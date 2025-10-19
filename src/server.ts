@@ -1,7 +1,14 @@
 //
-
+import { Server } from "http";
 import { app } from "./app.js";
 
-app.listen(6009, () => {
-  console.log("hello Server is running on port 6009");
-});
+const PORT = 6009;
+export let server: Server;
+
+async function main() {
+  server = app.listen(PORT, () => {
+    console.log("server running on port:", PORT);
+  });
+}
+
+main();
