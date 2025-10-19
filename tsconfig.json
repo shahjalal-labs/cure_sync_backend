@@ -1,30 +1,14 @@
-
 {
   "compilerOptions": {
-    // Project structure
+    "target": "ES2022", // ← Change from es2016 to ES2022
+    "module": "commonjs", 
     "rootDir": "./src",
     "outDir": "./dist",
-
-    // Modern language + module system
-    "target": "ES2022",               // Latest safe JS for Node 18+
-    "module": "NodeNext",             // Modern ESM support
-    "moduleResolution": "NodeNext",   // Must match module type
-    "resolveJsonModule": true,        // Import JSON easily
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,          // Smooth import interop (CJS <-> ESM)
-
-    // Type safety & consistency
-    "strict": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "strict": true,
     "skipLibCheck": true,
-    "isolatedModules": true,
-    "noUncheckedIndexedAccess": true,
-    "noEmitOnError": true,
-
-    // Debug & tooling
-    "sourceMap": true
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+    "moduleResolution": "node", // ← ADD THIS LINE
+    "allowSyntheticDefaultImports": true // ← ADD THIS LINE
+  }
 }
-
