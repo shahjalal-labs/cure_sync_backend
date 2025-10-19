@@ -1,6 +1,6 @@
 //
 import { Server } from "http";
-import { app } from "./app.ts";
+import { app } from "./app";
 
 const PORT = 6009;
 export let server: Server;

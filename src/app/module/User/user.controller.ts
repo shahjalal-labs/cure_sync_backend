@@ -1,7 +1,7 @@
 //
 
 import { RequestHandler } from "express";
-import { ObjectType } from "../../../types/objectType.ts";
+import { ObjectType } from "../../../types/objectType";
 
 const createAdmin: RequestHandler = async (req, res) => {
   res.send({
