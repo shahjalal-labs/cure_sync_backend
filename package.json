@@ -1,12 +1,17 @@
 {
   "name": "cure_sync_backend",
+  "type": "module",
   "module": "index.ts",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only index.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "start": "node /home/sj/web/ph/cure_sync/cure_sync_backend/dist/src/server.js
+",
+    "build": ""
   },
   "private": true,
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/express": "^5.0.3",
     "@types/node": "^24.8.1",
     "prisma": "^6.17.1",
     "ts-node-dev": "^2.0.0",
