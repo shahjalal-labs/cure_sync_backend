@@ -1,6 +1,6 @@
 //
 import express, { Router } from "express";
-import { UserController } from "./user.controller.js";
+import { UserController } from "./user.controller.ts";
 const router: Router = express.Router();
 
 router.get("/", UserController.createAdmin);

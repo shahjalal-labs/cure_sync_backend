@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "start": "node dist/src/server.js",
-    "build": ""
+    "build": "",
+    "watch": "tsc --watch"
   },
   "private": true,
   "devDependencies": {

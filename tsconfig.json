@@ -1,36 +1,14 @@
 {
   "compilerOptions": {
-    // File Layout
+    "target": "ES2022", // ← Change from es2016 to ES2022
+    "module": "commonjs", 
     "rootDir": "./src",
     "outDir": "./dist",
-
-    // Environment Settings - FIXED for Node.js + ESM
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "target": "ES2022",
-    "lib": ["ES2022"],
-    "types": ["node"],
-    
-    // ESM Specific
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-
-    // Other Outputs
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-
-    // Stricter Typechecking Options
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-
-    // Recommended Options
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "verbatimModuleSyntax": false,  // ← Change this to false
-    "isolatedModules": true,
-    "skipLibCheck": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+    "skipLibCheck": true,
+    "moduleResolution": "node", // ← ADD THIS LINE
+    "allowSyntheticDefaultImports": true // ← ADD THIS LINE
+  }
 }
