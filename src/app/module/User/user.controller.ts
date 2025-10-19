@@ -1,7 +1,6 @@
 //
 
 import { RequestHandler } from "express";
-import { ObjectType } from "../../../types/objectType";
 
 const createAdmin: RequestHandler = async (req, res) => {
   res.send({
@@ -9,6 +8,6 @@ const createAdmin: RequestHandler = async (req, res) => {
   });
 };
 
-export const UserController: ObjectType<RequestHandler> = {
+export const UserController = {
   createAdmin,
 };
