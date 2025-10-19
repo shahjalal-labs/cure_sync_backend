@@ -1,10 +1,7 @@
 //
-import express from "express";
-const router = express.Router();
+import express, { Router } from "express";
+import { UserController } from "./user.controller.js";
+const router: Router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send({
-    message: "Hello World",
-  });
-});
-export const UserRoutes = router;
+router.get("/", UserController.createAdmin);
+export const UserRoutes: Router = router;

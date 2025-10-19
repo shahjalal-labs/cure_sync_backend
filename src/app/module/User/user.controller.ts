@@ -1,11 +1,11 @@
 //
 
-const create_admin = async (req, res) => {
+const createAdmin = async (req, res) => {
   res.send({
     message: "Hello World",
   });
 };
 
 export const UserController = {
-  create_admin,
+  createAdmin,
 };
