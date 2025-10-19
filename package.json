@@ -3,9 +3,8 @@
   "type": "module",
   "module": "index.ts",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "start": "node /home/sj/web/ph/cure_sync/cure_sync_backend/dist/src/server.js
-",
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/src/server.js",
     "build": ""
   },
   "private": true,
