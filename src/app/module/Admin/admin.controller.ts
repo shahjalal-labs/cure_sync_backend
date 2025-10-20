@@ -3,14 +3,15 @@ import { RequestHandler } from "express";
 
 import { AdminService } from "./admin.service";
 import { pick } from "../../../shared/pick";
+import { adminFilterableFields } from "./admin.constant";
 
 const getAll: RequestHandler = async (req, res) => {
-  const params = req.query;
+  const filters = pick(req.query, adminFilterableFields);
 
-  pick(params, ["name", "email", "contactNumber"]);
+  const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
 
   try {
-    const result = await AdminService.getAllFromDB(params);
+    const result = await AdminService.getAllFromDB(filters, options);
 
     res.status(200).json({
       success: true,
