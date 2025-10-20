@@ -1,3 +1,34 @@
 //
 
-type TOptions = {};
+type TOptions = {
+  page?: number;
+  limit?: number;
+  sortOrder?: string;
+  sortBy?: string;
+};
+
+type TOptionsResult = {
+  page: number;
+  limit: number;
+
+  sortOrder: string;
+  sortBy: string;
+  skip: number;
+};
+
+const calcalutePagination = (options: TOptions): TOptionsResult => {
+  const page = options.page || 1;
+  const limit = options.limit || 10;
+  const skip = (page - 1) * limit;
+
+  const sortOrder = options.sortOrder || "desc";
+
+  const sortBy = options.sortBy || "createdAt";
+  return {
+    page,
+    limit,
+    skip,
+    sortOrder,
+    sortBy,
+  };
+};
