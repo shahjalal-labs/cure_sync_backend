@@ -5,9 +5,9 @@ import { AdminService } from "./admin.service";
 import { pick } from "../../../shared/pick";
 import { adminFilterableFields } from "./admin.constant";
 
-//w: (start)╭──────────── create new user with otp verification ────────────╮
+//w: (start)╭────────────  ────────────╮
 
-//w: (end) ╰──────────── create new user with otp verification ────────────╯
+//w: (end) ╰────────────  ────────────╯
 
 //w: (start)╭──────────── get all admin ────────────╮
 const getAll: RequestHandler = async (req, res) => {
@@ -56,7 +56,30 @@ const getAdminById: RequestHandler = async (req, res) => {
 //
 //w: (end) ╰──────────── get admin by id from db ────────────╯
 
+//
+//w: (start)╭──────────── updateAdmin ────────────╮
+
+const updateAdmin: RequestHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await AdminService.updateAdminIntoDB(id, req.body);
+    res.status(200).json({
+      success: true,
+      message: "Admin updated successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || "Something went wrong",
+      data: error,
+    });
+  }
+};
+//w: (end) ╰──────────── updateAdmin ────────────╯
 export const AdminController = {
   getAll,
   getAdminById,
+  updateAdmin,
 };
