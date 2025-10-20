@@ -1,4 +1,4 @@
-GET {{ port6009 }}/users
+GET {{port6009 }}/user
 
 POST {{port6009 }}/user
 Content-Type: application/json

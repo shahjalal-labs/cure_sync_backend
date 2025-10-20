@@ -31,6 +31,12 @@ const createAdminIntoDB = async (data: any) => {
   return result;
 };
 
+const getAllUsersFromDB = async () => {
+  const result = await prisma.user.findMany();
+  return result;
+};
+
 export const UserService = {
   createAdminIntoDB,
+  getAllUsersFromDB,
 };
