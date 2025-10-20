@@ -125,7 +125,7 @@ Content-Type: application/json
 
 
 POST {{port6009}}/user
-
+id: 5051362b-3b51-4cd0-9b6f-669cc437e9b4
 Content-Type: application/json
 {
   "password": "123456",

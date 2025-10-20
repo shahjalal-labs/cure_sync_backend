@@ -117,7 +117,7 @@ const updateAdminIntoDB = async (
 //
 //w: (start)╭──────────── deleteAdmin ────────────╮
 const deleteAdminFromDB = async (id: string): Promise<Admin | null> => {
-console.log(id, "[1;31mid in admin.service.ts at line 120[0m");
+  console.log(id, "[1;31mid in admin.service.ts at line 120[0m");
   await prisma.admin.findUniqueOrThrow({
     where: {
       id,
@@ -132,7 +132,7 @@ console.log(id, "[1;31mid in admin.service.ts at line 120[0m");
 
     await txClient.user.delete({
       where: {
-        id,
+        email: adminDeletedData.email,
       },
     });
     return adminDeletedData;
@@ -164,7 +164,7 @@ const softDeleteAdminFromDB = async (id: string) => {
 
     await txClient.user.update({
       where: {
-        id,
+        email: adminDeletedData.email,
       },
       data: {
         status: UserStatus.DELETED,

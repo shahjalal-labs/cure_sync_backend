@@ -79,7 +79,7 @@ const updateAdmin: RequestHandler = async (req, res) => {
 };
 //w: (end) ╰──────────── updateAdmin ────────────╯
 
-//w: (start)╭────────────  ────────────╮
+//w: (start)╭──────────── deleteAdmin ────────────╮
 const deleteAdmin: RequestHandler = async (req, res) => {
   try {
     const result = await AdminService.deleteAdminFromDB(req.params.id);
@@ -96,11 +96,31 @@ const deleteAdmin: RequestHandler = async (req, res) => {
     });
   }
 };
-//w: (end) ╰────────────  ────────────╯
+//w: (end) ╰──────────── deleteAdmin ────────────╯
 
+//w: (start)╭──────────── softDeleteAdmin ────────────╮
+
+const softDeleteAdmin: RequestHandler = async (req, res) => {
+  try {
+    const result = await AdminService.softDeleteAdminFromDB(req.params.id);
+    res.status(200).json({
+      success: true,
+      message: "Admin deleted successfully",
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || "Something went wrong",
+      data: err,
+    });
+  }
+};
+//w: (end) ╰──────────── softDeleteAdmin ────────────╯
 export const AdminController = {
   getAll,
   getAdminById,
   updateAdmin,
   deleteAdmin,
+  softDeleteAdmin,
 };

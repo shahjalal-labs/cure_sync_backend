@@ -11,6 +11,8 @@ GET {{ port6009 }}/admin?contactNumber=902384
 
 GET {{ port6009 }}/admin?page=3&limit=3
 
+GET {{ port6009 }}/admin
+
 GET {{ port6009 }}/admin/7397b10f-d293-4107-82c8-b6c2742c9c28
 
 
@@ -23,6 +25,9 @@ Content-Type: application/json
 
 
 
-DELETE {{ port6009 }}/admin/a15647d8-3062-4e77-8372-b84f9f9d6f21
+DELETE {{ port6009 }}/admin/5051362b-3b51-4cd0-9b6f-669cc437e9b4
 
+
+
+DELETE {{ port6009 }}/admin/soft/5051362b-3b51-4cd0-9b6f-669cc437e9b4
 
