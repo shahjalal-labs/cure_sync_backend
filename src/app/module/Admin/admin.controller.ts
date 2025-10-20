@@ -78,6 +78,11 @@ const updateAdmin: RequestHandler = async (req, res) => {
   }
 };
 //w: (end) ╰──────────── updateAdmin ────────────╯
+
+//w: (start)╭────────────  ────────────╮
+
+//w: (end) ╰────────────  ────────────╯
+
 export const AdminController = {
   getAll,
   getAdminById,

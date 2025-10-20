@@ -3,7 +3,7 @@
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
-import { Admin, Prisma, PrismaClient } from "@prisma/client";
+import { Admin, Prisma, PrismaClient, UserStatus } from "@prisma/client";
 import { adminSearchableFields } from "./admin.constant";
 import { paginationHelper, TOptions } from "../../../helpers/paginatonHelper";
 import { prisma } from "../../../shared/prisma";
@@ -141,7 +141,7 @@ const deleteAdminFromDB = async (id: string): Promise<Admin | null> => {
 
 //w: (end) ╰──────────── deleteAdmin ────────────╯
 
-//w: (start)╭────────────  ────────────╮
+//w: (start)╭──────────── softDeleteAdmin ────────────╮
 const softDeleteAdminFromDB = async (id: string) => {
   await prisma.admin.findUniqueOrThrow({
     where: {
@@ -160,9 +160,20 @@ const softDeleteAdminFromDB = async (id: string) => {
         isDeleted: true,
       },
     });
+
+    await txClient.user.update({
+      where: {
+        id,
+      },
+      data: {
+        status: UserStatus.DELETED,
+      },
+    });
+    return adminDeletedData;
   });
+  return result;
 };
-//w: (end) ╰────────────  ────────────╯
+//w: (end) ╰──────────── softDeleteAdmin ────────────╯
 
 export const AdminService = {
   getAllFromDB,
