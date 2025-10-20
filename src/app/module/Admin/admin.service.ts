@@ -114,16 +114,33 @@ const updateAdminIntoDB = async (
 };
 //w: (end) ╰──────────── updateAdmin ────────────╯
 
-//w: (start)╭────────────  ────────────╮
-
-const deleteAdminFromDB = async (id: string): Promise<Admin, null> => {
+//
+//w: (start)╭──────────── deleteAdmin ────────────╮
+const deleteAdminFromDB = async (id: string): Promise<Admin | null> => {
   await prisma.admin.findUniqueOrThrow({
     where: {
       id,
     },
   });
+  const result = await prisma.$transaction(async (txClient) => {
+    const adminDeletedData = await txClient.admin.delete({
+      where: {
+        id,
+      },
+    });
+
+    await txClient.user.delete({
+      where: {
+        id,
+      },
+    });
+    return adminDeletedData;
+  });
+  return result;
 };
-//w: (end) ╰────────────  ────────────╯
+
+//w: (end) ╰──────────── deleteAdmin ────────────╯
+
 export const AdminService = {
   getAllFromDB,
   getAdminByIdFromDB,
