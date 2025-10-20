@@ -5,6 +5,11 @@ import { AdminService } from "./admin.service";
 import { pick } from "../../../shared/pick";
 import { adminFilterableFields } from "./admin.constant";
 
+//w: (start)╭──────────── create new user with otp verification ────────────╮
+
+//w: (end) ╰──────────── create new user with otp verification ────────────╯
+
+//w: (start)╭──────────── get all admin ────────────╮
 const getAll: RequestHandler = async (req, res) => {
   const filters = pick(req.query, adminFilterableFields);
 
@@ -27,7 +32,31 @@ const getAll: RequestHandler = async (req, res) => {
     });
   }
 };
+//w: (end) ╰──────────── get all admin ────────────╯
+
+//w: (start)╭──────────── get admin by id from db ────────────╮
+
+const getAdminById: RequestHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await AdminService.getAdminByIdFromDB(id);
+    res.status(200).json({
+      success: true,
+      message: "Admin fetched successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || "Something went wrong",
+      data: error,
+    });
+  }
+};
+//
+//w: (end) ╰──────────── get admin by id from db ────────────╯
 
 export const AdminController = {
   getAll,
+  getAdminById,
 };

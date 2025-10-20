@@ -97,7 +97,8 @@ const getAdminByIdFromDB = async (id: string) => {
   });
   return result;
 };
-//w: (end) ╰──────────── create new user with otp verification ────────────╯
+//w: (end) ╰──────────── get admin by id from db ────────────╯
+
 export const AdminService = {
   getAllFromDB,
   getAdminByIdFromDB,
