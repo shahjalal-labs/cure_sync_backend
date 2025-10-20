@@ -1,26 +1,31 @@
 //
 
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const getAllFromDB = async (search: string) => {
-  const andConditions = [];
+  const andConditions: Prisma.AdminWhereInput[] = [];
 
   if (search) {
     andConditions.push(
-      {
+      /* {
         name: {
           contains: search,
           mode: "insensitive",
         },
-      },
+      }, */
 
-      {
+      /* {
         email: {
           contains: search,
           mode: "insensitive",
         },
+      }, */
+      {
+        OR: ["name", "email"].map((field) => ({
+          [field]: { contains: search, mode: "insensitive" },
+        })),
       },
     );
   }
@@ -29,7 +34,7 @@ const getAllFromDB = async (search: string) => {
     depth: "infinity",
   });
 
-  const whereConditions = {
+  const whereConditions: Prisma.AdminWhereInput = {
     AND: andConditions,
   };
 

@@ -1,1 +1,2 @@
-GET {{ port6009 }}/admin?searchTerm=m_ad
+GET {{ port6009 }}/admin?searchTerm=ha-adm
+GET {{ port6009 }}/admin
