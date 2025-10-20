@@ -2,23 +2,13 @@
 import { RequestHandler } from "express";
 
 import { AdminService } from "./admin.service";
+import { pick } from "../../../shared/pick";
 
 const getAll: RequestHandler = async (req, res) => {
   const params = req.query;
-  const finalObj: any = {};
-
-  const pick = (obj: Record<string, unknown>, keys: string[]) => {
-    console.log(`obj, keys`, obj, keys);
-    for (const key of keys) {
-      if (obj && Object.hasOwnProperty.call(obj, key)) {
-        finalObj[key] = obj[key];
-      }
-    }
-  };
 
   pick(params, ["name", "email", "contactNumber"]);
 
-  console.log(finalObj, "[1;31mfinalObj in admin.controller.ts at line 10[0m");
   try {
     const result = await AdminService.getAllFromDB(params);
 
