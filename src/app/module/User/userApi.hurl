@@ -122,3 +122,16 @@ Content-Type: application/json
     "contactNumber": "902384"
   }
 }
+
+
+POST {{port6009}}/user
+
+Content-Type: application/json
+{
+  "password": "123456",
+  "admin": {
+    "email": "karim-admin@sync.health",
+    "name": "Maliha",
+    "contactNumber": "902384"
+  }
+}

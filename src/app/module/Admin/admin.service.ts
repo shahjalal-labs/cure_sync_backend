@@ -117,6 +117,7 @@ const updateAdminIntoDB = async (
 //
 //w: (start)╭──────────── deleteAdmin ────────────╮
 const deleteAdminFromDB = async (id: string): Promise<Admin | null> => {
+console.log(id, "[1;31mid in admin.service.ts at line 120[0m");
   await prisma.admin.findUniqueOrThrow({
     where: {
       id,

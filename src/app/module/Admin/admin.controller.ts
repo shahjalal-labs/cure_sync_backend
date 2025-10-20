@@ -80,11 +80,27 @@ const updateAdmin: RequestHandler = async (req, res) => {
 //w: (end) ╰──────────── updateAdmin ────────────╯
 
 //w: (start)╭────────────  ────────────╮
-
+const deleteAdmin: RequestHandler = async (req, res) => {
+  try {
+    const result = await AdminService.deleteAdminFromDB(req.params.id);
+    res.status(200).json({
+      success: true,
+      message: "Admin deleted successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || "Something went wrong",
+      data: error,
+    });
+  }
+};
 //w: (end) ╰────────────  ────────────╯
 
 export const AdminController = {
   getAll,
   getAdminById,
   updateAdmin,
+  deleteAdmin,
 };

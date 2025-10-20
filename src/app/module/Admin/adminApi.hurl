@@ -18,5 +18,11 @@ PATCH {{ port6009 }}/admin/7397b10f-d293-4107-82c8-b6c2742c9c28
 Content-Type: application/json
 
 {
-  "name": "Abdur Rahim"
+  "name": "Abdur Rahim Mia"
 }
+
+
+
+DELETE {{ port6009 }}/admin/a15647d8-3062-4e77-8372-b84f9f9d6f21
+
+
