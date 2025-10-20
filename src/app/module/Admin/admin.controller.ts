@@ -16,7 +16,8 @@ const getAll: RequestHandler = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "All admins fetched successfully",
-      data: result,
+      meta: result.meta,
+      data: result.data,
     });
   } catch (error: any) {
     res.status(500).json({

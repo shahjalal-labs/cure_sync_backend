@@ -9,5 +9,5 @@ GET {{ port6009 }}/admin?email=MaliHa-admin@sync.health
 
 GET {{ port6009 }}/admin?contactNumber=902384
 
-GET {{ port6009 }}/admin?page=1&limit=32
+GET {{ port6009 }}/admin?page=3&limit=3
 

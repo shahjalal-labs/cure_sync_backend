@@ -1,9 +1,14 @@
 //
 
+//w: (start)╭──────────── create new user with otp verification ────────────╮
+
+//w: (end) ╰──────────── create new user with otp verification ────────────╯
 import { Prisma, PrismaClient } from "@prisma/client";
 import { adminSearchableFields } from "./admin.constant";
 import { paginationHelper, TOptions } from "../../../helpers/paginatonHelper";
 import { prisma } from "../../../shared/prisma";
+
+//w: (start)╭──────────── get all admin from db  ────────────╮
 
 const getAllFromDB = async (params: any, options: TOptions) => {
   const andConditions: Prisma.AdminWhereInput[] = [];
@@ -81,6 +86,19 @@ const getAllFromDB = async (params: any, options: TOptions) => {
   };
 };
 
+//w: (end) ╰──────────── get all admin from db ────────────╯
+//
+//w: (start)╭──────────── get admin by id from db ────────────╮
+const getAdminByIdFromDB = async (id: string) => {
+  const result = await prisma.admin.findUnique({
+    where: {
+      id,
+    },
+  });
+  return result;
+};
+//w: (end) ╰──────────── create new user with otp verification ────────────╯
 export const AdminService = {
   getAllFromDB,
+  getAdminByIdFromDB,
 };
