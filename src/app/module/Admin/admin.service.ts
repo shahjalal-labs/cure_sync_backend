@@ -45,10 +45,6 @@ const getAllFromDB = async (params: any, options: TOptions) => {
     });
   }
 
-  // console.dir(andConditions, {
-  //   depth: "infinity",
-  // });
-
   const whereConditions: Prisma.AdminWhereInput = {
     AND: andConditions,
   };
@@ -71,7 +67,18 @@ const getAllFromDB = async (params: any, options: TOptions) => {
             createdAt: "desc",
           },
   });
-  return result;
+
+  const total = await prisma.admin.count({
+    where: whereConditions,
+  });
+  return {
+    meta: {
+      page,
+      limit: take,
+      total,
+    },
+    data: result,
+  };
 };
 
 export const AdminService = {
