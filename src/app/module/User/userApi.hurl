@@ -11,7 +11,6 @@ Content-Type: application/json
 
 
 
-
 POST {{port6009}}/user
 Content-Type: application/json
 {
@@ -26,9 +25,9 @@ Content-Type: application/json
 POST {{port6009}}/user
 Content-Type: application/json
 {
-  "password": "pass789",
+  "password": "123456",
   "admin": {
-    "email": "rahim@cure.sync",
+    "email": "rahim.cure@sync.io",
     "name": "Rahim",
     "contactNumber": "984512"
   }
@@ -37,9 +36,9 @@ Content-Type: application/json
 POST {{port6009}}/user
 Content-Type: application/json
 {
-  "password": "letmein",
+  "password": "123456",
   "admin": {
-    "email": "karim@cure.sync",
+    "email": "karim_admin@curesync.app",
     "name": "Karim",
     "contactNumber": "947230"
   }
@@ -48,9 +47,9 @@ Content-Type: application/json
 POST {{port6009}}/user
 Content-Type: application/json
 {
-  "password": "admin001",
+  "password": "123456",
   "admin": {
-    "email": "nabila@cure.sync",
+    "email": "nabila.dev@cure-sync.org",
     "name": "Nabila",
     "contactNumber": "903458"
   }
@@ -59,9 +58,9 @@ Content-Type: application/json
 POST {{port6009}}/user
 Content-Type: application/json
 {
-  "password": "root321",
+  "password": "123456",
   "admin": {
-    "email": "tariq@cure.sync",
+    "email": "tariq.sync.care@gmail.com",
     "name": "Tariq",
     "contactNumber": "912640"
   }
@@ -70,9 +69,9 @@ Content-Type: application/json
 POST {{port6009}}/user
 Content-Type: application/json
 {
-  "password": "super999",
+  "password": "123456",
   "admin": {
-    "email": "sumaiya@cure.sync",
+    "email": "sumaiya@health.cure.sync",
     "name": "Sumaiya",
     "contactNumber": "938471"
   }
@@ -81,9 +80,9 @@ Content-Type: application/json
 POST {{port6009}}/user
 Content-Type: application/json
 {
-  "password": "health42",
+  "password": "123456",
   "admin": {
-    "email": "asif@cure.sync",
+    "email": "asif_cure@medsync.net",
     "name": "Asif",
     "contactNumber": "972364"
   }
@@ -92,9 +91,9 @@ Content-Type: application/json
 POST {{port6009}}/user
 Content-Type: application/json
 {
-  "password": "secure88",
+  "password": "123456",
   "admin": {
-    "email": "lima@cure.sync",
+    "email": "lima.care.sync@outlook.com",
     "name": "Lima",
     "contactNumber": "945613"
   }
@@ -103,9 +102,9 @@ Content-Type: application/json
 POST {{port6009}}/user
 Content-Type: application/json
 {
-  "password": "syncme12",
+  "password": "123456",
   "admin": {
-    "email": "raihan@cure.sync",
+    "email": "raihan+admin@cure.sync.io",
     "name": "Raihan",
     "contactNumber": "993752"
   }
@@ -114,11 +113,10 @@ Content-Type: application/json
 POST {{port6009}}/user
 Content-Type: application/json
 {
-  "password": "carex777",
+  "password": "123456",
   "admin": {
-    "email": "maliha@cure.sync",
+    "email": "maliha-admin@sync.health",
     "name": "Maliha",
     "contactNumber": "902384"
   }
 }
-
