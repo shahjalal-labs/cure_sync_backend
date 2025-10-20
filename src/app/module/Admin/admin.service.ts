@@ -2,13 +2,8 @@
 
 import { Prisma, PrismaClient } from "@prisma/client";
 import { adminSearchableFields } from "./admin.constant";
-import {
-  paginationHelper,
-  TOptions,
-  TOptionsResult,
-} from "../../../helpers/paginatonHelper";
-
-const prisma = new PrismaClient();
+import { paginationHelper, TOptions } from "../../../helpers/paginatonHelper";
+import { prisma } from "../../../shared/prisma";
 
 const getAllFromDB = async (params: any, options: TOptions) => {
   const andConditions: Prisma.AdminWhereInput[] = [];
@@ -67,6 +62,14 @@ const getAllFromDB = async (params: any, options: TOptions) => {
     where: whereConditions,
     skip,
     take,
+    orderBy:
+      options.sortBy && options.sortOrder
+        ? {
+            [options.sortBy]: options.sortOrder,
+          }
+        : {
+            createdAt: "desc",
+          },
   });
   return result;
 };

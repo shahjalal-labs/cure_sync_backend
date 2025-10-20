@@ -7,7 +7,7 @@ GET {{ port6009 }}/admin?searchTerm=752
 
 GET {{ port6009 }}/admin?email=MaliHa-admin@sync.health
 
-GET {{ port6009 }}/admin?contactNumber=90238488
+GET {{ port6009 }}/admin?contactNumber=902384
 
-GET {{ port6009 }}/admin?skip=2&limit=2
+GET {{ port6009 }}/admin?page=1&limit=32
 
