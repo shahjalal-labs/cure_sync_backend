@@ -4,7 +4,7 @@ import { AdminService } from "./admin.service";
 
 const getAll: RequestHandler = async (req, res) => {
   const search = req.query.searchTerm;
-console.log(search, "[1;31msearch in admin.controller.ts at line 7[0m");
+  console.log(search, "[1;31msearch in admin.controller.ts at line 7[0m");
   try {
     const result = await AdminService.getAllFromDB(search);
 
