@@ -141,9 +141,33 @@ const deleteAdminFromDB = async (id: string): Promise<Admin | null> => {
 
 //w: (end) ╰──────────── deleteAdmin ────────────╯
 
+//w: (start)╭────────────  ────────────╮
+const softDeleteAdminFromDB = async (id: string) => {
+  await prisma.admin.findUniqueOrThrow({
+    where: {
+      id,
+      isDeleted: false,
+    },
+  });
+
+  const result = await prisma.$transaction(async (txClient) => {
+    const adminDeletedData = await txClient.admin.update({
+      where: {
+        id,
+        isDeleted: false,
+      },
+      data: {
+        isDeleted: true,
+      },
+    });
+  });
+};
+//w: (end) ╰────────────  ────────────╯
+
 export const AdminService = {
   getAllFromDB,
   getAdminByIdFromDB,
   updateAdminIntoDB,
   deleteAdminFromDB,
+  softDeleteAdminFromDB,
 };
