@@ -13,3 +13,10 @@ GET {{ port6009 }}/admin?page=3&limit=3
 
 GET {{ port6009 }}/admin/7397b10f-d293-4107-82c8-b6c2742c9c28
 
+
+PATCH {{ port6009 }}/admin/7397b10f-d293-4107-82c8-b6c2742c9c28
+Content-Type: application/json
+
+{
+  "name": "Abdur Rahim"
+}

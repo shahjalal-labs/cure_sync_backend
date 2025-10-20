@@ -100,7 +100,10 @@ const getAdminByIdFromDB = async (id: string) => {
 //w: (end) ╰──────────── get admin by id from db ────────────╯
 
 //w: (start)╭──────────── updateAdmin ────────────╮
-const updateAdminIntoDB = async (id: string, data: Partial<Admin>) => {
+const updateAdminIntoDB = async (
+  id: string,
+  data: Partial<Admin>,
+): Promise<Admin> => {
   const result = await prisma.admin.update({
     where: {
       id,
@@ -111,8 +114,19 @@ const updateAdminIntoDB = async (id: string, data: Partial<Admin>) => {
 };
 //w: (end) ╰──────────── updateAdmin ────────────╯
 
+//w: (start)╭────────────  ────────────╮
+
+const deleteAdminFromDB = async (id: string): Promise<Admin, null> => {
+  await prisma.admin.findUniqueOrThrow({
+    where: {
+      id,
+    },
+  });
+};
+//w: (end) ╰────────────  ────────────╯
 export const AdminService = {
   getAllFromDB,
   getAdminByIdFromDB,
   updateAdminIntoDB,
+  deleteAdminFromDB,
 };
