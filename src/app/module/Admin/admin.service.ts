@@ -5,7 +5,7 @@ import { adminSearchableFields } from "./admin.constant";
 
 const prisma = new PrismaClient();
 
-const getAllFromDB = async (params) => {
+const getAllFromDB = async (params: any) => {
   const andConditions: Prisma.AdminWhereInput[] = [];
 
   const { searchTerm, ...filterData } = params;
@@ -28,10 +28,18 @@ const getAllFromDB = async (params) => {
       }, */
       {
         OR: adminSearchableFields.map((field) => ({
-          [field]: { contains: params, mode: "insensitive" },
+          [field]: { contains: searchTerm, mode: "insensitive" },
         })),
       },
     );
+  }
+
+  if (Object.keys(filterData).length) {
+    andConditions.push({
+      AND: Object.keys(filterData).map((key) => ({
+        [key]: filterData[key],
+      })),
+    });
   }
 
   console.dir(andConditions, {
