@@ -5,34 +5,36 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const getAllFromDB = async (search: string) => {
-  const andConditions = [
-    {
-      name: {
-        contains: search,
-        mode: "insensitive",
-      },
-    },
-
-    {
-      email: {
-        contains: search,
-        mode: "insensitive",
-      },
-    },
-  ];
+  const andConditions = [];
 
   if (search) {
-    andConditions.push();
+    andConditions.push(
+      {
+        name: {
+          contains: search,
+          mode: "insensitive",
+        },
+      },
+
+      {
+        email: {
+          contains: search,
+          mode: "insensitive",
+        },
+      },
+    );
   }
 
   console.dir(andConditions, {
     depth: "infinity",
   });
 
+  const whereConditions = {
+    AND: andConditions,
+  };
+
   const result = await prisma.admin.findMany({
-    where: {
-      OR: andConditions,
-    },
+    where: whereConditions,
   });
   return result;
 };
