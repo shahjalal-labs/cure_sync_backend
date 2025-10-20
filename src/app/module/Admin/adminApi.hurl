@@ -1,1 +1,1 @@
-GET {{port:6009}}/api/v1/admin
+GET {{ port6009 }}/admin
