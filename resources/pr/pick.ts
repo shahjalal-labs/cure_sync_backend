@@ -16,3 +16,4 @@ const user: User = {
 };
 
 const pickedUser = pick();
+

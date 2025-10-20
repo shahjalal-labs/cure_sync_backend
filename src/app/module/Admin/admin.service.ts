@@ -6,12 +6,6 @@ import { adminSearchableFields } from "./admin.constant";
 const prisma = new PrismaClient();
 
 const getAllFromDB = async (params: any) => {
-  const pick = (obj, keys) => {
-    console.log(`obj, keys`, obj, keys);
-  };
-
-  pick(params, ["name", "email", "contactNumber"]);
-
   const andConditions: Prisma.AdminWhereInput[] = [];
 
   const { searchTerm, ...filterData } = params;

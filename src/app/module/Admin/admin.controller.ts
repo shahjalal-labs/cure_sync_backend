@@ -4,6 +4,17 @@ import { AdminService } from "./admin.service";
 
 const getAll: RequestHandler = async (req, res) => {
   const params = req.query;
+  const pick = (obj, keys) => {
+    console.log(`obj, keys`, obj, keys);
+    for (const key of keys) {
+      if (obj && Object.hasOwnProperty.call(obj, key)) {
+        ("");
+      }
+    }
+  };
+
+  pick(params, ["name", "email", "contactNumber"]);
+
   try {
     const result = await AdminService.getAllFromDB(params);
 
