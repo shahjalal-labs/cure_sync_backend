@@ -1,9 +1,9 @@
 //
 
-//w: (start)╭──────────── create new user with otp verification ────────────╮
+//w: (start)╭────────────  ────────────╮
 
-//w: (end) ╰──────────── create new user with otp verification ────────────╯
-import { Prisma, PrismaClient } from "@prisma/client";
+//w: (end) ╰────────────  ────────────╯
+import { Admin, Prisma, PrismaClient } from "@prisma/client";
 import { adminSearchableFields } from "./admin.constant";
 import { paginationHelper, TOptions } from "../../../helpers/paginatonHelper";
 import { prisma } from "../../../shared/prisma";
@@ -99,7 +99,20 @@ const getAdminByIdFromDB = async (id: string) => {
 };
 //w: (end) ╰──────────── get admin by id from db ────────────╯
 
+//w: (start)╭──────────── updateAdmin ────────────╮
+const updateAdminIntoDB = async (id: string, data: Partial<Admin>) => {
+  const result = await prisma.admin.update({
+    where: {
+      id,
+    },
+    data,
+  });
+  return result;
+};
+//w: (end) ╰──────────── updateAdmin ────────────╯
+
 export const AdminService = {
   getAllFromDB,
   getAdminByIdFromDB,
+  updateAdminIntoDB,
 };
