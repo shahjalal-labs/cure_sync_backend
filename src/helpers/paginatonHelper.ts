@@ -1,5 +1,4 @@
 //
-
 export type TOptions = {
   page?: number;
   limit?: number;
