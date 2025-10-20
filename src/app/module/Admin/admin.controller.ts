@@ -3,10 +3,9 @@ import { RequestHandler } from "express";
 import { AdminService } from "./admin.service";
 
 const getAll: RequestHandler = async (req, res) => {
-  const search = req.query.searchTerm;
-  console.log(search, "[1;31msearch in admin.controller.ts at line 7[0m");
+  const params = req.query;
   try {
-    const result = await AdminService.getAllFromDB(search);
+    const result = await AdminService.getAllFromDB(params);
 
     res.status(200).json({
       success: true,
