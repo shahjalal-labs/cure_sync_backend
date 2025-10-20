@@ -1,13 +1,13 @@
 //
 
-type TOptions = {
+export type TOptions = {
   page?: number;
   limit?: number;
   sortOrder?: string;
   sortBy?: string;
 };
 
-type TOptionsResult = {
+export type TOptionsResult = {
   page: number;
   limit: number;
 
@@ -31,4 +31,8 @@ const calcalutePagination = (options: TOptions): TOptionsResult => {
     sortOrder,
     sortBy,
   };
+};
+
+export const paginationHelper = {
+  calcalutePagination,
 };
