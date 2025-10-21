@@ -4,32 +4,11 @@ import { RequestHandler, Response } from "express";
 import { AdminService } from "./admin.service";
 import { pick } from "../../../shared/pick";
 import { adminFilterableFields } from "./admin.constant";
+import { sendResponse } from "../../../shared/sendResponse";
 
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
-
-const sendResponse = <T>(
-  res: Response,
-  jsonData: {
-    statusCode: number;
-    success: boolean;
-    message: string;
-    meta?: {
-      page: number;
-      limit: number;
-      total: number;
-    };
-    data: T;
-  },
-) => {
-  res.status(jsonData.statusCode).json({
-    success: jsonData.success,
-    message: jsonData.message,
-    meta: jsonData.meta || null || undefined,
-    data: jsonData.data || null || undefined,
-  });
-};
 
 //w: (start)╭──────────── get all admin ────────────╮
 const getAll: RequestHandler = async (req, res) => {
@@ -39,8 +18,8 @@ const getAll: RequestHandler = async (req, res) => {
 
   try {
     const result = await AdminService.getAllFromDB(filters, options);
-
-    res.status(200).json({
+    sendResponse(res, {
+      statusCode: 200,
       success: true,
       message: "All admins fetched successfully",
       meta: result.meta,
@@ -62,7 +41,9 @@ const getAdminById: RequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
     const result = await AdminService.getAdminByIdFromDB(id);
-    res.status(200).json({
+
+    sendResponse(res, {
+      statusCode: 200,
       success: true,
       message: "Admin fetched successfully",
       data: result,
@@ -86,7 +67,8 @@ const updateAdmin: RequestHandler = async (req, res) => {
     const { id } = req.params;
 
     const result = await AdminService.updateAdminIntoDB(id, req.body);
-    res.status(200).json({
+    sendResponse(res, {
+      statusCode: 200,
       success: true,
       message: "Admin updated successfully",
       data: result,
@@ -105,7 +87,8 @@ const updateAdmin: RequestHandler = async (req, res) => {
 const deleteAdmin: RequestHandler = async (req, res) => {
   try {
     const result = await AdminService.deleteAdminFromDB(req.params.id);
-    res.status(200).json({
+    sendResponse(res, {
+      statusCode: 200,
       success: true,
       message: "Admin deleted successfully",
       data: result,
