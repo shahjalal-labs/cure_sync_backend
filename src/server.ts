@@ -1,13 +1,13 @@
 //
 import { Server } from "http";
 import { app } from "./app";
+import config from "./config";
 
-const PORT = 6009;
 export let server: Server;
 
 async function main() {
-  server = app.listen(PORT, () => {
-    console.log("server running on port:", PORT);
+  server = app.listen(config.port, () => {
+    console.log("server running on port:", config.port);
   });
 }
 
