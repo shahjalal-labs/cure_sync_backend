@@ -1,5 +1,5 @@
 //
-import { RequestHandler } from "express";
+import { RequestHandler, Response } from "express";
 
 import { AdminService } from "./admin.service";
 import { pick } from "../../../shared/pick";
@@ -8,6 +8,28 @@ import { adminFilterableFields } from "./admin.constant";
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
+
+const sendResponse = <T>(
+  res: Response,
+  jsonData: {
+    statusCode: number;
+    success: boolean;
+    message: string;
+    meta?: {
+      page: number;
+      limit: number;
+      total: number;
+    };
+    data: T;
+  },
+) => {
+  res.status(jsonData.statusCode).json({
+    success: jsonData.success,
+    message: jsonData.message,
+    meta: jsonData.meta || null || undefined,
+    data: jsonData.data || null || undefined,
+  });
+};
 
 //w: (start)╭──────────── get all admin ────────────╮
 const getAll: RequestHandler = async (req, res) => {
@@ -117,6 +139,7 @@ const softDeleteAdmin: RequestHandler = async (req, res) => {
   }
 };
 //w: (end) ╰──────────── softDeleteAdmin ────────────╯
+
 export const AdminController = {
   getAll,
   getAdminById,

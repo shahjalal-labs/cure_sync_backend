@@ -13,7 +13,7 @@ GET {{ port6009 }}/admin?page=3&limit=3
 
 GET {{ port6009 }}/admin
 
-GET {{ port6009 }}/admin/7397b10f-d293-4107-82c8-b6c2742c9c28
+GET {{ port6009 }}/admin/d8367e59-85c9-4d91-a6c0-c2ad572a65af
 
 
 PATCH {{ port6009 }}/admin/7397b10f-d293-4107-82c8-b6c2742c9c28
@@ -29,5 +29,5 @@ DELETE {{ port6009 }}/admin/5051362b-3b51-4cd0-9b6f-669cc437e9b4
 
 
 
-DELETE {{ port6009 }}/admin/soft/5051362b-3b51-4cd0-9b6f-669cc437e9b4
+DELETE {{ port6009 }}/admin/soft/d8367e59-85c9-4d91-a6c0-c2ad572a65af
 
