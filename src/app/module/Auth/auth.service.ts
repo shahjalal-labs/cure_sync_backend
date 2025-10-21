@@ -1,13 +1,18 @@
+//
 import { UserStatus } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
 import bcrypt from "bcrypt";
 import { jwtHelpers } from "../../../helpers/jwtHelpers";
 
+//w: (start)╭────────────  ────────────╮
+
+//w: (end) ╰────────────  ────────────╯
 type ILoginPayload = {
   email: string;
   password: string;
 };
 
+//w: (start)╭──────────── loginUserIntoDB ────────────╮
 const loginUserIntoDB = async (payload: ILoginPayload) => {
   const userData = await prisma.user.findFirstOrThrow({
     where: {
@@ -33,8 +38,30 @@ const loginUserIntoDB = async (payload: ILoginPayload) => {
     jwtSecret as string,
     "5m",
   );
-};
+  const refreshToken = jwtHelpers.generateToken(
+    {
+      email: userData.email,
+      role: userData.role,
+    },
+    process.env.REFRESH_TOKEN_SECRET as string,
+    "30d",
+  );
 
+  return {
+    accessToken,
+    refreshToken,
+    needPasswordChange: userData.needPasswordChange,
+  };
+};
+//w: (end) ╰──────────── loginUserIntoDB ────────────╯
+
+//w: (start)╭──────────── refreshToken  ────────────╮
+
+const refreshToken = async (token: string) => {
+  let decodedData;
+};
+//w: (end) ╰────────────  ────────────╯
 export const AuthService = {
   loginUserIntoDB,
+  refreshToken,
 };
