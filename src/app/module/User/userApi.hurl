@@ -1,6 +1,7 @@
 GET {{port6009 }}/user
 
 POST {{port6009 }}/user
+Authorization: {{token}}
 Content-Type: application/json
 {
   "password": "123456",
