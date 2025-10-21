@@ -82,7 +82,10 @@ const refreshToken = async (token: string) => {
     process.env.JWT_SECRET as string,
     "5m",
   );
-  return accessToken;
+  return {
+    accessToken,
+    needPasswordChange: userData.needPasswordChange,
+  };
 };
 //
 //w: (end) ╰──────────── refreshToken  ────────────╯

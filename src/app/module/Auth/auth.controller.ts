@@ -33,10 +33,20 @@ const loginUser = catchAsync(async (req, res) => {
 //w: (start)╭────────────  ────────────╮
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
   const { refreshToken } = req.cookies;
+
   console.log(
     refreshToken,
     "[1;31mrefreshToken in auth.controller.ts at line 36[0m",
   );
+
+  const result = await AuthService.refreshToken(refreshToken);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "issued refresh token successfully",
+    data: result,
+  });
 });
 //w: (end) ╰────────────  ────────────╯
 export const AuthController = {
