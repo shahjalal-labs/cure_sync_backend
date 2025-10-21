@@ -1,5 +1,5 @@
 //
-import { RequestHandler, Response } from "express";
+import { RequestHandler } from "express";
 
 import { AdminService } from "./admin.service";
 import { pick } from "../../../shared/pick";
@@ -108,9 +108,10 @@ const deleteAdmin: RequestHandler = async (req, res) => {
 const softDeleteAdmin: RequestHandler = async (req, res) => {
   try {
     const result = await AdminService.softDeleteAdminFromDB(req.params.id);
-    res.status(200).json({
+    sendResponse(res, {
+      statusCode: 200,
       success: true,
-      message: "Admin deleted successfully",
+      message: "Admin deleted successfully.",
       data: result,
     });
   } catch (err: any) {
