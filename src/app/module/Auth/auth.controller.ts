@@ -2,6 +2,7 @@ import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
 import { sendResponse } from "../../../shared/sendResponse";
 import { AuthService } from "./auth.service";
+import { Request, Response } from "express";
 
 //w: (start)╭────────────  ────────────╮
 
@@ -30,8 +31,15 @@ const loginUser = catchAsync(async (req, res) => {
 //w: (end) ╰──────────── loginUser  ────────────╯
 
 //w: (start)╭────────────  ────────────╮
-const refreshToken = async (req, res) => {};
+const refreshToken = catchAsync(async (req: Request, res: Response) => {
+  const { refreshToken } = req.cookies;
+  console.log(
+    refreshToken,
+    "[1;31mrefreshToken in auth.controller.ts at line 36[0m",
+  );
+});
 //w: (end) ╰────────────  ────────────╯
 export const AuthController = {
   loginUser,
+  refreshToken,
 };
