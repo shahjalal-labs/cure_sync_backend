@@ -3,15 +3,19 @@
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
-import { Admin, Prisma, PrismaClient, UserStatus } from "@prisma/client";
+import { Admin, Prisma, UserStatus } from "@prisma/client";
 import { adminSearchableFields } from "./admin.constant";
-import { paginationHelper, TOptions } from "../../../helpers/paginatonHelper";
+import { paginationHelper } from "../../../helpers/paginatonHelper";
 import { prisma } from "../../../shared/prisma";
-import { TAdminFilterRequest } from "./admin.interace";
+import { IAdminFilterRequest } from "./admin.interace";
+import { IPaginationOptions } from "../../interfaces/pagination";
 
 //w: (start)╭──────────── get all admin from db  ────────────╮
 
-const getAllFromDB = async (params: TAdminFilterRequest, options: TOptions) => {
+const getAllFromDB = async (
+  params: IAdminFilterRequest,
+  options: IPaginationOptions,
+) => {
   const andConditions: Prisma.AdminWhereInput[] = [];
 
   const { searchTerm, ...filterData } = params;
@@ -45,7 +49,7 @@ const getAllFromDB = async (params: TAdminFilterRequest, options: TOptions) => {
       AND: Object.keys(filterData).map((key) => ({
         [key]: {
           equals: filterData[key],
-          mode: "insensitive",
+          // mode: "insensitive",
         },
       })),
     });
