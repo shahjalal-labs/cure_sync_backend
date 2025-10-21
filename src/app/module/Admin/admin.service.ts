@@ -7,10 +7,11 @@ import { Admin, Prisma, PrismaClient, UserStatus } from "@prisma/client";
 import { adminSearchableFields } from "./admin.constant";
 import { paginationHelper, TOptions } from "../../../helpers/paginatonHelper";
 import { prisma } from "../../../shared/prisma";
+import { TAdminFilterRequest } from "./admin.interace";
 
 //w: (start)╭──────────── get all admin from db  ────────────╮
 
-const getAllFromDB = async (params: any, options: TOptions) => {
+const getAllFromDB = async (params: TAdminFilterRequest, options: TOptions) => {
   const andConditions: Prisma.AdminWhereInput[] = [];
 
   const { searchTerm, ...filterData } = params;
