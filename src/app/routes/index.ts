@@ -2,9 +2,15 @@
 import express from "express";
 import { UserRoutes } from "../module/User/user.routes";
 import { AdminRoutes } from "../module/Admin/admin.routes";
+import { AuthRoutes } from "../module/Auth/auth.routes";
 const router = express.Router();
 
-const moduleRoutes = [
+type IModuleRoutes = {
+  path: string;
+  route: express.Router;
+};
+
+const moduleRoutes: IModuleRoutes[] = [
   {
     path: "/user",
     route: UserRoutes,
@@ -12,6 +18,10 @@ const moduleRoutes = [
   {
     path: "/admin",
     route: AdminRoutes,
+  },
+  {
+    path: "/auth",
+    route: AuthRoutes,
   },
 ];
 

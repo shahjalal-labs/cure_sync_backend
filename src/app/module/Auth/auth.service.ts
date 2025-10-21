@@ -1,4 +1,7 @@
-const loginUserIntoDB = async (payload: any) => {
+type ILoginPayload = {
+  email: string;
+  password: string;
+const loginUserIntoDB = async (payload: ILoginPayload) => {
   console.log(`logging in user`);
 };
 
