@@ -3,6 +3,8 @@ import { UserStatus } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
 import bcrypt from "bcrypt";
 import { jwtHelpers } from "../../../helpers/jwtHelpers";
+import config from "../../../config";
+import { Secret } from "jsonwebtoken";
 
 //w: (start)╭────────────  ────────────╮
 
@@ -28,14 +30,14 @@ const loginUserIntoDB = async (payload: ILoginPayload) => {
 
   if (!isPasswordCorrect) throw new Error("Invalid password");
 
-  const jwtSecret = process.env.JWT_SECRET;
+  const jwtSecret = config.jwt.jwt_secret as Secret;
 
   const accessToken = jwtHelpers.generateToken(
     {
       email: userData.email,
       role: userData.role,
     },
-    jwtSecret as string,
+    jwtSecret,
     "5m",
   );
   const refreshToken = jwtHelpers.generateToken(
@@ -43,7 +45,7 @@ const loginUserIntoDB = async (payload: ILoginPayload) => {
       email: userData.email,
       role: userData.role,
     },
-    process.env.REFRESH_TOKEN_SECRET as string,
+    config.jwt.refresh_token_secret as string,
     "30d",
   );
 
