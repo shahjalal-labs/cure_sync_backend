@@ -3,6 +3,7 @@ import { RequestHandler } from "express";
 import { UserService } from "./user.service";
 import { sendResponse } from "../../../shared/sendResponse";
 import httpStatus from "http-status";
+import catchAsync from "../../../shared/catchAsync";
 
 const createAdmin: RequestHandler = async (req, res) => {
   const result = await UserService.createAdminIntoDB(req.body);
@@ -12,23 +13,15 @@ const createAdmin: RequestHandler = async (req, res) => {
   });
 };
 
-const getAllUsers: RequestHandler = async (req, res) => {
-  try {
-    const result = await UserService.getAllUsersFromDB();
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: "All users fetched successfully",
-      data: result,
-    });
-  } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: error.message || "Something went wrong",
-      data: error,
-    });
-  }
-};
+const getAllUsers: RequestHandler = catchAsync(async (req, res) => {
+  const result = await UserService.getAllUsersFromDB();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "All users fetched successfully",
+    data: result,
+  });
+});
 
 export const UserController = {
   createAdmin,
