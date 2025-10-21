@@ -34,7 +34,7 @@ const getAll: RequestHandler = async (req, res, next) => {
 
 //w: (start)╭──────────── get admin by id from db ────────────╮
 
-const getAdminById: RequestHandler = async (req, res) => {
+const getAdminById: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
     const result = await AdminService.getAdminByIdFromDB(id);
@@ -46,11 +46,7 @@ const getAdminById: RequestHandler = async (req, res) => {
       data: result,
     });
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: error.message || "Something went wrong",
-      data: error,
-    });
+    next(error);
   }
 };
 //
@@ -59,7 +55,7 @@ const getAdminById: RequestHandler = async (req, res) => {
 //
 //w: (start)╭──────────── updateAdmin ────────────╮
 
-const updateAdmin: RequestHandler = async (req, res) => {
+const updateAdmin: RequestHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -71,17 +67,13 @@ const updateAdmin: RequestHandler = async (req, res) => {
       data: result,
     });
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: error.message || "Something went wrong",
-      data: error,
-    });
+    next(error);
   }
 };
 //w: (end) ╰──────────── updateAdmin ────────────╯
 
 //w: (start)╭──────────── deleteAdmin ────────────╮
-const deleteAdmin: RequestHandler = async (req, res) => {
+const deleteAdmin: RequestHandler = async (req, res, next) => {
   try {
     const result = await AdminService.deleteAdminFromDB(req.params.id);
     sendResponse(res, {
@@ -91,18 +83,14 @@ const deleteAdmin: RequestHandler = async (req, res) => {
       data: result,
     });
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: error.message || "Something went wrong",
-      data: error,
-    });
+    next(error);
   }
 };
 //w: (end) ╰──────────── deleteAdmin ────────────╯
 
 //w: (start)╭──────────── softDeleteAdmin ────────────╮
 
-const softDeleteAdmin: RequestHandler = async (req, res) => {
+const softDeleteAdmin: RequestHandler = async (req, res, next) => {
   try {
     const result = await AdminService.softDeleteAdminFromDB(req.params.id);
     sendResponse(res, {
@@ -112,11 +100,7 @@ const softDeleteAdmin: RequestHandler = async (req, res) => {
       data: result,
     });
   } catch (err: any) {
-    res.status(500).json({
-      success: false,
-      message: err.message || "Something went wrong",
-      data: err,
-    });
+    next(err);
   }
 };
 //w: (end) ╰──────────── softDeleteAdmin ────────────╯

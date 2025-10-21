@@ -13,7 +13,6 @@ import { prisma } from "../../../shared/prisma";
 const getAllFromDB = async (params: any, options: TOptions) => {
   const andConditions: Prisma.AdminWhereInput[] = [];
 
-  throw new Error("Method not implemented.");
   const { searchTerm, ...filterData } = params;
   // console.log(filterData, "[1;31mfilterData in admin.service.ts at line 12[0m");
 

@@ -1,6 +1,7 @@
 //
 import express, { Application } from "express";
 import cors from "cors";
+import httpStatus from "http-status";
 import { UserRoutes } from "./app/module/User/user.routes";
 import { AdminRoutes } from "./app/module/Admin/admin.routes";
 import router from "./app/routes";
