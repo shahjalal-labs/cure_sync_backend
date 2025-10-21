@@ -59,8 +59,11 @@ const loginUserIntoDB = async (payload: ILoginPayload) => {
 
 const refreshToken = async (token: string) => {
   let decodedData;
+  try {
+    decodedData = jwtHelpers;
+  } catch (error) {}
 };
-//w: (end) ╰────────────  ────────────╯
+//w: (end) ╰──────────── refreshToken  ────────────╯
 export const AuthService = {
   loginUserIntoDB,
   refreshToken,
