@@ -2,6 +2,7 @@
 import { RequestHandler } from "express";
 import { UserService } from "./user.service";
 import { sendResponse } from "../../../shared/sendResponse";
+import httpStatus from "http-status";
 
 const createAdmin: RequestHandler = async (req, res) => {
   const result = await UserService.createAdminIntoDB(req.body);
@@ -15,7 +16,7 @@ const getAllUsers: RequestHandler = async (req, res) => {
   try {
     const result = await UserService.getAllUsersFromDB();
     sendResponse(res, {
-      statusCode: 200,
+      statusCode: httpStatus.OK,
       success: true,
       message: "All users fetched successfully",
       data: result,
