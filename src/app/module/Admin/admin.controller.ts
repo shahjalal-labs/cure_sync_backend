@@ -12,7 +12,7 @@ import httpStatus from "http-status";
 //w: (end) ╰────────────  ────────────╯
 
 //w: (start)╭──────────── get all admin ────────────╮
-const getAll: RequestHandler = async (req, res) => {
+const getAll: RequestHandler = async (req, res, next) => {
   const filters = pick(req.query, adminFilterableFields);
 
   const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
@@ -27,11 +27,7 @@ const getAll: RequestHandler = async (req, res) => {
       data: result.data,
     });
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: error.message || "Something went wrong",
-      data: error,
-    });
+    next(error);
   }
 };
 //w: (end) ╰──────────── get all admin ────────────╯
