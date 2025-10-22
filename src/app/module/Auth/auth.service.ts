@@ -1,5 +1,5 @@
 //
-import { User, UserStatus } from "@prisma/client";
+import { UserStatus } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
 import bcrypt from "bcrypt";
 import { jwtHelpers } from "../../../helpers/jwtHelpers";
@@ -33,6 +33,11 @@ const loginUserIntoDB = async (payload: ILoginPayload) => {
   if (!isPasswordCorrect) throw new Error("Invalid password");
 
   const jwtSecret = config.jwt.jwt_secret as Secret;
+  console.log(
+    `expiresIn`,
+    config.jwt.expires_in,
+    config.jwt.refresh_token_expires_in,
+  );
 
   const accessToken = jwtHelpers.generateToken(
     {
@@ -96,7 +101,7 @@ const refreshToken = async (token: string) => {
 
 //w: (start)╭──────────── changePassword  ────────────╮
 const changePassword = async (
-  user: User,
+  user: any,
   payload: {
     oldPassword: string;
     newPassword: string;
@@ -130,8 +135,24 @@ const changePassword = async (
 };
 //w: (end) ╰──────────── changePassword  ────────────╯
 
+//w: (start)╭────────────  ────────────╮
+
+const forgotPassword = async (payload: { email: string }) => {
+  const userData = await prisma.user.findUniqueOrThrow({
+    where: {
+      email: payload.email,
+      status: UserStatus.ACTIVE,
+    },
+  });
+};
+const resetPassToken = jwtHelpers.generateToken({
+  email: user,
+});
+//w: (end) ╰────────────  ────────────╯
+
 export const AuthService = {
   loginUserIntoDB,
   refreshToken,
   changePassword,
+  forgotPassword,
 };
