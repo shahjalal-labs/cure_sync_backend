@@ -3,6 +3,7 @@ import catchAsync from "../../../shared/catchAsync";
 import { sendResponse } from "../../../shared/sendResponse";
 import { AuthService } from "./auth.service";
 import { Request, Response } from "express";
+import { User } from "@prisma/client";
 
 //w: (start)╭────────────  ────────────╮
 
@@ -49,7 +50,25 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
   });
 });
 //w: (end) ╰────────────  ────────────╯
+
+//w: (start)╭────────────  ────────────╮
+
+const changePassword = catchAsync(
+  async (req: Request & { user?: any }, res) => {
+    const user = req.user;
+    const result = await AuthService.changePassword(user, req.body);
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Password changed successfully",
+      data: result,
+    });
+  },
+);
+//w: (end) ╰────────────  ────────────╯
+
 export const AuthController = {
   loginUser,
   refreshToken,
+  changePassword,
 };

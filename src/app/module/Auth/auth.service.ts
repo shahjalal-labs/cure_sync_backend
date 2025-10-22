@@ -114,7 +114,8 @@ const changePassword = async (
     userData.password,
   );
 
-  if (!isPasswordCorrect) throw new ApiError(http);
+  if (!isPasswordCorrect)
+    throw new ApiError(httpStatus.UNAUTHORIZED, "Incorrect password");
 
   const newHashedPassword: string = await bcrypt.hash(payload.newPassword, 12);
   await prisma.user.update({

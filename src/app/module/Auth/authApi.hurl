@@ -8,3 +8,11 @@ Content-Type: application/json
 
 
 POST  {{port6009}}/auth/refresh-token
+
+POST {{port6009}}/auth/change-password
+
+Content-Type: application/json
+{
+  "oldPassword": "123456",
+  "newPassword": "123456n"
+}
