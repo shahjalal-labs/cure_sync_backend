@@ -5,6 +5,8 @@ import bcrypt from "bcrypt";
 import { jwtHelpers } from "../../../helpers/jwtHelpers";
 import config from "../../../config";
 import { Secret } from "jsonwebtoken";
+import { ApiError } from "../../errors/ApiError";
+import httpStatus from "http-status";
 
 //w: (start)╭────────────  ────────────╮
 
@@ -112,7 +114,7 @@ const changePassword = async (
     userData.password,
   );
 
-  if (!isPasswordCorrect) throw new Error("Password incorrect!");
+  if (!isPasswordCorrect) throw new ApiError(http);
 
   const newHashedPassword: string = await bcrypt.hash(payload.newPassword, 12);
   await prisma.user.update({
