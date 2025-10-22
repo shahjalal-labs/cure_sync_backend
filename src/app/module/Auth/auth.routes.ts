@@ -4,9 +4,6 @@ import { AuthController } from "./auth.controller";
 import { validateRequest } from "../../middlewares/validateRequest";
 import { AuthValidationSchema } from "./auth.validation";
 import { auth } from "../../middlewares/auth";
-import multer from "multer";
-import path from "path";
-
 import { v2 as cloudinary } from "cloudinary";
 cloudinary.config({
   cloud_name: "my_cloud_name",
@@ -15,21 +12,9 @@ cloudinary.config({
 });
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(process.cwd(), "/uploads"));
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
-
-const upload = multer({ storage });
-
 router.post(
   "/",
-  // validateRequest(AuthValidationSchema.userLoginValidationSchema),
-  upload.single("file"),
+  validateRequest(AuthValidationSchema.userLoginValidationSchema),
   AuthController.loginUser,
 );
 
