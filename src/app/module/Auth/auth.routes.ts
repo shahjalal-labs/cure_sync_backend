@@ -6,22 +6,30 @@ import { AuthValidationSchema } from "./auth.validation";
 import { auth } from "../../middlewares/auth";
 import multer from "multer";
 import path from "path";
+
+import { v2 as cloudinary } from "cloudinary";
+cloudinary.config({
+  cloud_name: "my_cloud_name",
+  api_key: "my_key",
+  api_secret: "my_secret",
+});
 const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "/uploads"));
+    cb(null, path.join(process.cwd(), "/uploads"));
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
 router.post(
   "/",
-  validateRequest(AuthValidationSchema.userLoginValidationSchema),
+  // validateRequest(AuthValidationSchema.userLoginValidationSchema),
+  upload.single("file"),
   AuthController.loginUser,
 );
 
