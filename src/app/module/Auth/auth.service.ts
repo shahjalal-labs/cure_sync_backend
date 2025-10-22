@@ -1,5 +1,5 @@
 //
-import { UserStatus } from "@prisma/client";
+import { User, UserStatus } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
 import bcrypt from "bcrypt";
 import { jwtHelpers } from "../../../helpers/jwtHelpers";
@@ -94,13 +94,13 @@ const refreshToken = async (token: string) => {
 
 //w: (start)╭──────────── changePassword  ────────────╮
 const changePassword = async (
-  user: any,
+  user: User,
   payload: {
     oldPassword: string;
     newPassword: string;
   },
 ) => {
-  const userData = await prisma.user.findFirstOrThrow({
+  const userData = await prisma.user.findUniqueOrThrow({
     where: {
       email: user.email,
       status: UserStatus.ACTIVE,
@@ -112,9 +112,21 @@ const changePassword = async (
     userData.password,
   );
 
-  if (!isPasswordCorrect) throw new Error("Invalid password");
+  if (!isPasswordCorrect) throw new Error("Password incorrect!");
+
+  const newHashedPassword: string = await bcrypt.hash(payload.newPassword, 12);
+  await prisma.user.update({
+    where: {
+      email: userData.email,
+    },
+    data: {
+      password: newHashedPassword,
+      needPasswordChange: false,
+    },
+  });
 };
 //w: (end) ╰──────────── changePassword  ────────────╯
+
 export const AuthService = {
   loginUserIntoDB,
   refreshToken,
