@@ -176,6 +176,22 @@ const forgotPassword = async (payload: { email: string }) => {
 
 //w: (end) ╰──────────── forgotPassword  ────────────╯
 
+//w: (start)╭────────────  ────────────╮
+
+const resetPassword = async (
+  token: string,
+  payload: {
+    id: string;
+    newPassword: string;
+  },
+) => {
+  const userData = await prisma.user.findUniqueOrThrow({
+    where: {
+      id: payload.id,
+    },
+  });
+};
+//w: (end) ╰────────────  ────────────╯
 export const AuthService = {
   loginUserIntoDB,
   refreshToken,

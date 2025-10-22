@@ -23,3 +23,9 @@ Content-Type: application/json
 
 POST {{port6009}}/auth/forgot-password
 Authorization: {{token}}
+
+Content-Type: application/json
+{
+  "email": "shahjalal.backend@gmail.com"
+}
+
