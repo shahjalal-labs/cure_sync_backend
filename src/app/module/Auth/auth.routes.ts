@@ -4,7 +4,20 @@ import { AuthController } from "./auth.controller";
 import { validateRequest } from "../../middlewares/validateRequest";
 import { AuthValidationSchema } from "./auth.validation";
 import { auth } from "../../middlewares/auth";
+import multer from "multer";
+import path from "path";
 const router = express.Router();
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "/uploads"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 router.post(
   "/",
