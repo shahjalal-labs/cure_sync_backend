@@ -19,7 +19,16 @@ const changePasswordValidationSchema = z.object({
     .strict(),
 });
 
+const forgotPasswordValidationSchema = z.object({
+  body: z
+    .object({
+      email: z.string(),
+    })
+    .strict(),
+});
+
 export const AuthValidationSchema = {
   userLoginValidationSchema,
   changePasswordValidationSchema,
+  forgotPasswordValidationSchema,
 };

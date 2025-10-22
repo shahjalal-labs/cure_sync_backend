@@ -19,3 +19,7 @@ Content-Type: application/json
   "oldPassword": "123456",
   "newPassword": "123456"
 }
+
+
+POST {{port6009}}/auth/forgot-password
+Authorization: {{token}}

@@ -31,7 +31,7 @@ const loginUser = catchAsync(async (req, res) => {
 });
 //w: (end) ╰──────────── loginUser  ────────────╯
 
-//w: (start)╭────────────  ────────────╮
+//w: (start)╭──────────── refreshToken  ────────────╮
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
   const { refreshToken } = req.cookies;
 
@@ -49,7 +49,7 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
-//w: (end) ╰────────────  ────────────╯
+//w: (end) ╰──────────── refreshToken  ────────────╯
 
 //w: (start)╭──────────── changePassword  ────────────╮
 
