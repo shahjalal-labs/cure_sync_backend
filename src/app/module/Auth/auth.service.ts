@@ -135,7 +135,7 @@ const changePassword = async (
 };
 //w: (end) ╰──────────── changePassword  ────────────╯
 
-//w: (start)╭────────────  ────────────╮
+//w: (start)╭──────────── forgotPassword  ────────────╮
 
 const forgotPassword = async (payload: { email: string }) => {
   const userData = await prisma.user.findUniqueOrThrow({
@@ -144,11 +144,17 @@ const forgotPassword = async (payload: { email: string }) => {
       status: UserStatus.ACTIVE,
     },
   });
+  const resetPassToken = jwtHelpers.generateToken(
+    {
+      email: userData.email,
+      role: userData.role,
+    },
+    config.jwt.reset_pass_secret as Secret,
+    config.jwt.reset_pass_token_expires_in as string,
+  );
 };
-const resetPassToken = jwtHelpers.generateToken({
-  email: user,
-});
-//w: (end) ╰────────────  ────────────╯
+
+//w: (end) ╰──────────── forgotPassword  ────────────╯
 
 export const AuthService = {
   loginUserIntoDB,
