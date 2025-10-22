@@ -4,8 +4,8 @@
 POST {{port6009}}/auth
 Content-Type: application/json
 {
-  "email": "jamal@cure.sync",
-  "password": "123456"
+  "email": "shahjalal.backend@gmail.com",
+  "password": "newPassword"
 }
 
 
@@ -29,3 +29,11 @@ Content-Type: application/json
   "email": "shahjalal.backend@gmail.com"
 }
 
+POST {{port6009}}/auth/reset-password
+Authorization: {{token}}
+
+Content-Type: application/json
+{
+  "id": "137296a7-aae3-4ad2-bad6-fd9cde86ef7a",
+  "newPassword": "newPassword"
+}
