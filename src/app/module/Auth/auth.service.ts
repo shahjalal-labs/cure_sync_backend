@@ -7,6 +7,7 @@ import config from "../../../config";
 import { Secret } from "jsonwebtoken";
 import { ApiError } from "../../errors/ApiError";
 import httpStatus from "http-status";
+import { emailSender } from "../../../helpers/emailSender";
 
 //w: (start)╭────────────  ────────────╮
 
@@ -155,6 +156,22 @@ const forgotPassword = async (payload: { email: string }) => {
 
   const resetPassLink =
     config.reset_pass_link + `?userId=${userData.id}&token=${resetPassToken}`;
+
+  await emailSender(
+    userData.email,
+    `
+      <div>
+         <p>Dear User,</p>
+            <p>Your password reset link 
+                <a href=${resetPassLink}>
+                    <button>
+                        Reset Password
+                    </button>
+                </a>
+         </p>
+      </div>
+    `,
+  );
 };
 
 //w: (end) ╰──────────── forgotPassword  ────────────╯
