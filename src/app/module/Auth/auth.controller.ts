@@ -4,6 +4,7 @@ import { sendResponse } from "../../../shared/sendResponse";
 import { AuthService } from "./auth.service";
 import { Request, Response } from "express";
 import { User } from "@prisma/client";
+import { Secret } from "jsonwebtoken";
 
 //w: (start)╭────────────  ────────────╮
 
@@ -78,9 +79,24 @@ const forgotPassword = catchAsync(async (req, res) => {
   });
 });
 //w: (end) ╰──────────── forgotPassword  ────────────╯
+
+//w: (start)╭────────────  ────────────╮
+const resetPassword = catchAsync(async (req, res) => {
+  const token = req.headers.authorization || "";
+  await AuthService.resetPassword(token, req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Password reset link sent successfully",
+    data: null,
+  });
+});
+//w: (end) ╰────────────  ────────────╯
+
 export const AuthController = {
   loginUser,
   refreshToken,
   changePassword,
   forgotPassword,
+  resetPassword,
 };

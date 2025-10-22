@@ -202,10 +202,14 @@ const resetPassword = async (
 
   const newHashedPassword = await bcrypt.hash(payload.newPassword, 12);
 
-
   await prisma.user.update({
-    where:   ]
-  })
+    where: {
+      id: payload.id,
+    },
+    data: {
+      password: newHashedPassword,
+    },
+  });
 };
 //w: (end) ╰──────────── resetPassword  ────────────╯
 
