@@ -47,12 +47,20 @@ const createPatient = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Doctor created successfully",
+    message: "Patient created successfully",
     data: result,
   });
 });
 //w: (end) ╰──────────── createPatient  ────────────╯
-//
+
+//w: (start)╭────────────  ────────────╮
+
+const changeProfileStatus = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await UserService.changeProfileStatus(id);
+});
+//w: (end) ╰────────────  ────────────╯
+
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
@@ -61,4 +69,5 @@ export const UserController = {
   getAllUsers,
   createDoctor,
   createPatient,
+  changeProfileStatus,
 };

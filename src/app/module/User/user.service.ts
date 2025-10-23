@@ -106,9 +106,24 @@ const createPatientIntoDB = async (req: Request): Promise<Patient> => {
 };
 //w: (end) ╰──────────── create  patient  ────────────╯
 
-//w: (start)╭────────────  ────────────╮
+//w: (start)╭──────────── changeProfileStatus  ────────────╮
+const changeProfileStatus = async (id: string, status: UserRole) => {
+  await prisma.user.findUniqueOrThrow({
+    where: {
+      id,
+    },
+  });
 
-//w: (end) ╰────────────  ────────────╯
+  const updateUserStatus = await prisma.user.update({
+    where: {
+      id,
+    },
+    data: status,
+  });
+  return updateUserStatus;
+};
+
+//w: (end) ╰──────────── changeProfileStatus  ────────────╯
 
 //w: (start)╭────────────  ────────────╮
 
@@ -118,4 +133,5 @@ export const UserService = {
   createDoctorIntoDB,
   createPatientIntoDB,
   getAllUsersFromDB,
+  changeProfileStatus,
 };
