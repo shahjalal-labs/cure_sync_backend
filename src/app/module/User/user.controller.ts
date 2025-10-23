@@ -4,6 +4,8 @@ import { UserService } from "./user.service";
 import { sendResponse } from "../../../shared/sendResponse";
 import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
+import { pick } from "../../../shared/pick";
+import { userFilterableFields } from "./user.constant";
 
 //w: (start)╭──────────── createAdmin ────────────╮
 const createAdmin = catchAsync(async (req: Request, res: Response) => {
@@ -19,7 +21,12 @@ const createAdmin = catchAsync(async (req: Request, res: Response) => {
 
 //w: (start)╭──────────── getAllUsers ────────────╮
 const getAllUsers: RequestHandler = catchAsync(async (req, res) => {
-  const result = await UserService.getAllUsersFromDB();
+  const filters = pick(req.query, userFilterableFields);
+
+  const options = pick(req.query, ["page", "limit", "sortBy", "sortOrder"]);
+
+  const result = await UserService.getAllUsersFromDB(filters, options);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
