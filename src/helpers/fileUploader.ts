@@ -4,16 +4,17 @@ import fs from "fs";
 import multer from "multer";
 import path from "path";
 import { ICloudinaryResponse, IFile } from "../app/interfaces/file";
+import config from "../config";
 
 clouadinary.config({
-  cloud_name: "root",
-  api_key: "225611373532826",
-  api_secret: "3MKG91TQ5twmBzYk2Vd6vabHVDc",
+  cloud_name: config.cloudinary.cloud_name,
+  api_key: config.cloudinary.api_key,
+  api_secret: config.cloudinary.api_secret,
 });
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(process.cwd(), "/uploads"));
+    cb(null, path.join(process.cwd(), "uploads"));
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);

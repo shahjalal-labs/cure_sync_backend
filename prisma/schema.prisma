@@ -36,6 +36,9 @@ model Admin {
   @@map("admins")
 }
 
+model Doctor {
+}
+
 enum UserRole {
   SUPER_ADMIN
   ADMIN
