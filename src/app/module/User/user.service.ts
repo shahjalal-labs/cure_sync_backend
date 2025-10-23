@@ -73,8 +73,37 @@ const createDoctorIntoDB = async (req: Request): Promise<Doctor> => {
   });
   return result;
 };
-
 //w: (end) ╰──────────── createDoctor  ────────────╯
+//
+//w: (start)╭──────────── create patient  ────────────╮
+const createPatientIntoDB = async (req: Request): Promise<Doctor> => {
+  const file = req.file as IFile;
+  if (file) {
+    const uploadToCloudinary = await fileUploader.uploadToCloudinary(file);
+    req.body.patient.profilePhoto = uploadToCloudinary?.secure_url;
+  }
+
+  const hashedPassword = await bcrypt.hash(req.body.password, 12);
+
+  const userData = {
+    email: req.body.patient.email,
+    password: hashedPassword,
+    role: UserRole.PATIENT,
+  };
+
+  const result = await prisma.$transaction(async (txClient) => {
+    await txClient.user.create({
+      data: userData,
+    });
+
+    const createdPatient = await txClient..create({
+      data: req.body.doctor,
+    });
+    return createdPatient;
+  });
+  return result;
+};
+//w: (end) ╰──────────── create  patient  ────────────╯
 
 //w: (start)╭────────────  ────────────╮
 
@@ -85,6 +114,7 @@ const createDoctorIntoDB = async (req: Request): Promise<Doctor> => {
 //w: (end) ╰────────────  ────────────╯
 export const UserService = {
   createAdminIntoDB,
-  getAllUsersFromDB,
   createDoctorIntoDB,
+  createPatientIntoDB,
+  getAllUsersFromDB,
 };
