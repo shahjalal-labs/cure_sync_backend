@@ -66,7 +66,7 @@ const createDoctorIntoDB = async (req: Request): Promise<Doctor> => {
       data: userData,
     });
 
-    const createdDoctor = await prisma.doctor.create({
+    const createdDoctor = await txClient.doctor.create({
       data: req.body.doctor,
     });
     return createdDoctor;

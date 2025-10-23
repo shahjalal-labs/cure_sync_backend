@@ -12,7 +12,7 @@ const createAdminValidationSchema = z.object({
 });
 
 const createDoctorValidationSchema = z.object({
-  passwor: z.string(),
+  password: z.string(),
   doctor: z.object({
     name: z.string(),
     email: z.string(),
@@ -21,7 +21,7 @@ const createDoctorValidationSchema = z.object({
     registrationNumber: z.string(),
     experience: z.number(),
     gender: z.enum([Gender.MALE, Gender.FEMALE]),
-    appointmentFee: z.positive(),
+    appointmentFee: z.number().positive(),
     qualification: z.string(),
     currentWorkingPlace: z.string(),
     designation: z.string(),
