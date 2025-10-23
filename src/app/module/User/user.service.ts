@@ -1,5 +1,5 @@
 //
-import { Admin, Doctor, UserRole } from "@prisma/client";
+import { Admin, Doctor, Patient, UserRole } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { prisma } from "../../../shared/prisma";
 import { Request } from "express";
@@ -9,6 +9,14 @@ import { fileUploader } from "../../../helpers/fileUploader";
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
+//
+//w: (start)╭──────────── getAllUsersFromDB  ────────────╮
+const getAllUsersFromDB = async () => {
+  const result = await prisma.user.findMany();
+  return result;
+};
+//w: (end) ╰──────────── getAllUsersFromDB  ────────────╯
+
 //w: (start)╭──────────── createAdminIntoDB  ────────────╮
 const createAdminIntoDB = async (req: Request): Promise<Admin> => {
   const file = req.file as IFile;
@@ -37,13 +45,6 @@ const createAdminIntoDB = async (req: Request): Promise<Admin> => {
   return result;
 };
 //w: (end) ╰──────────── createAdminIntoDB  ────────────╯
-
-//w: (start)╭──────────── getAllUsersFromDB  ────────────╮
-const getAllUsersFromDB = async () => {
-  const result = await prisma.user.findMany();
-  return result;
-};
-//w: (end) ╰──────────── getAllUsersFromDB  ────────────╯
 
 //w: (start)╭──────────── createDoctor  ────────────╮
 const createDoctorIntoDB = async (req: Request): Promise<Doctor> => {
@@ -76,7 +77,7 @@ const createDoctorIntoDB = async (req: Request): Promise<Doctor> => {
 //w: (end) ╰──────────── createDoctor  ────────────╯
 //
 //w: (start)╭──────────── create patient  ────────────╮
-const createPatientIntoDB = async (req: Request): Promise<Doctor> => {
+const createPatientIntoDB = async (req: Request): Promise<Patient> => {
   const file = req.file as IFile;
   if (file) {
     const uploadToCloudinary = await fileUploader.uploadToCloudinary(file);
@@ -96,7 +97,7 @@ const createPatientIntoDB = async (req: Request): Promise<Doctor> => {
       data: userData,
     });
 
-    const createdPatient = await txClient..create({
+    const createdPatient = await txClient.patient.create({
       data: req.body.doctor,
     });
     return createdPatient;
