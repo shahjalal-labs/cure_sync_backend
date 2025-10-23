@@ -7,6 +7,12 @@ import { fileUploader } from "../../../helpers/fileUploader";
 import { userValidation } from "./user.validation";
 const router: Router = express.Router();
 
+router.get(
+  "/",
+  auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
+  UserController.getAllUsers,
+);
+
 router.post(
   "/create-admin",
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
@@ -19,6 +25,15 @@ router.post(
   },
 );
 
-router.get("/", UserController.getAllUsers);
+router.post(
+  "/create-doctor",
+  auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
+  fileUploader.upload.single("file"),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = userValidation.createDoctorValidationSchema.parse(
+      JSON.parse(req.body.data),
+    );
+  },
+);
 
 export const UserRoutes: Router = router;
