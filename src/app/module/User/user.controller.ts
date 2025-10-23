@@ -56,8 +56,7 @@ const createPatient = catchAsync(async (req: Request, res: Response) => {
 //w: (start)╭──────────── changeProfileStatus  ────────────╮
 const changeProfileStatus = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const { status } = req.body;
-  const result = await UserService.changeProfileStatus(id, status);
+  const result = await UserService.changeProfileStatus(id, req.body);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

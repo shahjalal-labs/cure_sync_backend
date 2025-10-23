@@ -5,17 +5,12 @@ import { prisma } from "../../../shared/prisma";
 import { Request } from "express";
 import { IFile } from "../../interfaces/file";
 import { fileUploader } from "../../../helpers/fileUploader";
+import { IPaginationOptions } from "../../interfaces/pagination";
 
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
 //
-//w: (start)╭──────────── getAllUsersFromDB  ────────────╮
-const getAllUsersFromDB = async () => {
-  const result = await prisma.user.findMany();
-  return result;
-};
-//w: (end) ╰──────────── getAllUsersFromDB  ────────────╯
 
 //w: (start)╭──────────── createAdminIntoDB  ────────────╮
 const createAdminIntoDB = async (req: Request): Promise<Admin> => {
@@ -124,6 +119,13 @@ const changeProfileStatus = async (id: string, status: UserRole) => {
 };
 
 //w: (end) ╰──────────── changeProfileStatus  ────────────╯
+
+//w: (start)╭──────────── getAllUsersFromDB  ────────────╮
+const getAllUsersFromDB = async (
+  params: any,
+  options: IPaginationOptions,
+) => {};
+//w: (end) ╰──────────── getAllUsersFromDB  ────────────╯
 
 //w: (start)╭────────────  ────────────╮
 
