@@ -21,7 +21,7 @@ const createSpecialities = catchAsync(async (req: Request, res: Response) => {
 const getAllSpecialities = catchAsync(async (req, res) => {
   const result = await SpecialitiesService.getAllSpecialitiesFromDB();
   sendResponse(res, {
-    statusCode: httpStatus.ok,
+    statusCode: httpStatus.OK,
     success: true,
     message: "Specialities fetched successfully",
     data: result,
@@ -29,17 +29,18 @@ const getAllSpecialities = catchAsync(async (req, res) => {
 });
 //w: (end) ╰──────────── getAllSpecialities ────────────╯
 
-//w: (start)╭──────────── deleteSpecialitiesFromDB  ────────────╮
-const deleteSpecialitiesFromDB = catchAsync(
-  async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const result = await SpecialitiesService.deleteSpecialitiesFromDB(id);
-    sendResponse(res, {
-      statusCode: http,
-    });
-  },
-);
-//w: (end) ╰──────────── deleteSpecialitiesFromDB  ────────────╯
+//w: (start)╭──────────── deleteSpecialities────────────╮
+const deleteSpecialities = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await SpecialitiesService.deleteSpecialitiesFromDB(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Specialities deleted successfully",
+    data: result,
+  });
+});
+//w: (end) ╰──────────── deleteSpecialities────────────╯
 
 //w: (start)╭────────────  ────────────╮
 
@@ -48,4 +49,5 @@ const deleteSpecialitiesFromDB = catchAsync(
 export const SpecialitiesController = {
   createSpecialities,
   getAllSpecialities,
+  deleteSpecialities,
 };
