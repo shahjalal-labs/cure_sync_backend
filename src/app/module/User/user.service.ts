@@ -123,18 +123,15 @@ const changeProfileStatus = async (id: string, status: UserRole) => {
 //w: (end) ╰──────────── changeProfileStatus  ────────────╯
 
 //w: (start)╭──────────── getAllUsersFromDB  ────────────╮
-const getAllUsersFromDB = async (
-  params: IUserFilterRequest,
-  options: IPaginationOptions,
-) => {
+const getAllUsersFromDB = async (params: any, options: IPaginationOptions) => {
   const { page, limit, skip } = paginationHelper.calcalutePagination(options);
-
   const { searchTerm, ...filterData } = params;
 
-  const andConditions: Prisma.UserWhereInput[] = [];
+  const andCondions: Prisma.UserWhereInput[] = [];
 
+  //console.log(filterData);
   if (params.searchTerm) {
-    andConditions.push({
+    andCondions.push({
       OR: userSearchableFields.map((field) => ({
         [field]: {
           contains: params.searchTerm,
@@ -143,8 +140,9 @@ const getAllUsersFromDB = async (
       })),
     });
   }
-  if (Object.keys(filterData).length) {
-    andConditions.push({
+
+  if (Object.keys(filterData).length > 0) {
+    andCondions.push({
       AND: Object.keys(filterData).map((key) => ({
         [key]: {
           equals: (filterData as any)[key],
@@ -152,13 +150,12 @@ const getAllUsersFromDB = async (
       })),
     });
   }
-  const whereConditions: Prisma.UserWhereInput = andConditions.length
-    ? {
-        AND: andConditions,
-      }
-    : {};
+
+  const whereConditons: Prisma.UserWhereInput =
+    andCondions.length > 0 ? { AND: andCondions } : {};
+
   const result = await prisma.user.findMany({
-    where: whereConditions,
+    where: whereConditons,
     skip,
     take: limit,
     orderBy:
@@ -178,13 +175,13 @@ const getAllUsersFromDB = async (
       createdAt: true,
       updatedAt: true,
       admin: true,
-      doctor: true,
       patient: true,
+      doctor: true,
     },
   });
 
   const total = await prisma.user.count({
-    where: whereConditions,
+    where: whereConditons,
   });
 
   return {
