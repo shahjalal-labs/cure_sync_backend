@@ -8,6 +8,7 @@ import { fileUploader } from "../../../helpers/fileUploader";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { paginationHelper } from "../../../helpers/paginatonHelper";
 import { userSearchableFields } from "./user.constant";
+import { IAuthUser } from "../../interfaces/common";
 
 //w: (start)╭────────────  ────────────╮
 
@@ -195,6 +196,9 @@ const getAllUsersFromDB = async (params: any, options: IPaginationOptions) => {
 };
 //w: (end) ╰──────────── getAllUsersFromDB  ────────────╯
 
+//w: (start)╭──────────── getMyProfileFromDB  ────────────╮
+const getMyProfileFromDB = async (user: IAuthUser) => {};
+//w: (end) ╰──────────── getMyProfileFromDB  ────────────╯
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
