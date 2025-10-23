@@ -12,29 +12,43 @@ const createAdminValidationSchema = z.object({
 });
 
 const createDoctorValidationSchema = z.object({
-  password: z.string({
-    required_error: "Password is required",
-  }),
+  password: z.string({ message: "Password is required" }),
   doctor: z.object({
-    name: z.string(),
-    email: z.string(),
-    contactNumber: z.string(),
-    address: z.string(),
-    registrationNumber: z.string(),
-    experience: z.number(),
-    gender: z.enum([Gender.MALE, Gender.FEMALE]),
-    appointmentFee: z.number().positive(),
-    qualification: z.string(),
-    currentWorkingPlace: z.string(),
-    designation: z.string(),
+    name: z.string({ message: "Doctor name is required" }),
+    email: z.string({ message: "Email is required" }),
+    contactNumber: z.string({ message: "Contact number is required" }),
+    address: z.string().optional(),
+    registrationNumber: z.string({
+      message: "Registration number is required",
+    }),
+    experience: z.number().optional(),
+    gender: z.enum([Gender.MALE, Gender.FEMALE], {
+      message: "Gender is required",
+    }),
+    appointmentFee: z
+      .number({ message: "Appointment fee is required" })
+      .positive("Appointment fee must be positive"),
+    qualification: z.string({ message: "Qualification is required" }),
+    currentWorkingPlace: z.string({
+      message: "Current working place is required",
+    }),
+    designation: z.string({ message: "Designation is required" }),
   }),
 });
 
 const createPatientValidationSchema = z.object({
-  password: z.string(),
+  password: z.string({
+    message: "Password is required",
+  }),
+  patient: z.object({
+    name: z.string({ message: "Patient name is required" }),
+    email: z.string({ message: "Email is required" }),
+    contactNumber: z.string().optional(),
+  }),
 });
 
 export const userValidation = {
   createAdminValidationSchema,
   createDoctorValidationSchema,
+  createPatientValidationSchema,
 };
