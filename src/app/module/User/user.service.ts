@@ -2,8 +2,15 @@
 import { UserRole } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { prisma } from "../../../shared/prisma";
+import { Request } from "express";
 
-const createAdminIntoDB = async (data: any) => {
+//w: (start)╭────────────  ────────────╮
+
+//w: (end) ╰────────────  ────────────╯
+//w: (start)╭──────────── createAdminIntoDB  ────────────╮
+const createAdminIntoDB = async (req: Request): Promise<Admin> => {
+  const file = req.file as ;
+
   const hashedPassword = await bcrypt.hash(data?.password, 12);
   const userData = {
     email: data.admin.email,
@@ -23,11 +30,14 @@ const createAdminIntoDB = async (data: any) => {
   });
   return result;
 };
+//w: (end) ╰──────────── createAdminIntoDB  ────────────╯
 
+//w: (start)╭────────────  ────────────╮
 const getAllUsersFromDB = async () => {
   const result = await prisma.user.findMany();
   return result;
 };
+//w: (end) ╰────────────  ────────────╯
 
 export const UserService = {
   createAdminIntoDB,

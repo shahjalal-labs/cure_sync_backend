@@ -38,3 +38,8 @@ const uploadToCloudinary = async (
     );
   });
 };
+
+export const fileUploader = {
+  upload,
+  uploadToCloudinary,
+};
