@@ -222,15 +222,14 @@ const getMyProfileFromDB = async (user: IAuthUser) => {
         email: userInfo.email,
       },
     });
-  }
-  if (userInfo.role === UserRole.SUPER_ADMIN) {
-    profileInfo = await prisma.admin.update({
+  } else if (userInfo.role === UserRole.SUPER_ADMIN) {
+    profileInfo = await prisma.admin.findUnique({
       where: {
         email: userInfo.email,
       },
-      data: req.body,
     });
   }
+  return { ...userInfo, ...profileInfo };
 };
 //w: (end) ╰──────────── getMyProfileFromDB  ────────────╯
 //w: (start)╭────────────  ────────────╮
