@@ -14,7 +14,7 @@ router.get(
   UserController.getAllUsers,
 );
 
-router.get("/", auth(), UserController.getMyProfile);
+router.get("/me", auth(), UserController.getMyProfile);
 
 router.post(
   "/create-admin",
