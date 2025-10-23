@@ -4,12 +4,7 @@ import { AuthController } from "./auth.controller";
 import { validateRequest } from "../../middlewares/validateRequest";
 import { AuthValidationSchema } from "./auth.validation";
 import { auth } from "../../middlewares/auth";
-import { v2 as cloudinary } from "cloudinary";
-cloudinary.config({
-  cloud_name: "my_cloud_name",
-  api_key: "my_key",
-  api_secret: "my_secret",
-});
+
 const router = express.Router();
 
 router.post(
