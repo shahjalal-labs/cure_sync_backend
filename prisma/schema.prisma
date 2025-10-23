@@ -64,18 +64,17 @@ model Doctor {
 }
 
 model Patient {
-  id                  String             @id @default(uuid())
-  email               String             @unique
-  name                String
-  profilePhoto        String?
-  contactNumber       String?
-  address             String?
-  isDeleted           Boolean            @default(false)
-  createdAt           DateTime           @default(now())
-  updatedAt           DateTime           @updatedAt
-  user                User               @relation(fields: [email], references: [email])
-  patientHealthData   PatientHealthData? @relation(fields: [patientHealthDataId], references: [id])
-  patientHealthDataId String?
+  id                String             @id @default(uuid())
+  email             String             @unique
+  name              String
+  profilePhoto      String?
+  contactNumber     String?
+  address           String?
+  isDeleted         Boolean            @default(false)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  user              User               @relation(fields: [email], references: [email])
+  PatientHealthData PatientHealthData?
 
   @@map("patients")
 }
@@ -100,10 +99,29 @@ model DoctorSpecialities {
 }
 
 model PatientHealthData {
-  id      String    @id @default(uuid())
-  // patientId String  @unique
-  // patient   Patient @relation(fields: [patientId], references: [id])
-  Patient Patient[]
+  id                  String        @id @default(uuid())
+  patientId           String        @unique
+  patient             Patient       @relation(fields: [patientId], references: [id])
+  gender              Gender
+  dateOfBirth         String
+  bloodGroup          BloodGroup
+  hasAllergies        Boolean?      @default(false)
+  hasDiabetes         Boolean?      @default(false)
+  height              String
+  weight              String
+  smokingStatus       Boolean?      @default(false)
+  dietaryPreferences  String?
+  pregnancyStatus     Boolean?      @default(false)
+  mentalHealthHistory String?
+  immunizationStatus  String?
+  hasPastSurgeries    Boolean?      @default(false)
+  recentAnxiety       Boolean?      @default(false)
+  recentDepression    Boolean?      @default(false)
+  maritalStatus       MaritalStatus @default(UNMARRIED)
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  @@map("patient_health_datas")
 }
 
 model Schedule {
