@@ -10,20 +10,38 @@ const createScheduleIntoDB = async (payload: any) => {
 };
 //w: (end) ╰──────────── createScheduleIntoDB  ────────────╯
 
-//w: (start)╭────────────  ────────────╮
-
+//w: (start)╭──────────── getScheduleByIdFromDB  ────────────╮
 const getScheduleByIdFromDB = async (id: string) => {
-  const result = await prisma.schedule.findUnique({
+  const result = await prisma.schedule.findUniqueOrThrow({
     where: {
       id,
     },
   });
   return result;
 };
-//w: (end) ╰────────────  ────────────╯
+//w: (end) ╰──────────── getScheduleByIdFromDB  ────────────╯
+//
+//w: (start)╭──────────── deleteScheduleFromDB  ────────────╮
+const deleteScheduleFromDB = async (id: string) => {
+  await prisma.schedule.findUniqueOrThrow({
+    where: {
+      id,
+    },
+  });
+  const result = await prisma.schedule.delete({
+    where: {
+      id,
+    },
+  });
+  return result;
+};
+//w: (end) ╰──────────── deleteScheduleFromDB  ────────────╯
+
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
 export const ScheduleService = {
   createScheduleIntoDB,
+  getScheduleByIdFromDB,
+  deleteScheduleFromDB,
 };
