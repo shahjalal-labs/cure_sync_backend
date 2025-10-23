@@ -53,13 +53,19 @@ const createPatient = catchAsync(async (req: Request, res: Response) => {
 });
 //w: (end) ╰──────────── createPatient  ────────────╯
 
-//w: (start)╭────────────  ────────────╮
-
+//w: (start)╭──────────── changeProfileStatus  ────────────╮
 const changeProfileStatus = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await UserService.changeProfileStatus(id);
+  const { status } = req.body;
+  const result = await UserService.changeProfileStatus(id, status);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Profile status changed successfully",
+    data: result,
+  });
 });
-//w: (end) ╰────────────  ────────────╯
+//w: (end) ╰──────────── changeProfileStatus  ────────────╯
 
 //w: (start)╭────────────  ────────────╮
 
