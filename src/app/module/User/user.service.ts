@@ -1,5 +1,5 @@
 //
-import { Admin, UserRole } from "@prisma/client";
+import { Admin, Doctor, UserRole } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { prisma } from "../../../shared/prisma";
 import { Request } from "express";
@@ -38,14 +38,30 @@ const createAdminIntoDB = async (req: Request): Promise<Admin> => {
 };
 //w: (end) ╰──────────── createAdminIntoDB  ────────────╯
 
-//w: (start)╭────────────  ────────────╮
+//w: (start)╭──────────── getAllUsersFromDB  ────────────╮
 const getAllUsersFromDB = async () => {
   const result = await prisma.user.findMany();
   return result;
 };
+//w: (end) ╰──────────── getAllUsersFromDB  ────────────╯
+
+//w: (start)╭────────────  ────────────╮
+const createDoctor = async (req: Request): Promise<Doctor> => {
+  const file = req.file as IFile;
+  if (file) {
+    const uploadToCloudinary = await fileUploader.uploadToCloudinary(file);
+    req.body.doctor.profilePhoto = uploadToCloudinary?.secure_url;
+  }
+};
+
+//w: (end) ╰────────────  ────────────╯
+
+//w: (start)╭────────────  ────────────╮
+
 //w: (end) ╰────────────  ────────────╯
 
 export const UserService = {
   createAdminIntoDB,
   getAllUsersFromDB,
+  createDoctor,
 };
