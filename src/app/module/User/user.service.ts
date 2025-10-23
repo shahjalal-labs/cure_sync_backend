@@ -98,7 +98,7 @@ const createPatientIntoDB = async (req: Request): Promise<Patient> => {
     });
 
     const createdPatient = await txClient.patient.create({
-      data: req.body.doctor,
+      data: req.body.patient,
     });
     return createdPatient;
   });
