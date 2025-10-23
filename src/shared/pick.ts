@@ -10,7 +10,6 @@ export const pick = <T extends Record<string, unknown>, k extends keyof T>(
       finalObj[key] = obj[key];
     }
   }
-
-  console.log(finalObj, "[1;31mfinalObj in pick.ts at line 7[0m");
+  // console.log(finalObj, "[1;31mfinalObj in pick.ts at line 7[0m");
   return finalObj;
 };
