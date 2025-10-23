@@ -1,19 +1,25 @@
 //
-import { UserRole } from "@prisma/client";
+import { Admin, UserRole } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { prisma } from "../../../shared/prisma";
 import { Request } from "express";
+import { IFile } from "../../interfaces/file";
+import { fileUploader } from "../../../helpers/fileUploader";
 
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
 //w: (start)╭──────────── createAdminIntoDB  ────────────╮
 const createAdminIntoDB = async (req: Request): Promise<Admin> => {
-  const file = req.file as ;
+  const file = req.file as IFile;
+  if (file) {
+    const uploadToCloudinary = await fileUploader.uploadToCloudinary(file);
+    req.body.admin.profilePhoto = uploadToCloudinary?.secure_url;
+  }
 
-  const hashedPassword = await bcrypt.hash(data?.password, 12);
+  const hashedPassword = await bcrypt.hash(req.body.password, 12);
   const userData = {
-    email: data.admin.email,
+    email: req.body.admin.email,
     password: hashedPassword,
     role: UserRole.ADMIN,
   };
@@ -24,7 +30,7 @@ const createAdminIntoDB = async (req: Request): Promise<Admin> => {
     });
 
     const createdAdminData = await txClient.admin.create({
-      data: data.admin,
+      data: req.body.admin,
     });
     return createdAdminData;
   });

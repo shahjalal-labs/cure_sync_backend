@@ -5,14 +5,19 @@ import { sendResponse } from "../../../shared/sendResponse";
 import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
 
-const createAdmin: RequestHandler = async (req, res) => {
-  const result = await UserService.createAdminIntoDB(req.body);
-  res.send({
-    message: "Hello World",
-    data: result,
-  });
-};
+//w: (start)╭────────────  ────────────╮
 
+//w: (end) ╰────────────  ────────────╯
+//w: (start)╭──────────── createAdmin ────────────╮
+const createAdmin = catchAsync(async (req, res) => {
+  const result = await UserService.createAdminIntoDB(req);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+  });
+});
+//w: (end) ╰──────────── createAdmin ────────────╯
+
+//w: (start)╭──────────── getAllUsers ────────────╮
 const getAllUsers: RequestHandler = catchAsync(async (req, res) => {
   const result = await UserService.getAllUsersFromDB();
   sendResponse(res, {
@@ -22,6 +27,7 @@ const getAllUsers: RequestHandler = catchAsync(async (req, res) => {
     data: result,
   });
 });
+//w: (end) ╰──────────── getAllUsers ────────────╯
 
 export const UserController = {
   createAdmin,
