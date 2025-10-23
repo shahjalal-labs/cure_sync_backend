@@ -1,11 +1,12 @@
 //
-import { Admin, Doctor, Patient, UserRole } from "@prisma/client";
+import { Admin, Doctor, Patient, Prisma, UserRole } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { prisma } from "../../../shared/prisma";
 import { Request } from "express";
 import { IFile } from "../../interfaces/file";
 import { fileUploader } from "../../../helpers/fileUploader";
 import { IPaginationOptions } from "../../interfaces/pagination";
+import { paginationHelper } from "../../../helpers/paginatonHelper";
 
 //w: (start)╭────────────  ────────────╮
 
@@ -121,10 +122,17 @@ const changeProfileStatus = async (id: string, status: UserRole) => {
 //w: (end) ╰──────────── changeProfileStatus  ────────────╯
 
 //w: (start)╭──────────── getAllUsersFromDB  ────────────╮
-const getAllUsersFromDB = async (
-  params: any,
-  options: IPaginationOptions,
-) => {};
+const getAllUsersFromDB = async (params: any, options: IPaginationOptions) => {
+  const { page, limit, skip } = paginationHelper.calcalutePagination(options);
+
+  const { searchTerm, ...filterData } = params;
+
+  const andConditions: Prisma.UserWhereInput[] = [];
+
+  if (params.searchTerm) {
+    andConditions.push({});
+  }
+};
 //w: (end) ╰──────────── getAllUsersFromDB  ────────────╯
 
 //w: (start)╭────────────  ────────────╮
