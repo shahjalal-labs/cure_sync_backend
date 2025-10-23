@@ -43,7 +43,10 @@ router.post(
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
   fileUploader.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
-    req.body = userValidation.createDoctorValidationSchema;
+    req.body = userValidation.createPatientValidationSchema.parse(
+      JSON.parse(req.body.data),
+    );
+    return UserController.createPatient(req, res, next);
   },
 );
 
