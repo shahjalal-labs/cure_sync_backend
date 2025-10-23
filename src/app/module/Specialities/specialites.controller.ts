@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import catchAsync from "../../../shared/catchAsync";
 import { SpecialitiesService } from "./specialities.service";
 import { sendResponse } from "../../../shared/sendResponse";
-import { UserService } from "../User/user.service";
+import httpStatus from "http-status";
 
 //w: (start)╭──────────── createSpecialities  ────────────╮
 const createSpecialities = catchAsync(async (req: Request, res: Response) => {
@@ -18,17 +18,33 @@ const createSpecialities = catchAsync(async (req: Request, res: Response) => {
 //w: (end) ╰──────────── createSpecialities  ────────────╯
 
 //w: (start)╭──────────── getAllSpecialities ────────────╮
-
 const getAllSpecialities = catchAsync(async (req, res) => {
   const result = await SpecialitiesService.getAllSpecialitiesFromDB();
   sendResponse(res, {
-    statusCode: 200,
+    statusCode: httpStatus.ok,
     success: true,
     message: "Specialities fetched successfully",
     data: result,
   });
 });
 //w: (end) ╰──────────── getAllSpecialities ────────────╯
+
+//w: (start)╭──────────── deleteSpecialitiesFromDB  ────────────╮
+const deleteSpecialitiesFromDB = catchAsync(
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const result = await SpecialitiesService.deleteSpecialitiesFromDB(id);
+    sendResponse(res, {
+      statusCode: http,
+    });
+  },
+);
+//w: (end) ╰──────────── deleteSpecialitiesFromDB  ────────────╯
+
+//w: (start)╭────────────  ────────────╮
+
+//w: (end) ╰────────────  ────────────╯
+
 export const SpecialitiesController = {
   createSpecialities,
   getAllSpecialities,
