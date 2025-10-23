@@ -7,6 +7,7 @@ import { IFile } from "../../interfaces/file";
 import { fileUploader } from "../../../helpers/fileUploader";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { paginationHelper } from "../../../helpers/paginatonHelper";
+import { userSearchableFields } from "./user.constant";
 
 //w: (start)╭────────────  ────────────╮
 
@@ -122,7 +123,10 @@ const changeProfileStatus = async (id: string, status: UserRole) => {
 //w: (end) ╰──────────── changeProfileStatus  ────────────╯
 
 //w: (start)╭──────────── getAllUsersFromDB  ────────────╮
-const getAllUsersFromDB = async (params: any, options: IPaginationOptions) => {
+const getAllUsersFromDB = async (
+  params: IUserFilterRequest,
+  options: IPaginationOptions,
+) => {
   const { page, limit, skip } = paginationHelper.calcalutePagination(options);
 
   const { searchTerm, ...filterData } = params;
@@ -130,8 +134,45 @@ const getAllUsersFromDB = async (params: any, options: IPaginationOptions) => {
   const andConditions: Prisma.UserWhereInput[] = [];
 
   if (params.searchTerm) {
-    andConditions.push({});
+    andConditions.push({
+      OR: userSearchableFields.map((field) => ({
+        [field]: {
+          contains: params.searchTerm,
+          mode: "insensitive",
+        },
+      })),
+    });
   }
+
+  const whereConditions: Prisma.UserWhereInput = andConditions.length
+    ? {
+        AND: andConditions,
+      }
+    : {};
+  const result = await prisma.user.findMany({
+    where: whereConditions,
+    skip,
+    take: limit,
+    orderBy:
+      options.sortBy && options.sortOrder
+        ? {
+            [options.sortBy]: options.sortOrder,
+          }
+        : {
+            createdAt: "desc",
+          },
+    select: {
+      id: true,
+      email: true,
+      role: true,
+      needPasswordChange: true,
+      status: true,
+      createdAt: true,
+      updatedAt: true,
+      a,
+    },
+  });
+  return result;
 };
 //w: (end) ╰──────────── getAllUsersFromDB  ────────────╯
 
