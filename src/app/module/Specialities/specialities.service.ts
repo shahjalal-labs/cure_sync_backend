@@ -36,6 +36,7 @@ const deleteSpecialitiesFromDB = async (id: string): Promise<Specialities> => {
   return result;
 };
 //w: (end) ╰──────────── deleteSpecialitiesFromDB  ────────────╯
+
 export const SpecialitiesService = {
   createSpecialitiesIntoDB,
   getAllSpecialitiesFromDB,
