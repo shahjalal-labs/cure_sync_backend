@@ -45,23 +45,46 @@ const getAllUsersFromDB = async () => {
 };
 //w: (end) ╰──────────── getAllUsersFromDB  ────────────╯
 
-//w: (start)╭────────────  ────────────╮
-const createDoctor = async (req: Request): Promise<Doctor> => {
+//w: (start)╭──────────── createDoctor  ────────────╮
+const createDoctorIntoDB = async (req: Request): Promise<Doctor> => {
   const file = req.file as IFile;
   if (file) {
     const uploadToCloudinary = await fileUploader.uploadToCloudinary(file);
     req.body.doctor.profilePhoto = uploadToCloudinary?.secure_url;
   }
+
+  const hashedPassword = await bcrypt.hash(req.body.password, 12);
+
+  const userData = {
+    email: req.body.doctor.email,
+    password: hashedPassword,
+    role: UserRole.DOCTOR,
+  };
+
+  const result = await prisma.$transaction(async (txClient) => {
+    await txClient.user.create({
+      data: userData,
+    });
+
+    const createdDoctor = await prisma.doctor.create({
+      data: req.body.doctor,
+    });
+    return createdDoctor;
+  });
+  return result;
 };
+
+//w: (end) ╰──────────── createDoctor  ────────────╯
+
+//w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
 
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
-
 export const UserService = {
   createAdminIntoDB,
   getAllUsersFromDB,
-  createDoctor,
+  createDoctorIntoDB,
 };

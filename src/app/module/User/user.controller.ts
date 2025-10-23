@@ -5,9 +5,6 @@ import { sendResponse } from "../../../shared/sendResponse";
 import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
 
-//w: (start)╭────────────  ────────────╮
-
-//w: (end) ╰────────────  ────────────╯
 //w: (start)╭──────────── createAdmin ────────────╮
 const createAdmin = catchAsync(async (req: Request, res: Response) => {
   const result = await UserService.createAdminIntoDB(req);
@@ -32,7 +29,22 @@ const getAllUsers: RequestHandler = catchAsync(async (req, res) => {
 });
 //w: (end) ╰──────────── getAllUsers ────────────╯
 
+//w: (start)╭──────────── createDoctor  ────────────╮
+const createDoctor = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.createDoctorIntoDB(req);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Doctor created successfully",
+    data: result,
+  });
+});
+//w: (end) ╰──────────── createDoctor  ────────────╯
+//w: (start)╭────────────  ────────────╮
+
+//w: (end) ╰────────────  ────────────╯
 export const UserController = {
   createAdmin,
   getAllUsers,
+  createDoctor,
 };
