@@ -143,7 +143,15 @@ const getAllUsersFromDB = async (
       })),
     });
   }
-
+  if (Object.keys(filterData).length) {
+    andConditions.push({
+      AND: Object.keys(filterData).map((key) => ({
+        [key]: {
+          equals: (filterData as any)[key],
+        },
+      })),
+    });
+  }
   const whereConditions: Prisma.UserWhereInput = andConditions.length
     ? {
         AND: andConditions,
@@ -169,10 +177,24 @@ const getAllUsersFromDB = async (
       status: true,
       createdAt: true,
       updatedAt: true,
-      a,
+      admin: true,
+      doctor: true,
+      patient: true,
     },
   });
-  return result;
+
+  const total = await prisma.user.count({
+    where: whereConditions,
+  });
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
 };
 //w: (end) ╰──────────── getAllUsersFromDB  ────────────╯
 
