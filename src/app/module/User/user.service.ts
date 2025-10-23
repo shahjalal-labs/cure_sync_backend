@@ -197,7 +197,41 @@ const getAllUsersFromDB = async (params: any, options: IPaginationOptions) => {
 //w: (end) ╰──────────── getAllUsersFromDB  ────────────╯
 
 //w: (start)╭──────────── getMyProfileFromDB  ────────────╮
-const getMyProfileFromDB = async (user: IAuthUser) => {};
+const getMyProfileFromDB = async (user: IAuthUser) => {
+  const userInfo = await prisma.user.findUniqueOrThrow({
+    where: {
+      email: user.email,
+    },
+  });
+  let profileInfo;
+  if (userInfo.role === UserRole.ADMIN) {
+    profileInfo = await prisma.admin.findUnique({
+      where: {
+        email: userInfo.email,
+      },
+    });
+  } else if (userInfo.role === UserRole.DOCTOR) {
+    profileInfo = await prisma.doctor.findUnique({
+      where: {
+        email: userInfo.email,
+      },
+    });
+  } else if (userInfo.role === UserRole.PATIENT) {
+    profileInfo = await prisma.patient.findUnique({
+      where: {
+        email: userInfo.email,
+      },
+    });
+  }
+  if (userInfo.role === UserRole.SUPER_ADMIN) {
+    profileInfo = await prisma.admin.update({
+      where: {
+        email: userInfo.email,
+      },
+      data: req.body,
+    });
+  }
+};
 //w: (end) ╰──────────── getMyProfileFromDB  ────────────╯
 //w: (start)╭────────────  ────────────╮
 
@@ -208,4 +242,5 @@ export const UserService = {
   createPatientIntoDB,
   getAllUsersFromDB,
   changeProfileStatus,
+  getMyProfileFromDB,
 };
