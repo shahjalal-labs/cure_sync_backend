@@ -75,6 +75,7 @@ model Patient {
   updatedAt         DateTime           @updatedAt
   user              User               @relation(fields: [email], references: [email])
   PatientHealthData PatientHealthData?
+  MedicalReport     MedicalReport[]
 
   @@map("patients")
 }
@@ -122,6 +123,18 @@ model PatientHealthData {
   updatedAt           DateTime      @updatedAt
 
   @@map("patient_health_datas")
+}
+
+model MedicalReport {
+  id         String   @id @default(uuid())
+  patientId  String
+  patent     Patient  @relation(fields: [patientId], references: [id])
+  reportName String
+  reportLink String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("medical_reports")
 }
 
 model Schedule {
