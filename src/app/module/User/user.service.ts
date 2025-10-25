@@ -237,7 +237,13 @@ const getMyProfileFromDB = async (user: IAuthUser) => {
 //w: (start)╭──────────── updateMyProfile  ────────────╮
 const updateMyProfile = async (
   user: IAuthUser,
-  req: Request<unknown, unknown, TUpdateMyProfile> & {},
+  req: Request<
+    unknown,
+    unknown,
+    TUpdateMyProfile & {
+      profilePhoto?: string;
+    }
+  > & {},
 ): Promise<Admin | Doctor | Patient | null> => {
   const existingUser = await prisma.user.findUniqueOrThrow({
     where: {
@@ -245,10 +251,10 @@ const updateMyProfile = async (
     },
   });
 
-  if (req.file) {
-    req.body;
-  }
-  {
+  const file = req.file as IFile;
+  if (file) {
+    const uploadToCloudinary = await fileUploader.uploadToCloudinary(file);
+    req.body.profilePhoto = uploadToCloudinary?.secure_url;
   }
   let updatedUser: Admin | Doctor | Patient | null = null;
 

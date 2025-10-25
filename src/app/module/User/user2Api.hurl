@@ -9,3 +9,15 @@ Authorization: Bearer {{ token }}
 {
   "status": "ADMIN"
 }
+
+
+PATCH {{ port6009 }}/user/me/update
+
+Authorization: {{ token }}
+
+Content-Type: application/json
+
+{
+  "name": "test",
+  "contactNumber": "123456789"
+}

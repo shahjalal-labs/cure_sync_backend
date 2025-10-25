@@ -72,7 +72,7 @@ router.patch(
   "/me/update",
   auth(),
   (req: Request, res: Response, next: NextFunction) => {
-    req.body = userValidation.updateMyProfileValidationSchema.partial(
+    req.body.data = userValidation.updateMyProfileValidationSchema.partial(
       JSON.parse(req.body.data),
     );
     return UserController.updateMyProfile(req, res, next);
