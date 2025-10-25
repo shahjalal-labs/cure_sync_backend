@@ -15,7 +15,7 @@ PATCH {{ port6009 }}/user/me/update
 
 Authorization: {{ token }}
 
-Content-Type: application/json
+Content-Type: application/form-data
 
 {
   "name": "test",

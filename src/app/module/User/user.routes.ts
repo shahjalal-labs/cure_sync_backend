@@ -71,10 +71,12 @@ router.patch(
 router.patch(
   "/me/update",
   auth(),
+  fileUploader.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
-    req.body.data = userValidation.updateMyProfileValidationSchema.partial(
+    req.body = userValidation.updateMyProfileValidationSchema.parse(
       JSON.parse(req.body.data),
     );
+
     return UserController.updateMyProfile(req, res, next);
   },
 );

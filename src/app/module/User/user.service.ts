@@ -11,11 +11,6 @@ import { userSearchableFields } from "./user.constant";
 import { IAuthUser } from "../../interfaces/common";
 import { TUpdateMyProfile } from "./user.validation";
 
-//w: (start)╭────────────  ────────────╮
-
-//w: (end) ╰────────────  ────────────╯
-//
-
 //w: (start)╭──────────── createAdminIntoDB  ────────────╮
 const createAdminIntoDB = async (req: Request): Promise<Admin> => {
   const file = req.file as IFile;

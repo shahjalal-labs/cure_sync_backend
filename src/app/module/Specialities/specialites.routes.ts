@@ -8,8 +8,10 @@ import { UserRole } from "@prisma/client";
 
 const router = express.Router();
 
+//w: (start)╭──────────── createSpecialities ────────────╮
 router.post(
   "/",
+  auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
   fileUploader.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = SpecialitiesValidation.createSpecialitiesValidationSchema.parse(
@@ -18,12 +20,16 @@ router.post(
     return SpecialitiesController.createSpecialities(req, res, next);
   },
 );
+//w: (end) ╰──────────── createSpecialities ────────────╯
+
 router.get("/", SpecialitiesController.getAllSpecialities);
 
+//w: (start)╭──────────── deleteSpecialities ────────────╮
 router.delete(
   "/:id",
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
   SpecialitiesController.deleteSpecialities,
 );
+//w: (end) ╰──────────── deleteSpecialities ────────────╯
 
 export const SpecialitiesRoutes = router;
