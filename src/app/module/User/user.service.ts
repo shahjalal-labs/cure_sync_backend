@@ -233,7 +233,7 @@ const getMyProfileFromDB = async (user: IAuthUser) => {
 };
 //w: (end) ╰──────────── getMyProfileFromDB  ────────────╯
 //
-//w: (start)╭────────────  ────────────╮
+//w: (start)╭──────────── updateMyProfile  ────────────╮
 const updateMyProfile = async (
   user: IAuthUser,
   req: Request,
@@ -243,9 +243,8 @@ const updateMyProfile = async (
       email: user?.email,
     },
   });
+  let updatedUser: Admin | Doctor | Patient | null = null;
 
-  let profileInfo;
-  let updatedUser;
   if (existingUser.role === UserRole.ADMIN) {
     updatedUser = await prisma.admin.update({
       where: {
@@ -262,11 +261,18 @@ const updateMyProfile = async (
         ...req.body,
       },
     });
+  } else if (existingUser.role === UserRole.PATIENT) {
+    updatedUser = await prisma.patient.update({
+      where: {
+        email: existingUser.email,
+      },
+      data: req.body,
+    });
   }
   return updatedUser;
 };
 
-//w: (end) ╰────────────  ────────────╯
+//w: (end) ╰──────────── updateMyProfile  ────────────╯
 
 //w: (start)╭────────────  ────────────╮
 

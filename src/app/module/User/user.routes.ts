@@ -59,4 +59,9 @@ router.patch(
   UserController.changeProfileStatus,
 );
 
+//w: (start)╭──────────── updateMyProfile  ────────────╮
+router.patch("/me/update", auth(), UserController.updateMyProfile);
+
+//w: (end) ╰──────────── updateMyProfile  ────────────╯
+
 export const UserRoutes: Router = router;

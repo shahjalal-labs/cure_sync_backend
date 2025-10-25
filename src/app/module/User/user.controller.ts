@@ -94,6 +94,32 @@ const getMyProfile = catchAsync(
   },
 );
 //w: (end) ╰──────────── getMyProfile  ────────────╯
+
+//w: (start)╭──────────── updateMyProfile  ────────────╮
+const updateMyProfile = catchAsync(
+  async (
+    req: Request & {
+      user?: IAuthUser;
+    },
+    res,
+  ) => {
+    const user = req.user;
+    const result = await UserService.updateMyProfile(user as IAuthUser, req);
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Profile updated successfully",
+      data: result,
+    });
+  },
+);
+//w: (end) ╰──────────── updateMyProfile  ────────────╯
+
+//w: (start)╭──────────── updateMyProfile  ────────────╮
+
+//w: (end) ╰──────────── updateMyProfile  ────────────╯
+
 export const UserController = {
   createAdmin,
   getAllUsers,
@@ -101,4 +127,5 @@ export const UserController = {
   createPatient,
   changeProfileStatus,
   getMyProfile,
+  updateMyProfile,
 };

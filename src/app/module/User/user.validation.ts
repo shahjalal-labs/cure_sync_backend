@@ -69,6 +69,11 @@ const changeProfileStatusValidationSchema = z.object({
     .strict(),
 });
 
+//w: (start)╭──────────── updateMyProfile  ────────────╮
+
+const updateMyProfileValidationSchema = z.object({});
+//w: (end) ╰──────────── updateMyProfile  ────────────╯
+
 export const userValidation = {
   createAdminValidationSchema,
   createDoctorValidationSchema,
