@@ -2,6 +2,7 @@
 import { Gender, UserRole, UserStatus } from "@prisma/client";
 import z from "zod";
 
+//w: (start)╭──────────── createAdminValidationSchema  ────────────╮
 const createAdminValidationSchema = z
   .object({
     password: z.string(),
@@ -12,7 +13,9 @@ const createAdminValidationSchema = z
     }),
   })
   .strict();
+//w: (end) ╰──────────── createAdminValidationSchema  ────────────╯
 
+//w: (start)╭──────────── createDoctorValidationSchema  ────────────╮
 const createDoctorValidationSchema = z
   .object({
     password: z.string({ message: "Password is required" }),
@@ -39,7 +42,9 @@ const createDoctorValidationSchema = z
     }),
   })
   .strict();
+//w: (end) ╰────────────  createDoctorValidationSchema ────────────╯
 
+//w: (start)╭──────────── createPatientValidationSchema  ────────────╮
 const createPatientValidationSchema = z
   .object({
     password: z.string({
@@ -56,7 +61,9 @@ const createPatientValidationSchema = z
     }),
   })
   .strict();
+//w: (end) ╰──────────── createPatientValidationSchema  ────────────╯
 
+//w: (start)╭──────────── changeProfileStatusValidationSchema  ────────────╮
 const changeProfileStatusValidationSchema = z.object({
   body: z
     .object({
@@ -68,10 +75,16 @@ const changeProfileStatusValidationSchema = z.object({
     })
     .strict(),
 });
+//w: (end) ╰──────────── changeProfileStatusValidationSchema  ────────────╯
 
 //w: (start)╭──────────── updateMyProfile  ────────────╮
-
-const updateMyProfileValidationSchema = z.object({});
+const updateMyProfileValidationSchema = z
+  .object({
+    name: z.string().min(2).max(50),
+    contactNumber: z.string().min(4).max(15),
+  })
+  .partial()
+  .strict();
 //w: (end) ╰──────────── updateMyProfile  ────────────╯
 
 export const userValidation = {
@@ -79,4 +92,5 @@ export const userValidation = {
   createDoctorValidationSchema,
   createPatientValidationSchema,
   changeProfileStatusValidationSchema,
+  updateMyProfileValidationSchema,
 };

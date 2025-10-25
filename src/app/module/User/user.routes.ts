@@ -60,7 +60,16 @@ router.patch(
 );
 
 //w: (start)╭──────────── updateMyProfile  ────────────╮
-router.patch("/me/update", auth(), UserController.updateMyProfile);
+router.patch(
+  "/me/update",
+  auth(),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = userValidation.updateMyProfileValidationSchema.partial(
+      JSON.parse(req.body.data),
+    );
+    return UserController.updateMyProfile(req, res, next);
+  },
+);
 
 //w: (end) ╰──────────── updateMyProfile  ────────────╯
 
