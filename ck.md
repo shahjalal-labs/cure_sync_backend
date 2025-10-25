@@ -70,3 +70,7 @@ Write a complete Neovim Lua script implementing this navigation behavior, includ
 Make the code readable, maintainable, and well-commented.
 
 ````
+
+off day changed from sunday to friday but hasn't assigned yet.
+
+My mother was ill and remained hospital since i have to transport home, hospital and office that's why it's become late..

@@ -232,6 +232,42 @@ const getMyProfileFromDB = async (user: IAuthUser) => {
   return { ...userInfo, ...profileInfo };
 };
 //w: (end) ╰──────────── getMyProfileFromDB  ────────────╯
+//
+//w: (start)╭────────────  ────────────╮
+const updateMyProfile = async (
+  user: IAuthUser,
+  req: Request,
+): Promise<Admin | Doctor | Patient | null> => {
+  const existingUser = await prisma.user.findUniqueOrThrow({
+    where: {
+      email: user?.email,
+    },
+  });
+
+  let profileInfo;
+  let updatedUser;
+  if (existingUser.role === UserRole.ADMIN) {
+    updatedUser = await prisma.admin.update({
+      where: {
+        email: existingUser.email,
+      },
+      data: req.body,
+    });
+  } else if (existingUser.role === UserRole.DOCTOR) {
+    updatedUser = await prisma.doctor.update({
+      where: {
+        email: existingUser.email,
+      },
+      data: {
+        ...req.body,
+      },
+    });
+  }
+  return updatedUser;
+};
+
+//w: (end) ╰────────────  ────────────╯
+
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
@@ -242,4 +278,5 @@ export const UserService = {
   getAllUsersFromDB,
   changeProfileStatus,
   getMyProfileFromDB,
+  updateMyProfile,
 };
