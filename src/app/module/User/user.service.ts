@@ -9,6 +9,7 @@ import { IPaginationOptions } from "../../interfaces/pagination";
 import { paginationHelper } from "../../../helpers/paginatonHelper";
 import { userSearchableFields } from "./user.constant";
 import { IAuthUser } from "../../interfaces/common";
+import { TUpdateMyProfile } from "./user.validation";
 
 //w: (start)╭────────────  ────────────╮
 
@@ -236,13 +237,19 @@ const getMyProfileFromDB = async (user: IAuthUser) => {
 //w: (start)╭──────────── updateMyProfile  ────────────╮
 const updateMyProfile = async (
   user: IAuthUser,
-  req: Request,
+  req: Request<unknown, unknown, TUpdateMyProfile> & {},
 ): Promise<Admin | Doctor | Patient | null> => {
   const existingUser = await prisma.user.findUniqueOrThrow({
     where: {
       email: user?.email,
     },
   });
+
+  if (req.file) {
+    req.body;
+  }
+  {
+  }
   let updatedUser: Admin | Doctor | Patient | null = null;
 
   if (existingUser.role === UserRole.ADMIN) {

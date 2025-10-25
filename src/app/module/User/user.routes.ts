@@ -16,6 +16,7 @@ router.get(
 
 router.get("/me", auth(), UserController.getMyProfile);
 
+//w: (start)╭──────────── createAdmin ────────────╮
 router.post(
   "/create-admin",
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
@@ -27,7 +28,9 @@ router.post(
     return UserController.createAdmin(req, res, next);
   },
 );
+//w: (end) ╰──────────── createAdmin ────────────╯
 
+//w: (start)╭──────────── createDoctor ────────────╮
 router.post(
   "/create-doctor",
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
@@ -40,7 +43,9 @@ router.post(
     return UserController.createDoctor(req, res, next);
   },
 );
+//w: (end) ╰──────────── createDoctor ────────────╯
 
+//w: (start)╭──────────── createPatient ────────────╮
 router.post(
   "/create-patient",
   fileUploader.upload.single("file"),
@@ -51,13 +56,16 @@ router.post(
     return UserController.createPatient(req, res, next);
   },
 );
+//w: (end) ╰──────────── createPatient ────────────╯
 
+//w: (start)╭──────────── changeProfileStatus ────────────╮
 router.patch(
   "/:id/status",
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
   validateRequest(userValidation.changeProfileStatusValidationSchema),
   UserController.changeProfileStatus,
 );
+//w: (end) ╰──────────── changeProfileStatus ────────────╯
 
 //w: (start)╭──────────── updateMyProfile  ────────────╮
 router.patch(
@@ -70,7 +78,6 @@ router.patch(
     return UserController.updateMyProfile(req, res, next);
   },
 );
-
 //w: (end) ╰──────────── updateMyProfile  ────────────╯
 
 export const UserRoutes: Router = router;

@@ -86,6 +86,7 @@ const updateMyProfileValidationSchema = z
   .partial()
   .strict();
 //w: (end) ╰──────────── updateMyProfile  ────────────╯
+export type TUpdateMyProfile = z.infer<typeof updateMyProfileValidationSchema>;
 
 export const userValidation = {
   createAdminValidationSchema,
