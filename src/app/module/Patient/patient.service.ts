@@ -1,7 +1,9 @@
 //
 
 //w: (start)╭──────────── getAllPatient  ────────────╮
-const getAllPatient = () => {};
+const getAllPatient = async () => {
+  console.log(`okay`);
+};
 //w: (end) ╰──────────── getAllPatient  ────────────╯
 
 //w: (start)╭────────────  ────────────╮

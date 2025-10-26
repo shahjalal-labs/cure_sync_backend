@@ -20,6 +20,6 @@ const getAllPatient = catchAsync(async (req: Request, res: Response) => {
 });
 //w: (end) ╰──────────── getAllPatient  ────────────╯
 
-export const UserController = {
+export const PatientController = {
   getAllPatient,
 };
