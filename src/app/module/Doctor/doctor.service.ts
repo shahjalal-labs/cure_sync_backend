@@ -23,14 +23,36 @@ const updateDoctor = async (
       where: {
         id,
       },
-      data: doctorData,
+      data: {},
     });
   });
   return null;
 };
 //w: (end) ╰──────────── updateDoctor  ────────────╯
 
+//w: (start)╭──────────── softDeleteDoctor  ────────────╮
+const softDeleteDoctor = async (id: string) => {
+  const result = await prisma.$transaction(async (tx) => {
+    await tx.doctor.findUniqueOrThrow({
+      where: {
+        id,
+      },
+    });
+
+    const deletedDoctor = await tx.doctor.update({
+      where: {
+        id,
+      },
+      data: {
+        isDeleted: true,
+      },
+    });
+  });
+};
+//w: (end) ╰──────────── softDeleteDoctor  ────────────╯
+
 export const DoctorService = {
   getAllDoctor,
   updateDoctor,
+  softDeleteDoctor,
 };
