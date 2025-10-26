@@ -69,7 +69,12 @@ const updateDoctor = async (
     }
   });
 
-  return null;
+  const result = await prisma.doctor.findUnique({
+    where: {
+      id: doctorInfo.id,
+    },
+  });
+  return result;
 };
 //w: (end) ╰──────────── updateDoctor  ────────────╯
 

@@ -3,6 +3,7 @@ import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
 import { sendResponse } from "../../../shared/sendResponse";
 import { DoctorService } from "./doctor.service";
+import { Request, Response } from "express";
 
 //w: (start)╭──────────── getAllDoctor  ────────────╮
 const getAllDoctor = catchAsync(async (req, res) => {
@@ -28,6 +29,15 @@ const getDoctorById = catchAsync(async (req, res) => {
   });
 });
 //w: (end) ╰──────────── getDoctorById  ────────────╯
+
+//w: (start)╭──────────── updateDoctor  ────────────╮
+const updateDoctor = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const result = await DoctorService.updateDoctor();
+});
+//w: (end) ╰──────────── updateDoctor  ────────────╯
+
 //
 //w: (start)╭──────────── softDeleteDoctor  ────────────╮
 const softDeleteDoctor = catchAsync(async (req, res) => {
@@ -59,5 +69,6 @@ export const DoctorController = {
   getAllDoctor,
   softDeleteDoctor,
   deleteDoctor,
+  updateDoctor,
   getDoctorById,
 };
