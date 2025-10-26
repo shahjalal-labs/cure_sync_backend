@@ -5,6 +5,7 @@ import { paginationHelper } from "../../../helpers/paginatonHelper";
 import { prisma } from "../../../shared/prisma";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { IPatientFilterRequest } from "./patient.interface";
+import { patientSearchableFields } from "./patient.constant";
 
 //w: (start)╭──────────── getAllPatient  ────────────╮
 const getAllPatient = async (
@@ -19,9 +20,21 @@ const getAllPatient = async (
 
   if (searchTerm) {
     andConditions.push({
-        OR: 
-    })
+      OR: patientSearchableFields.map((f) => ({
+        [f]: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      })),
+    });
   }
+
+  if (Object.keys(filterData).length) {
+    andConditions.push({
+      AND: Object.keys(filterData).map(f=> )
+    });
+  }
+
   const result = await prisma.patient.findMany({
     where: {
       isDeleted: false,
