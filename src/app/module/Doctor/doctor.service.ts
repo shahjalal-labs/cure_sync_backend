@@ -1,5 +1,6 @@
 import { Doctor, UserStatus } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
+import { IDoctorUpdate } from "./doctor.interface";
 
 //w: (start)╭──────────── getAllDoctor  ────────────╮
 const getAllDoctor = async () => {
@@ -27,10 +28,10 @@ const getDoctorById = async (id: string): Promise<Doctor | null> => {
 //w: (start)╭──────────── updateDoctor  ────────────╮
 const updateDoctor = async (
   id: string,
-  payload: Partial<Doctor>,
+  payload: IDoctorUpdate,
 ): Promise<Doctor | null> => {
   const { specialities, ...doctorData } = payload;
-  const existingDoctor = await prisma.doctor.findUniqueOrThrow({
+  const doctorInfo = await prisma.doctor.findUniqueOrThrow({
     where: { id, isDeleted: false },
   });
 
@@ -39,7 +40,7 @@ const updateDoctor = async (
       where: {
         id,
       },
-      data: {},
+      data: doctorData,
     });
   });
   return null;
