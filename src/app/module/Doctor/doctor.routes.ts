@@ -10,9 +10,14 @@ router.get("/", DoctorController.getAllDoctor);
 
 router.get("/:id", DoctorController.getDoctorById);
 
+router.patch(
+  "/:id",
+  auth(UserRole.ADMIN, UserRole.SUPER_ADMIN, UserRole.DOCTOR),
+);
+
 router.delete(
   "/soft/:id",
-  auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
+  auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR),
   DoctorController.softDeleteDoctor,
 );
 
