@@ -1,5 +1,8 @@
 //
-export const doctorSearchableFields = [
+import { Doctor } from "@prisma/client";
+
+//
+export const doctorSearchableFields: Array<keyof Doctor> = [
   "name",
   "email",
   "contactNumber",
@@ -8,4 +11,11 @@ export const doctorSearchableFields = [
   "designation",
 ];
 
-export const doctorFilterableFields = ["searchTerm", "email"];
+export const doctorFilterableFields: string[] = [
+  "searchTerm",
+  "email",
+  "contactNumber",
+  "gender",
+  "appointmentFee",
+  "specialities",
+];

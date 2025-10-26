@@ -3,6 +3,7 @@ import { prisma } from "../../../shared/prisma";
 import { IDoctorFilterRequest, IDoctorUpdate } from "./doctor.interface";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { paginationHelper } from "../../../helpers/paginatonHelper";
+import { doctorSearchableFields } from "./doctor.constant";
 
 //w: (start)╭──────────── getAllDoctor  ────────────╮
 const getAllDoctor = async (
@@ -17,7 +18,12 @@ const getAllDoctor = async (
 
   if (searchTerm) {
     andConditions.push({
-      OR: "",
+      OR: doctorSearchableFields.map((field) => ({
+        [field]: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      })),
     });
   }
 
