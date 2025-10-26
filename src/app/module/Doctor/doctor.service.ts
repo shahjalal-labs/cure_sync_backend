@@ -45,11 +45,24 @@ const getAllDoctor = async (
     : {};
 
   const result = await prisma.doctor.findMany({
-    where: {
-      isDeleted: false,
-    },
+    where: whereConditions,
+    skip,
+    take: limit,
+    orderBy:
+      options.sortBy && options.sortOrder
+        ? {
+            [options.sortBy]: options.sortOrder,
+          }
+        : {
+            createdAt: "desc",
+          },
   });
-  return result;
+
+  const total = prisma.doctor.count({
+    where: whereConditions,
+  });
+
+  return {};
 };
 //w: (end) ╰──────────── getAllDoctor  ────────────╯
 
