@@ -68,14 +68,24 @@ const softDeleteDoctor = async (id: string) => {
 //w: (end) ╰──────────── softDeleteDoctor  ────────────╯
 
 //w: (start)╭──────────── deleteDoctor ────────────╮
-const deleteDoctor = async (id: string): Promise<Doctor | null> => {
+const deleteDoctor = async (id: string): Promise<Doctor> => {
   return await prisma.$transaction(async (tx) => {
     await tx.doctor.findUniqueOrThrow({
       where: {
         id,
       },
     });
-    return null;
+    const deletedDoctor = await tx.doctor.delete({
+      where: {
+        id,
+      },
+    });
+    await tx.user.delete({
+      where: {
+        email: deletedDoctor.email,
+      },
+    });
+    return deletedDoctor;
   });
 };
 //w: (end) ╰──────────── deleteDoctor ────────────╯

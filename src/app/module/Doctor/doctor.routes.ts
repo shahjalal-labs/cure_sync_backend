@@ -15,7 +15,7 @@ router.delete(
 );
 
 router.delete(
-  "/:",
+  "/:id",
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
   DoctorController.deleteDoctor,
 );
