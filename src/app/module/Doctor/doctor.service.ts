@@ -42,7 +42,33 @@ const updateDoctor = async (
       },
       data: doctorData,
     });
+    //
+    if (specialities && specialities.length) {
+      //t: delete specialities
+      const deleteSpecialites = specialities.filter((spc) => spc.isDeleted);
+
+      deleteSpecialites.forEach((spc) => {
+        tx.doctorSpecialities.deleteMany({
+          where: {
+            doctorId: doctorInfo.id,
+            specialitiesId: spc.specialitiesId,
+          },
+        });
+      });
+
+      //t: create  specialities
+      const createSpecialites = specialities.filter((spc) => !spc.isDeleted);
+      createSpecialites.forEach((spc) => {
+        tx.doctorSpecialities.create({
+          data: {
+            doctorId: doctorInfo.id,
+            specialitiesId: spc.specialitiesId,
+          },
+        });
+      });
+    }
   });
+
   return null;
 };
 //w: (end) ╰──────────── updateDoctor  ────────────╯
