@@ -27,6 +27,23 @@ const getAllDoctor = async (
     });
   }
 
+  if (Object.keys(filterData).length) {
+    const filterConditons = Object.keys(filterData).map((field) => ({
+      [field]: (filterData as any)[field],
+    }));
+    andConditions.push(...filterConditons);
+  }
+
+  andConditions.push({
+    isDeleted: false,
+  });
+
+  const whereConditions: Prisma.DoctorWhereInput = andConditions.length
+    ? {
+        AND: andConditions,
+      }
+    : {};
+
   const result = await prisma.doctor.findMany({
     where: {
       isDeleted: false,
