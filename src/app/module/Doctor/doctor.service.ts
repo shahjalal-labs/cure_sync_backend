@@ -1,9 +1,26 @@
-import { Doctor, UserStatus } from "@prisma/client";
+import { Doctor, Prisma, UserStatus } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
 import { IDoctorFilterRequest, IDoctorUpdate } from "./doctor.interface";
+import { IPaginationOptions } from "../../interfaces/pagination";
+import { paginationHelper } from "../../../helpers/paginatonHelper";
 
 //w: (start)╭──────────── getAllDoctor  ────────────╮
-const getAllDoctor = async (filters: IDoctorFilterRequest) => {
+const getAllDoctor = async (
+  filters: IDoctorFilterRequest,
+  options: IPaginationOptions,
+) => {
+  const { limit, page, skip } = paginationHelper.calcalutePagination(options);
+
+  const { searchTerm, specialities, ...filterData } = filters;
+
+  const andConditions: Prisma.DoctorWhereInput[] = [];
+
+  if (searchTerm) {
+    andConditions.push({
+      OR: "",
+    });
+  }
+
   const result = await prisma.doctor.findMany({
     where: {
       isDeleted: false,
