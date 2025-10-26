@@ -1,4 +1,4 @@
-import { Doctor } from "@prisma/client";
+import { Doctor, UserStatus } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
 
 //w: (start)╭──────────── getAllDoctor  ────────────╮
@@ -47,7 +47,18 @@ const softDeleteDoctor = async (id: string) => {
         isDeleted: true,
       },
     });
+    await tx.user.update({
+      where: {
+        email: deletedDoctor.email,
+      },
+      data: {
+        status: UserStatus.DELETED,
+      },
+    });
+
+    return deletedDoctor;
   });
+  return result;
 };
 //w: (end) ╰──────────── softDeleteDoctor  ────────────╯
 
