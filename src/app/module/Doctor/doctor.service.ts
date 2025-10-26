@@ -96,6 +96,18 @@ const updateDoctor = async (
     where: {
       id: doctorInfo.id,
     },
+    include: {
+      doctorSpecialities: {
+        select: {
+          specialities: true,
+        },
+      },
+      user: {
+        select: {
+          email: true,
+        },
+      },
+    },
   });
   return result;
 };

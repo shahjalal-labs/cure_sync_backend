@@ -15,10 +15,10 @@ Content-Type: application/json
 
 {
   "name": "Dr. Nusrat Jahan",
-  "specialities": [
-    { "specialitiesId": "550e8400-e29b-41d4-a716-446655440000", "isDeleted": false },
-    { "specialitiesId": "550e8400-e29b-41d4-a716-446655440001", "isDeleted": false },
-    { "specialitiesId": "550e8400-e29b-41d4-a716-446655440002", "isDeleted": false }
+    "specialities": [
+    { "specialitiesId": "7d07e1ae-df45-4d10-9213-d96ad745d182", "isDeleted": false },
+    { "specialitiesId": "9c528ef5-f616-41ee-8df1-5962ba5e49aa", "isDeleted": false },
+    { "specialitiesId": "ad65e927-4565-4a38-9a40-566186778d87", "isDeleted": false }
   ]
 }
 
