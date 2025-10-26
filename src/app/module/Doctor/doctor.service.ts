@@ -27,6 +27,14 @@ const getAllDoctor = async (
     });
   }
 
+  if (specialities) {
+    console.log(
+      specialities,
+      "[1;31mspecialities in doctor.service.ts at line 42[0m",
+    );
+    andConditions.push({});
+  }
+
   if (Object.keys(filterData).length) {
     const filterConditons = Object.keys(filterData).map((field) => ({
       [field]: (filterData as any)[field],
@@ -58,7 +66,7 @@ const getAllDoctor = async (
           },
   });
 
-  const total = prisma.doctor.count({
+  const total = await prisma.doctor.count({
     where: whereConditions,
   });
 

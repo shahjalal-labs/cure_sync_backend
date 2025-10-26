@@ -10,12 +10,15 @@ import { doctorFilterableFields } from "./doctor.constant";
 //w: (start)╭──────────── getAllDoctor  ────────────╮
 const getAllDoctor = catchAsync(async (req, res) => {
   const filters = pick(req.query, doctorFilterableFields);
-  const result = await DoctorService.getAllDoctor();
+
+  const options = pick(req.query, ["page", "limit", "sortBy", "sortOrder"]);
+  const result = await DoctorService.getAllDoctor(filters, options);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: "All doctor fetched successfully",
-    data: result,
+    meta: result.meta,
+    data: result.data,
   });
 });
 //w: (end) ╰──────────── getAllDoctor  ────────────╯
