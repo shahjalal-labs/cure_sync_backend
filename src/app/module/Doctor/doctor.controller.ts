@@ -4,9 +4,12 @@ import catchAsync from "../../../shared/catchAsync";
 import { sendResponse } from "../../../shared/sendResponse";
 import { DoctorService } from "./doctor.service";
 import { Request, Response } from "express";
+import { pick } from "../../../shared/pick";
+import { doctorFilterableFields } from "./doctor.constant";
 
 //w: (start)╭──────────── getAllDoctor  ────────────╮
 const getAllDoctor = catchAsync(async (req, res) => {
+  const filters = pick(req.query, doctorFilterableFields);
   const result = await DoctorService.getAllDoctor();
   sendResponse(res, {
     statusCode: httpStatus.OK,

@@ -62,7 +62,14 @@ const getAllDoctor = async (
     where: whereConditions,
   });
 
-  return {};
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
 };
 //w: (end) ╰──────────── getAllDoctor  ────────────╯
 

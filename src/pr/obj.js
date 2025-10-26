@@ -13,6 +13,10 @@ const student2 = {
 
 const student3 = {
   name: "Ismail",
-  [student2.age]: student1.age,
+  [student2]: student1.age,
   address: student1.address,
 };
+
+console.dir(student3, {
+  depth: "infinity",
+});
