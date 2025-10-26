@@ -14,5 +14,11 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-  "name": "updated"
+  "name": "Dr. Nusrat Jahan",
+  "specialities": [
+    { "specialitiesId": "550e8400-e29b-41d4-a716-446655440000", "isDeleted": false },
+    { "specialitiesId": "550e8400-e29b-41d4-a716-446655440001", "isDeleted": false },
+    { "specialitiesId": "550e8400-e29b-41d4-a716-446655440002", "isDeleted": false }
+  ]
 }
+

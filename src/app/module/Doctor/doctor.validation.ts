@@ -14,6 +14,14 @@ const doctorUpdateSchema = z.object({
       qualification: z.string().min(3).max(100),
       currentWorkingPlace: z.string().min(3).max(100),
       designation: z.string().min(3).max(100),
+      specialities: z.array(
+        z
+          .object({
+            specialitiesId: z.string(),
+            isDeleted: z.boolean(),
+          })
+          .strict(),
+      ),
     })
     .partial()
     .strict(),

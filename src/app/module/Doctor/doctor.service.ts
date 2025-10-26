@@ -31,6 +31,7 @@ const updateDoctor = async (
   payload: IDoctorUpdate,
 ): Promise<Doctor | null> => {
   const { specialities, ...doctorData } = payload;
+console.log(specialities, "[1;31mspecialities in doctor.service.ts at line 34[0m");
   const doctorInfo = await prisma.doctor.findUniqueOrThrow({
     where: { id, isDeleted: false },
   });
