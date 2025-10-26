@@ -65,7 +65,6 @@ const getAllDoctor = async (
       doctorSpecialities: {
         select: {
           specialities: true,
-          // specialitiesId: true,
         },
       },
     },
