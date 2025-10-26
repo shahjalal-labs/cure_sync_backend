@@ -1,9 +1,9 @@
 import { Doctor, UserStatus } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
-import { IDoctorUpdate } from "./doctor.interface";
+import { IDoctorFilterRequest, IDoctorUpdate } from "./doctor.interface";
 
 //w: (start)╭──────────── getAllDoctor  ────────────╮
-const getAllDoctor = async () => {
+const getAllDoctor = async (filters: IDoctorFilterRequest) => {
   const result = await prisma.doctor.findMany({
     where: {
       isDeleted: false,
@@ -105,6 +105,8 @@ const updateDoctor = async (
       user: {
         select: {
           email: true,
+          status: true,
+          needPasswordChange: true,
         },
       },
     },

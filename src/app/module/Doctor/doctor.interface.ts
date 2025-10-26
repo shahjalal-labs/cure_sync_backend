@@ -1,4 +1,13 @@
 //
+
+export type IDoctorFilterRequest = {
+  searchTerm?: string | undefined;
+  email?: string | undefined;
+  contactNo?: string | undefined;
+  gender?: string | undefined;
+  specialities?: string | undefined;
+};
+
 export type IDoctorUpdate = {
   name?: string;
   profilePhoto?: string;

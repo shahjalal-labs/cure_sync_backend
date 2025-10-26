@@ -18,7 +18,7 @@ Content-Type: application/json
     "specialities": [
     { "specialitiesId": "7d07e1ae-df45-4d10-9213-d96ad745d182", "isDeleted": false },
     { "specialitiesId": "9c528ef5-f616-41ee-8df1-5962ba5e49aa", "isDeleted": false },
-    { "specialitiesId": "ad65e927-4565-4a38-9a40-566186778d87", "isDeleted": false }
+    { "specialitiesId": "ad65e927-4565-4a38-9a40-566186778d87", "isDeleted": true }
   ]
 }
 
