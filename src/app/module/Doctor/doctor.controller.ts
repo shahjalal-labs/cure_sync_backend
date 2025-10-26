@@ -29,7 +29,22 @@ const softDeleteDoctor = catchAsync(async (req, res) => {
   });
 });
 //w: (end) ╰──────────── softDeleteDoctor  ────────────╯
+
+//w: (start)╭──────────── deleteDoctor ────────────╮
+const deleteDoctor = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await DoctorService.deleteDoctor(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Doctor deleted successfully",
+    data: result,
+  });
+});
+//w: (end) ╰──────────── deleteDoctor ────────────╯
+
 export const DoctorController = {
   getAllDoctor,
   softDeleteDoctor,
+  deleteDoctor,
 };
