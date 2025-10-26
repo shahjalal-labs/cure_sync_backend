@@ -9,6 +9,9 @@ const getAllDoctor = catchAsync(async (req, res) => {
   const result = await DoctorService.getAllDoctor();
   sendResponse(res, {
     statusCode: httpStatus.OK,
+    success: true,
+    message: "All doctor fetched successfully",
+    data: result,
   });
 });
 //w: (end) ╰──────────── getAllDoctor  ────────────╯
