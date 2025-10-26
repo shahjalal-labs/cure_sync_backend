@@ -31,7 +31,10 @@ const updateDoctor = async (
   payload: IDoctorUpdate,
 ): Promise<Doctor | null> => {
   const { specialities, ...doctorData } = payload;
-console.log(specialities, "[1;31mspecialities in doctor.service.ts at line 34[0m");
+  console.log(
+    specialities,
+    "[1;31mspecialities in doctor.service.ts at line 34[0m",
+  );
   const doctorInfo = await prisma.doctor.findUniqueOrThrow({
     where: { id, isDeleted: false },
   });
@@ -48,25 +51,44 @@ console.log(specialities, "[1;31mspecialities in doctor.service.ts at line 34[
       //t: delete specialities
       const deleteSpecialites = specialities.filter((spc) => spc.isDeleted);
 
-      deleteSpecialites.forEach((spc) => {
-        tx.doctorSpecialities.deleteMany({
+      for (const spc of deleteSpecialites) {
+        await tx.doctorSpecialities.deleteMany({
           where: {
             doctorId: doctorInfo.id,
             specialitiesId: spc.specialitiesId,
           },
         });
-      });
+      }
 
       //t: create  specialities
       const createSpecialites = specialities.filter((spc) => !spc.isDeleted);
-      createSpecialites.forEach((spc) => {
+      /* createSpecialites.forEach((spc) => {
+        tx.specialities.findUniqueOrThrow({
+          where: {
+            id: spc.specialitiesId,
+          },
+        });
         tx.doctorSpecialities.create({
           data: {
             doctorId: doctorInfo.id,
             specialitiesId: spc.specialitiesId,
           },
         });
-      });
+      }); */
+      for (const spc of createSpecialites) {
+        // Ensure the speciality exists
+        await tx.specialities.findUniqueOrThrow({
+          where: { id: spc.specialitiesId },
+        });
+
+        // Link the doctor to this speciality
+        await tx.doctorSpecialities.create({
+          data: {
+            doctorId: doctorInfo.id,
+            specialitiesId: spc.specialitiesId,
+          },
+        });
+      }
     }
   });
 
