@@ -28,11 +28,18 @@ const getAllDoctor = async (
   }
 
   if (specialities) {
-    console.log(
-      specialities,
-      "[1;31mspecialities in doctor.service.ts at line 42[0m",
-    );
-    andConditions.push({});
+    andConditions.push({
+      doctorSpecialities: {
+        some: {
+          specialities: {
+            title: {
+              contains: specialities,
+              mode: "insensitive",
+            },
+          },
+        },
+      },
+    });
   }
 
   if (Object.keys(filterData).length) {
@@ -54,6 +61,14 @@ const getAllDoctor = async (
 
   const result = await prisma.doctor.findMany({
     where: whereConditions,
+    include: {
+      doctorSpecialities: {
+        select: {
+          specialities: true,
+          // specialitiesId: true,
+        },
+      },
+    },
     skip,
     take: limit,
     orderBy:
