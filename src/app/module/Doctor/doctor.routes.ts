@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.get("/", DoctorController.getAllDoctor);
 
+router.get("/:id", DoctorController.getDoctorById);
+
 router.delete(
   "/soft/:id",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),

@@ -16,8 +16,20 @@ const getAllDoctor = catchAsync(async (req, res) => {
 });
 //w: (end) ╰──────────── getAllDoctor  ────────────╯
 
+//w: (start)╭──────────── getDoctorById  ────────────╮
+const getDoctorById = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await DoctorService.getDoctorById(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Doctor fetched successfully",
+    data: result,
+  });
+});
+//w: (end) ╰──────────── getDoctorById  ────────────╯
+//
 //w: (start)╭──────────── softDeleteDoctor  ────────────╮
-
 const softDeleteDoctor = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await DoctorService.softDeleteDoctor(id);
@@ -47,4 +59,5 @@ export const DoctorController = {
   getAllDoctor,
   softDeleteDoctor,
   deleteDoctor,
+  getDoctorById,
 };

@@ -11,6 +11,18 @@ const getAllDoctor = async () => {
   return result;
 };
 //w: (end) ╰──────────── getAllDoctor  ────────────╯
+
+//w: (start)╭──────────── getDoctorById  ────────────╮
+const getDoctorById = async (id: string): Promise<Doctor | null> => {
+  return await prisma.doctor.findUniqueOrThrow({
+    where: {
+      id,
+      isDeleted: false,
+    },
+  });
+};
+//w: (end) ╰──────────── getDoctorById  ────────────╯
+
 //
 //w: (start)╭──────────── updateDoctor  ────────────╮
 const updateDoctor = async (
@@ -95,4 +107,5 @@ export const DoctorService = {
   updateDoctor,
   softDeleteDoctor,
   deleteDoctor,
+  getDoctorById,
 };
