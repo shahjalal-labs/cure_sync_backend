@@ -3,7 +3,11 @@ import { prisma } from "../../../shared/prisma";
 
 //w: (start)╭──────────── getAllDoctor  ────────────╮
 const getAllDoctor = async () => {
-  const result = await prisma.doctor.findMany();
+  const result = await prisma.doctor.findMany({
+    where: {
+      isDeleted: false,
+    },
+  });
   return result;
 };
 //w: (end) ╰──────────── getAllDoctor  ────────────╯
@@ -22,6 +26,7 @@ const updateDoctor = async (
     await tx.doctor.update({
       where: {
         id,
+        isDeleted: false,
       },
       data: {},
     });
