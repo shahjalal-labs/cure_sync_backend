@@ -1,0 +1,164 @@
+[
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Rafiul Hasan",
+      "email": "rafiul.hasan@outlook.com",
+      "contactNumber": "+8801712345701",
+      "address": "Bashundhara R/A, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Nusrat Jahan",
+      "email": "nusrat.jahan@gmail.com",
+      "contactNumber": "+8801612345702",
+      "address": "Sholokbahar, Chattogram"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Sabbir Ahmed",
+      "email": "sabbir.ahmed@proton.me",
+      "contactNumber": "+8801812345703",
+      "address": "Mirpur-10, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Mitu Akhter",
+      "email": "mitu.akhter@icloud.com",
+      "contactNumber": "+8801512345704",
+      "address": "Sonadanga, Khulna"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Tariqul Islam",
+      "email": "tariqul.islam@mail.com",
+      "contactNumber": "+8801719876705",
+      "address": "Agrabad, Chattogram"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Sharmin Nahar",
+      "email": "sharmin.nahar@live.com",
+      "contactNumber": "+8801911123344",
+      "address": "Motijheel, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Rashidul Karim",
+      "email": "rashidul.karim77@yahoo.com",
+      "contactNumber": "+8801301234706",
+      "address": "Ambarkhana, Sylhet"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Tahmina Chowdhury",
+      "email": "tahmina.chowdhury@bdmail.net",
+      "contactNumber": "+8801407654707",
+      "address": "Mohammadpur, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Javed Hossain",
+      "email": "javed.hossain@gmail.com",
+      "contactNumber": "+8801755556788",
+      "address": "Rajshahi City Center"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Rafiul Hasan",
+      "email": "rafiul.hasan@outlook.com",
+      "contactNumber": "+8801712345701",
+      "address": "Bashundhara R/A, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Nusrat Jahan",
+      "email": "nusrat.jahan@gmail.com",
+      "contactNumber": "+8801612345702",
+      "address": "Sholokbahar, Chattogram"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Sabbir Ahmed",
+      "email": "sabbir.ahmed@proton.me",
+      "contactNumber": "+8801812345703",
+      "address": "Mirpur-10, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Mitu Akhter",
+      "email": "mitu.akhter@icloud.com",
+      "contactNumber": "+8801512345704",
+      "address": "Sonadanga, Khulna"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Tariqul Islam",
+      "email": "tariqul.islam@mail.com",
+      "contactNumber": "+8801719876705",
+      "address": "Agrabad, Chattogram"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Sharmin Nahar",
+      "email": "sharmin.nahar@live.com",
+      "contactNumber": "+8801911123344",
+      "address": "Motijheel, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Rashidul Karim",
+      "email": "rashidul.karim77@yahoo.com",
+      "contactNumber": "+8801301234706",
+      "address": "Ambarkhana, Sylhet"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Tahmina Chowdhury",
+      "email": "tahmina.chowdhury@bdmail.net",
+      "contactNumber": "+8801407654707",
+      "address": "Mohammadpur, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Javed Hossain",
+      "email": "javed.hossain@gmail.com",
+      "contactNumber": "+8801755556788",
+      "address": "Rajshahi City Center"
+    }
+  }
+]

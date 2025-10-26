@@ -57,7 +57,7 @@ const createPatientValidationSchema = z
         message: "Contact number is required",
       }),
       address: z.string().optional(),
-      gender: z.enum([Gender.MALE, Gender.FEMALE]),
+      // gender: z.enum([Gender.MALE, Gender.FEMALE]),
     }),
   })
   .strict();
