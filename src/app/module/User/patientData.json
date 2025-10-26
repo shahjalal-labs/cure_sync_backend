@@ -2,101 +2,82 @@
   {
     "password": "123456",
     "patient": {
-      "name": "Aminul Islam",
-      "email": "aminul.islam@gmail.com",
-      "contactNumber": "+8801712345601",
-      "address": "House 21, Road 5, Dhanmondi, Dhaka",
-      "gender": "MALE"
+      "name": "Rafiul Hasan",
+      "email": "rafiul.hasan@outlook.com",
+      "contactNumber": "+8801712345701",
+      "address": "Bashundhara R/A, Dhaka"
     }
   },
   {
     "password": "123456",
     "patient": {
       "name": "Nusrat Jahan",
-      "email": "nusrat.jahan92@yahoo.com",
-      "contactNumber": "+8801912345602",
-      "address": "Sector 7, Uttara, Dhaka",
-      "gender": "FEMALE"
+      "email": "nusrat.jahan@gmail.com",
+      "contactNumber": "+8801612345702",
+      "address": "Sholokbahar, Chattogram"
     }
   },
   {
     "password": "123456",
     "patient": {
-      "name": "Mahfuzur Rahman",
-      "email": "mahfuz.rahman@outlook.com",
-      "contactNumber": "+8801612345603",
-      "address": "Gulshan-1, Dhaka",
-      "gender": "MALE"
+      "name": "Sabbir Ahmed",
+      "email": "sabbir.ahmed@proton.me",
+      "contactNumber": "+8801812345703",
+      "address": "Mirpur-10, Dhaka"
     }
   },
   {
     "password": "123456",
     "patient": {
-      "name": "Farhana Begum",
-      "email": "farhana_begum@icloud.com",
-      "contactNumber": "+8801812345604",
-      "address": "Banani, Dhaka",
-      "gender": "FEMALE"
+      "name": "Mitu Akhter",
+      "email": "mitu.akhter@icloud.com",
+      "contactNumber": "+8801512345704",
+      "address": "Sonadanga, Khulna"
     }
   },
   {
     "password": "123456",
     "patient": {
-      "name": "Kamal Ahmed",
-      "email": "kamal.ahmed83@protonmail.com",
-      "contactNumber": "+8801512345605",
-      "address": "Chattogram College Road",
-      "gender": "MALE"
+      "name": "Tariqul Islam",
+      "email": "tariqul.islam@mail.com",
+      "contactNumber": "+8801719876705",
+      "address": "Agrabad, Chattogram"
     }
   },
   {
     "password": "123456",
     "patient": {
-      "name": "Laila Sultana",
-      "email": "laila.sultana@mail.com",
-      "contactNumber": "+8801719876506",
-      "address": "Khatunganj, Chattogram",
-      "gender": "FEMALE"
+      "name": "Sharmin Nahar",
+      "email": "sharmin.nahar@live.com",
+      "contactNumber": "+8801911123344",
+      "address": "Motijheel, Dhaka"
     }
   },
   {
     "password": "123456",
     "patient": {
-      "name": "Selim Khan",
-      "email": "skhan77@hotmail.com",
-      "contactNumber": "+8801911122233",
-      "address": "Kakrail, Dhaka",
-      "gender": "MALE"
+      "name": "Rashidul Karim",
+      "email": "rashidul.karim77@yahoo.com",
+      "contactNumber": "+8801301234706",
+      "address": "Ambarkhana, Sylhet"
     }
   },
   {
     "password": "123456",
     "patient": {
-      "name": "Tanjila Rahman",
-      "email": "tanjila.rahman@live.com",
-      "contactNumber": "+8801301234508",
-      "address": "Kazir Dewri, Chattogram",
-      "gender": "FEMALE"
+      "name": "Tahmina Chowdhury",
+      "email": "tahmina.chowdhury@bdmail.net",
+      "contactNumber": "+8801407654707",
+      "address": "Mohammadpur, Dhaka"
     }
   },
   {
     "password": "123456",
     "patient": {
-      "name": "Ahsan Kabir",
-      "email": "ahsan_kabir.bd@bdmail.net",
-      "contactNumber": "+8801407654309",
-      "address": "Zindabazar, Sylhet",
-      "gender": "MALE"
-    }
-  },
-  {
-    "password": "123456",
-    "patient": {
-      "name": "Rubina Akter",
-      "email": "rubina.akter72@yahoo.com",
-      "contactNumber": "+8801755556670",
-      "address": "Nirala, Khulna",
-      "gender": "FEMALE"
+      "name": "Javed Hossain",
+      "email": "javed.hossain@gmail.com",
+      "contactNumber": "+8801755556788",
+      "address": "Rajshahi City Center"
     }
   }
 ]
