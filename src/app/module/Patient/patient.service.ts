@@ -37,7 +37,8 @@ const getAllPatient = async (
     andConditions.push({
       AND: Object.keys(filterData).map((f) => ({
         [f]: {
-          equlas: (filterData as any)[f],
+          equals: (filterData as any)[f],
+          mode: "insensitive",
         },
       })),
     });
@@ -82,10 +83,19 @@ const getAllPatient = async (
 };
 //w: (end) ╰──────────── getAllPatient  ────────────╯
 
-//w: (start)╭────────────  ────────────╮
-
-//w: (end) ╰────────────  ────────────╯
+//w: (start)╭──────────── getPatientById ────────────╮
+const getPatientById = async (id: string): Promise<Patient | null> => {
+  const result = await prisma.patient.findUniqueOrThrow({
+    where: {
+      id,
+      isDeleted: true,
+    },
+  });
+  return result;
+};
+//w: (end) ╰──────────── getPatientById ────────────╯
 
 export const PatientService = {
   getAllPatient,
+  getPatientById,
 };

@@ -4,9 +4,7 @@ import { sendResponse } from "../../../shared/sendResponse";
 import { PatientService } from "./patient.service";
 import httpStatus from "http-status";
 import { pick } from "../../../shared/pick";
-import {
-  patientFilterableFields,
-} from "./patient.constant";
+import { patientFilterableFields } from "./patient.constant";
 
 //w: (start)╭──────────── getAllPatient  ────────────╮
 const getAllPatient = catchAsync(async (req: Request, res: Response) => {
@@ -24,9 +22,19 @@ const getAllPatient = catchAsync(async (req: Request, res: Response) => {
 });
 //w: (end) ╰──────────── getAllPatient  ────────────╯
 
+//w: (start)╭──────────── getPatientById ────────────╮
+
+const getPatientById = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await PatientService.getPatientById(id);
+});
+
+//w: (end) ╰──────────── getPatientById ────────────╯
+
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
 export const PatientController = {
   getAllPatient,
+  getPatientById,
 };
