@@ -15,3 +15,11 @@ DELETE  {{port6009}}/patients/soft/93f32bcb-a1eb-4462-b682-f60317951e93
 
 DELETE  {{port6009}}/patients/soft/93f32bcb-a1eb-4462-b682-f60317951e93
 
+
+
+PATCH  {{port6009}}/patients/93f32bcb-a1eb-4462-b682-f60317951e93
+
+Content-type:applicatio/json
+{
+  "patientHealthData":{}
+}

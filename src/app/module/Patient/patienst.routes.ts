@@ -10,4 +10,6 @@ router.get("/:id", PatientController.getPatientById);
 
 router.delete("/soft/:id", PatientController.softDeletePatient);
 
+router.patch("/:id", PatientController.updatePatient);
+
 export const PatientRoutes = router;
