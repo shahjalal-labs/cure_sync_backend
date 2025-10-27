@@ -11,8 +11,8 @@ import { patientSearchableFields } from "./patient.constant";
 const getAllPatient = async (
   filters: IPatientFilterRequest,
   options: IPaginationOptions,
-): Promise<Patient[] | null> => {
-  // const { page, limit, skip } = paginationHelper.calcalutePagination(options);
+) => {
+  const { page, limit, skip } = paginationHelper.calcalutePagination(options);
 
   const { searchTerm, ...filterData } = filters;
 
@@ -51,8 +51,22 @@ const getAllPatient = async (
 
   const result = await prisma.patient.findMany({
     where: whereConditions,
+    skip,
+    take: limit,
   });
-  return result;
+
+  const total = await prisma.patient.count({
+    where: whereConditions,
+  });
+
+  return {
+    meta: {
+      total,
+      page,
+      limit,
+    },
+    data: result,
+  };
 };
 //w: (end) ╰──────────── getAllPatient  ────────────╯
 
