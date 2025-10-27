@@ -96,6 +96,53 @@ const getPatientById = async (id: string): Promise<Patient | null> => {
 };
 //w: (end) ╰──────────── getPatientById ────────────╯
 
+//w: (start)╭──────────── updatePatient  ────────────╮
+const updatePatient = async (
+  id: string,
+  payload: any,
+): Promise<Patient | null> => {
+  const { patientHealthData, medicalReport, ...patientData } = payload;
+
+  const patientInfo = await prisma.patient.findUniqueOrThrow({
+    where: { id, isDeleted: false },
+  });
+  await prisma.$transaction(async (tx) => {
+    await tx.patient.update({
+      where: { id },
+      data: patientData,
+    });
+
+    if (patientHealthData) {
+      await tx.patientHealthData.upsert({
+        where: {
+          patientId: patientInfo.id,
+        },
+        update: patientHealthData,
+        create: {
+          ...patientHealthData,
+          patientId: patientInfo.id,
+        },
+      });
+    }
+    if (medicalReport) {
+      await tx.medicalReport.create({
+        data: {
+          ...medicalReport,
+          patientId: patientInfo,
+        },
+      });
+    }
+  });
+
+  const responsedData = await prisma.patient.findUnique({
+    where: {
+      id: patientInfo.id,
+    },
+  });
+  return responsedData;
+};
+//w: (end) ╰──────────── updatePatient  ────────────╯
+
 //w: (start)╭──────────── softDeletePatient  ────────────╮
 const softDeletePatient = async (id: string): Promise<Patient | null> => {
   return await prisma.$transaction(async (transactionClient) => {
@@ -124,4 +171,5 @@ export const PatientService = {
   getAllPatient,
   getPatientById,
   softDeletePatient,
+  updatePatient,
 };

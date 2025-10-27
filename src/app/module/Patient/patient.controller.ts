@@ -54,31 +54,6 @@ const softDeletePatient = catchAsync(async (req, res) => {
 //w: (end) ╰──────────── softDeletePatient  ────────────╯
 
 //w: (start)╭────────────  ────────────╮
-const updatePatient = async (
-  id: string,
-  payload: any,
-): Promise<Patient | null> => {
-  const { patientHealthData, medicalReport, ...patientData } = payload;
-
-  const patientInfo = await prisma.patient.findUniqueOrThrow({
-    where: { id, isDeleted: false },
-  });
-  await prisma.$transaction(async (tx) => {
-    await tx.patient.update({
-      where: { id },
-      data: patientData,
-    });
-  });
-
-  if (patientHealthData) {
-    await t;
-  }
-
-  return null;
-};
-//w: (end) ╰────────────  ────────────╯
-
-//w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
 export const PatientController = {
