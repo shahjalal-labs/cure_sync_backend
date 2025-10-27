@@ -38,6 +38,7 @@ const getPatientById = catchAsync(async (req, res) => {
 //w: (end) ╰──────────── getPatientById ────────────╯
 
 //w: (start)╭──────────── softDeletePatient  ────────────╮
+<<<<<<< HEAD
 const softDeletePatient = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await PatientService.softDeletePatient(id);
@@ -49,6 +50,11 @@ const softDeletePatient = catchAsync(async (req, res) => {
   });
 });
 //w: (end) ╰──────────── softDeletePatient  ────────────╯
+=======
+
+
+
+>>>>>>> 1c644a8 (refactor: Updated Patient/patient.controller.ts, Patient/patient.service.ts, Patient/patientApi.hurl)
 
 //w: (start)╭────────────  ────────────╮
 

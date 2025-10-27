@@ -96,10 +96,13 @@ const getPatientById = async (id: string): Promise<Patient | null> => {
 };
 //w: (end) ╰──────────── getPatientById ────────────╯
 
+<<<<<<< HEAD
 //w: (start)╭────────────  ────────────╮
 const updatePatient = async (id: string) => {};
 //w: (end) ╰────────────  ────────────╯
 
+=======
+>>>>>>> 1c644a8 (refactor: Updated Patient/patient.controller.ts, Patient/patient.service.ts, Patient/patientApi.hurl)
 //w: (start)╭──────────── softDeletePatient  ────────────╮
 const softDeletePatient = async (id: string) => {
   await prisma.$transaction(async (tx) => {
