@@ -12,3 +12,6 @@ DELETE  {{port6009}}/patients/soft/93f32bcb-a1eb-4462-b682-f60317951e93
 =======
 >>>>>>> 1c644a8 (refactor: Updated Patient/patient.controller.ts, Patient/patient.service.ts, Patient/patientApi.hurl)
 
+
+DELETE  {{port6009}}/patients/soft/93f32bcb-a1eb-4462-b682-f60317951e93
+
