@@ -23,11 +23,10 @@ const getAllPatient = catchAsync(async (req: Request, res: Response) => {
 //w: (end) ╰──────────── getAllPatient  ────────────╯
 
 //w: (start)╭──────────── getPatientById ────────────╮
-
 const getPatientById = catchAsync(async (req, res) => {
   const { id } = req.params;
-console.log(id, "[1;31mid in patient.controller.ts at line 29[0m");
   const result = await PatientService.getPatientById(id);
+  console.log(result, "[1;31mresult in patient.controller.ts at line 31[0m");
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
