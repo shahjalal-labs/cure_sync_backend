@@ -1,6 +1,9 @@
 //
 export const patientSearchableFields = ["name", "email", "contactNumber"];
 
-
-
- const = ;
+export const patientFilterableFields = [
+  "name",
+  "email",
+  "contactNumber",
+  "searchTerm",
+];
