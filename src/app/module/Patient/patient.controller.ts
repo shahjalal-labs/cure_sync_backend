@@ -54,6 +54,10 @@ const softDeletePatient = catchAsync(async (req, res) => {
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
+
+//w: (start)╭────────────  ────────────╮
+
+//w: (end) ╰────────────  ────────────╯
 export const PatientController = {
   getAllPatient,
   getPatientById,
