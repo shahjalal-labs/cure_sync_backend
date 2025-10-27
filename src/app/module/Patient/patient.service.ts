@@ -86,7 +86,7 @@ const getAllPatient = async (
 //w: (start)╭──────────── getPatientById ────────────╮
 const getPatientById = async (id: string): Promise<Patient | null> => {
   console.log(id, "[1;31mid in patient.service.ts at line 88[0m");
-  const result = await prisma.patient.findUnique({
+  const result = await prisma.patient.findUniqueOrThrow({
     where: {
       id,
       isDeleted: false,
