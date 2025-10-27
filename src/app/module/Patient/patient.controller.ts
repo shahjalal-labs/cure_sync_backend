@@ -26,7 +26,14 @@ const getAllPatient = catchAsync(async (req: Request, res: Response) => {
 
 const getPatientById = catchAsync(async (req, res) => {
   const { id } = req.params;
+console.log(id, "[1;31mid in patient.controller.ts at line 29[0m");
   const result = await PatientService.getPatientById(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Patient fetched successfully.",
+    data: result,
+  });
 });
 
 //w: (end) ╰──────────── getPatientById ────────────╯

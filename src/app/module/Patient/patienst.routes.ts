@@ -6,4 +6,6 @@ const router = express.Router();
 
 router.get("/", PatientController.getAllPatient);
 
+router.get("/:id", PatientController.getPatientById);
+
 export const PatientRoutes = router;
