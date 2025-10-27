@@ -96,6 +96,10 @@ const getPatientById = async (id: string): Promise<Patient | null> => {
 };
 //w: (end) ╰──────────── getPatientById ────────────╯
 
+//w: (start)╭────────────  ────────────╮
+const updatePatient = async (id: string) => {};
+//w: (end) ╰────────────  ────────────╯
+
 //w: (start)╭──────────── softDeletePatient  ────────────╮
 const softDeletePatient = async (id: string) => {
   await prisma.$transaction(async (tx) => {
