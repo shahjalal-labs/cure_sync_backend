@@ -31,14 +31,26 @@ const getAllPatient = async (
 
   if (Object.keys(filterData).length) {
     andConditions.push({
-      AND: Object.keys(filterData).map(f=> )
+      AND: Object.keys(filterData).map((f) => ({
+        [f]: {
+          equlas: (filterData as any)[f],
+        },
+      })),
     });
   }
 
+  andConditions.push({
+    isDeleted: false,
+  });
+
+  const whereConditions: Prisma.PatientWhereInput = andConditions.length
+    ? {
+        AND: andConditions,
+      }
+    : {};
+
   const result = await prisma.patient.findMany({
-    where: {
-      isDeleted: false,
-    },
+    where: whereConditions,
   });
   return result;
 };
