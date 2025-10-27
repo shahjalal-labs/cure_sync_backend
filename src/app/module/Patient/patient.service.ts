@@ -19,6 +19,7 @@ const getAllPatient = async (
   const andConditions: Prisma.PatientWhereInput[] = [];
 
   if (searchTerm) {
+console.log(searchTerm, "[1;31msearchTerm in patient.service.ts at line 22[0m");
     andConditions.push({
       OR: patientSearchableFields.map((f) => ({
         [f]: {

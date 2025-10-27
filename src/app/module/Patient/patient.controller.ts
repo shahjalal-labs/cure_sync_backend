@@ -3,10 +3,16 @@ import catchAsync from "../../../shared/catchAsync";
 import { sendResponse } from "../../../shared/sendResponse";
 import { PatientService } from "./patient.service";
 import httpStatus from "http-status";
+import { pick } from "../../../shared/pick";
+import { patientSearchableFields } from "./patient.constant";
 
 //w: (start)╭──────────── getAllPatient  ────────────╮
 const getAllPatient = catchAsync(async (req: Request, res: Response) => {
-  const result = await PatientService.getAllPatient();
+  const filters = pick(req.query, patientSearchableFields);
+
+  const options = pick(req.query, ["page", "limit", "sortOrder", "sortBy"]);
+  const result = await PatientService.getAllPatient(filters, options);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
