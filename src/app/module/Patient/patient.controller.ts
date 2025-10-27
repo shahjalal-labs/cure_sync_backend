@@ -6,6 +6,8 @@ import { PatientService } from "./patient.service";
 import httpStatus from "http-status";
 import { pick } from "../../../shared/pick";
 import { patientFilterableFields } from "./patient.constant";
+import { Patient } from "@prisma/client";
+import { prisma } from "../../../shared/prisma";
 
 //w: (start)╭──────────── getAllPatient  ────────────╮
 const getAllPatient = catchAsync(async (req: Request, res: Response) => {
@@ -52,7 +54,28 @@ const softDeletePatient = catchAsync(async (req, res) => {
 //w: (end) ╰──────────── softDeletePatient  ────────────╯
 
 //w: (start)╭────────────  ────────────╮
+const updatePatient = async (
+  id: string,
+  payload: any,
+): Promise<Patient | null> => {
+  const { patientHealthData, medicalReport, ...patientData } = payload;
 
+  const patientInfo = await prisma.patient.findUniqueOrThrow({
+    where: { id, isDeleted: false },
+  });
+  await prisma.$transaction(async (tx) => {
+    await tx.patient.update({
+      where: { id },
+      data: patientData,
+    });
+  });
+
+  if (patientHealthData) {
+    await t;
+  }
+
+  return null;
+};
 //w: (end) ╰────────────  ────────────╯
 
 //w: (start)╭────────────  ────────────╮
@@ -62,4 +85,5 @@ export const PatientController = {
   getAllPatient,
   getPatientById,
   softDeletePatient,
+  updatePatient,
 };
