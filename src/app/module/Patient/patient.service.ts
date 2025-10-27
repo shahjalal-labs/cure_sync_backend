@@ -1,6 +1,6 @@
 //
 
-import { Patient, Prisma, UserStatus } from "@prisma/client";
+import { Patient, Prisma } from "@prisma/client";
 import { paginationHelper } from "../../../helpers/paginatonHelper";
 import { prisma } from "../../../shared/prisma";
 import { IPaginationOptions } from "../../interfaces/pagination";
@@ -86,53 +86,17 @@ const getAllPatient = async (
 //w: (start)╭──────────── getPatientById ────────────╮
 const getPatientById = async (id: string): Promise<Patient | null> => {
   console.log(id, "[1;31mid in patient.service.ts at line 88[0m");
-  const result = await prisma.patient.findUniqueOrThrow({
+  const result = await prisma.patient.findUnique({
     where: {
       id,
-      isDeleted: false,
+      isDeleted: true,
     },
   });
   return result;
 };
 //w: (end) ╰──────────── getPatientById ────────────╯
 
-<<<<<<< HEAD
-//w: (start)╭────────────  ────────────╮
-const updatePatient = async (id: string) => {};
-//w: (end) ╰────────────  ────────────╯
-
-=======
->>>>>>> 1c644a8 (refactor: Updated Patient/patient.controller.ts, Patient/patient.service.ts, Patient/patientApi.hurl)
-//w: (start)╭──────────── softDeletePatient  ────────────╮
-const softDeletePatient = async (id: string) => {
-  await prisma.$transaction(async (tx) => {
-    const deletedPatient = await tx.patient.update({
-      where: {
-        id,
-      },
-      data: {
-        isDeleted: true,
-      },
-    });
-
-    tx.user.update({
-      where: {
-        email: deletedPatient.email,
-      },
-      data: {
-        status: UserStatus.DELETED,
-      },
-    });
-  });
-};
-//w: (end) ╰──────────── softDeletePatient  ────────────╯
-
-//w: (start)╭────────────  ────────────╮
-
-//w: (end) ╰────────────  ────────────╯
-
 export const PatientService = {
   getAllPatient,
   getPatientById,
-  softDeletePatient,
 };
