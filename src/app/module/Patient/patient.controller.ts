@@ -37,6 +37,11 @@ const getPatientById = catchAsync(async (req, res) => {
 
 //w: (end) ╰──────────── getPatientById ────────────╯
 
+//w: (start)╭──────────── softDeletePatient  ────────────╮
+
+
+
+
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
