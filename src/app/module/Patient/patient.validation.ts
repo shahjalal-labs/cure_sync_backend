@@ -33,10 +33,10 @@ const updatePatientSchema = z.object({
           reportName: z.string().min(3, "Report Name is required."),
           reportLink: z.string(),
         })
-        .strict(),
+        .strict()
+        .optional(),
     })
-    .strict()
-    .optional(),
+    .strict(),
 });
 
 export const PatientValidation = {

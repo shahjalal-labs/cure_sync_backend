@@ -1,6 +1,7 @@
 //
 import z from "zod";
 
+//w: (start)╭──────────── updateDoctor  ────────────╮
 const doctorUpdateSchema = z.object({
   body: z
     .object({
@@ -26,6 +27,7 @@ const doctorUpdateSchema = z.object({
     .partial()
     .strict(),
 });
+//w: (end) ╰──────────── updateDoctor  ────────────╯
 
 export const DoctorValidation = {
   doctorUpdateSchema,

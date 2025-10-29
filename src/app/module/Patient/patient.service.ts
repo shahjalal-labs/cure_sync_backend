@@ -132,7 +132,7 @@ const updatePatient = async (
       await tx.medicalReport.create({
         data: {
           ...medicalReport,
-          patientId: patientInfo,
+          patientId: patientInfo.id,
         },
       });
     }

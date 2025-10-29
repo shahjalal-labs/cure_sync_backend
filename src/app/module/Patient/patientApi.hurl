@@ -21,7 +21,10 @@ Content-Type: application/json
 {
   "name": "Aminul Islam",
   "contactNumber": "01712345678",
-  "address": "House 45, Road 10, Dhanmondi, Dhaka"
-  
+  "address": "House 45, Road 10, Dhanmondi, Dhaka",
+  "medicalReport": {
+    "reportName": "Blood Test Report",
+    "reportLink": "https://example.com/reports/blood-test-2025.pdf"
+  }
 }
 
