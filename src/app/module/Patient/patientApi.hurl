@@ -21,16 +21,7 @@ Content-Type: application/json
 {
   "name": "Aminul Islam",
   "contactNumber": "01712345678",
-  "address": "House 45, Road 10, Dhanmondi, Dhaka",
-  "patientHealthData": {
-    "gender": "MALE",
-    "dateOfBirth": "2000-11-22",
-    "bloodGroup": "O_POSITIVE",
-    "hasAllergies": false,
-    "hasDiabetes": true,
-    "height": "160",
-    "weight": "55",
-    "age":32
-  }
+  "address": "House 45, Road 10, Dhanmondi, Dhaka"
+  
 }
 
