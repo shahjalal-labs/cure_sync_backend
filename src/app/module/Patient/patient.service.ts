@@ -137,11 +137,17 @@ const updatePatient = async (
       });
     }
 
-    const responsedData = await prisma.patient.findUnique({
+    const responsedData = await tx.patient.findUnique({
       where: {
         id: patientInfo.id,
       },
+      include: {
+        patientHealthData: true,
+        medicalReport: true,
+      },
     });
+
+    return responsedData;
   });
 
   return result;

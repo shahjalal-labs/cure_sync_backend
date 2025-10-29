@@ -19,17 +19,18 @@ PATCH {{port6009}}/patients/93f32bcb-a1eb-4462-b682-f60317951e93
 Content-Type: application/json
 
 {
-  "name": "Ayesha Rahman",
+  "name": "Aminul Islam",
   "contactNumber": "01712345678",
   "address": "House 45, Road 10, Dhanmondi, Dhaka",
   "patientHealthData": {
-    "gender": "FEMALE",
+    "gender": "MALE",
     "dateOfBirth": "2000-11-22",
     "bloodGroup": "O_POSITIVE",
     "hasAllergies": false,
     "hasDiabetes": true,
     "height": "160",
-    "weight": "55"
+    "weight": "55",
+    "age":32
   }
 }
 

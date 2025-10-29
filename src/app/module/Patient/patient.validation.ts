@@ -26,6 +26,7 @@ const updatePatientSchema = z.object({
           height: z.string().min(2),
           weight: z.string().min(2),
         })
+        .strict()
         .optional(),
     })
     .strict(),
