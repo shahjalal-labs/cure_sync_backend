@@ -5,27 +5,31 @@ GET {{port6009}}/patients?searchTerm=sa&page=1&limit=15&sortBy=name&sortOrder=as
 
 
 GET {{port6009}}/patients/93f32bcb-a1eb-4462-b682-f60317951e93
-<<<<<<< HEAD
 
 
 DELETE  {{port6009}}/patients/soft/93f32bcb-a1eb-4462-b682-f60317951e93
-=======
->>>>>>> 1c644a8 (refactor: Updated Patient/patient.controller.ts, Patient/patient.service.ts, Patient/patientApi.hurl)
 
 
 DELETE  {{port6009}}/patients/soft/93f32bcb-a1eb-4462-b682-f60317951e93
 
 
 
-PATCH  {{port6009}}/patients/93f32bcb-a1eb-4462-b682-f60317951e93
 
+PATCH {{port6009}}/patients/93f32bcb-a1eb-4462-b682-f60317951e93
 Content-Type: application/json
+
 {
-  "password": "123456",
-  "admin": {
-    "email": "maliha-admin@sync.health",
-    "name": "Maliha",
-    "contactNumber": "902384"
+  "name": "Ayesha Rahman",
+  "contactNumber": "01712345678",
+  "address": "House 45, Road 10, Dhanmondi, Dhaka",
+  "patientHealthData": {
+    "gender": "FEMALE",
+    "dateOfBirth": "2000-11-22",
+    "bloodGroup": "O_POSITIVE",
+    "hasAllergies": false,
+    "hasDiabetes": true,
+    "height": "160",
+    "weight": "55"
   }
 }
 

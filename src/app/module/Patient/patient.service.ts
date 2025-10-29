@@ -56,6 +56,10 @@ const getAllPatient = async (
 
   const result = await prisma.patient.findMany({
     where: whereConditions,
+    include: {
+      patientHealthData: true,
+      medicalReport: true,
+    },
     skip,
     take: limit,
     orderBy:
@@ -106,7 +110,7 @@ const updatePatient = async (
   const patientInfo = await prisma.patient.findUniqueOrThrow({
     where: { id, isDeleted: false },
   });
-  await prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     await tx.patient.update({
       where: { id },
       data: patientData,
@@ -132,14 +136,15 @@ const updatePatient = async (
         },
       });
     }
+
+    const responsedData = await prisma.patient.findUnique({
+      where: {
+        id: patientInfo.id,
+      },
+    });
   });
 
-  const responsedData = await prisma.patient.findUnique({
-    where: {
-      id: patientInfo.id,
-    },
-  });
-  return responsedData;
+  return result;
 };
 //w: (end) ╰──────────── updatePatient  ────────────╯
 
