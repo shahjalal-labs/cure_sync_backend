@@ -6,6 +6,7 @@ import { prisma } from "../../../shared/prisma";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { IPatientFilterRequest } from "./patient.interface";
 import { patientSearchableFields } from "./patient.constant";
+import { TUpdatePatientPayload } from "./patient.validation";
 
 //w: (start)╭──────────── getAllPatient  ────────────╮
 const getAllPatient = async (
@@ -103,7 +104,7 @@ const getPatientById = async (id: string): Promise<Patient | null> => {
 //w: (start)╭──────────── updatePatient  ────────────╮
 const updatePatient = async (
   id: string,
-  payload: any,
+  payload: TUpdatePatientPayload,
 ): Promise<Patient | null> => {
   const { patientHealthData, medicalReport, ...patientData } = payload;
 
@@ -178,9 +179,42 @@ const softDeletePatient = async (id: string): Promise<Patient | null> => {
 };
 //w: (end) ╰──────────── softDeletePatient  ────────────╯
 
+//w: (start)╭──────────── deletePatient  ────────────╮
+const deletePatient = async (id: string) => {
+  const patientInfo = await prisma.patient.findUniqueOrThrow({
+    where: {
+      id,
+    },
+  });
+
+  const result = await prisma.$transaction(async (tx) => {
+    tx.medicalReport.deleteMany({
+      where: {
+        patientId: patientInfo.id,
+      },
+    });
+
+    tx.patientHealthData.delete({
+      where: {
+        patientId: patientInfo.id,
+      },
+    });
+
+    const deletedPatient = await tx.patient.delete({
+      where: {
+        id: patientInfo.id,
+      },
+    });
+    return deletedPatient;
+  });
+  return result;
+};
+//w: (end) ╰──────────── deletePatient  ────────────╯
+
 export const PatientService = {
   getAllPatient,
   getPatientById,
   softDeletePatient,
   updatePatient,
+  deletePatient,
 };

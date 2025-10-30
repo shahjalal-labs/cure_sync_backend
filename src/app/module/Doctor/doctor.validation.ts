@@ -27,6 +27,7 @@ const doctorUpdateSchema = z.object({
     .partial()
     .strict(),
 });
+
 //w: (end) ╰──────────── updateDoctor  ────────────╯
 
 export const DoctorValidation = {

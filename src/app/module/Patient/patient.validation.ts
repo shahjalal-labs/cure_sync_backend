@@ -39,6 +39,8 @@ const updatePatientSchema = z.object({
     .strict(),
 });
 
+export type TUpdatePatientPayload = z.infer<typeof updatePatientSchema>["body"];
+
 export const PatientValidation = {
   updatePatientSchema,
 };
