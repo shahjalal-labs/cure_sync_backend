@@ -10,6 +10,9 @@ router.get("/", PatientController.getAllPatient);
 
 router.get("/:id", PatientController.getPatientById);
 
+// hard delete patient
+router.delete("/:id", PatientController.deletePatient);
+
 router.delete("/soft/:id", PatientController.softDeletePatient);
 
 router.patch(
