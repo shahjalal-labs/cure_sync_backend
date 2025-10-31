@@ -2,14 +2,9 @@
 import { prisma } from "../../../shared/prisma";
 import { addDays, addMinutes, isBefore, format } from "date-fns";
 
-//w: (start)╭──────────── createScheduleIntoDB  ────────────╮
-const createScheduleIntoDB = async (payload: any) => {
-  const { startDate, endDate, startTime, endTime } = payload;
+//w: (start)╭──────────── createSchedule  ────────────╮
 
-  const currentDate = new Date(startDate);
-};
-
-async function insertIntoDB({ startDate, endDate, startTime, endTime }) {
+async function createSchedule({ startDate, endDate, startTime, endTime }) {
   const slots = [];
   const interval = 30; // minutes
 
@@ -41,7 +36,7 @@ async function insertIntoDB({ startDate, endDate, startTime, endTime }) {
   return slots;
 }
 
-//w: (end) ╰──────────── createScheduleIntoDB  ────────────╯
+//w: (end) ╰──────────── createSchedule ────────────╯
 
 //w: (start)╭──────────── getScheduleByIdFromDB  ────────────╮
 const getScheduleByIdFromDB = async (id: string) => {
@@ -74,7 +69,7 @@ const deleteScheduleFromDB = async (id: string) => {
 
 //w: (end) ╰────────────  ────────────╯
 export const ScheduleService = {
-  createScheduleIntoDB,
+  createSchedule,
   getScheduleByIdFromDB,
   deleteScheduleFromDB,
 };
