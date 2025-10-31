@@ -49,7 +49,7 @@ const getScheduleByIdFromDB = async (id: string) => {
 };
 //w: (end) ╰──────────── getScheduleByIdFromDB  ────────────╯
 //
-//w: (start)╭──────────── deleteScheduleFromDB  ────────────╮
+//w: (start)╭──────────── deleteSchedule ────────────╮
 const deleteScheduleFromDB = async (id: string) => {
   await prisma.schedule.findUniqueOrThrow({
     where: {
@@ -63,7 +63,7 @@ const deleteScheduleFromDB = async (id: string) => {
   });
   return result;
 };
-//w: (end) ╰──────────── deleteScheduleFromDB  ────────────╯
+//w: (end) ╰──────────── deleteSchedule ────────────╯
 
 //w: (start)╭────────────  ────────────╮
 

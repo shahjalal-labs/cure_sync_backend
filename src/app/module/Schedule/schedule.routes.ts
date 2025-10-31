@@ -12,10 +12,20 @@ router.get(
   ScheduleController.getSchedulById,
 );
 
+//w: (start)╭──────────── deleteSchedule ────────────╮
 router.delete(
   "/:id",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
   ScheduleController.deleteSchedule,
 );
+//w: (end) ╰──────────── deleteSchedule ────────────╯
+
+//w: (start)╭──────────── createSchedule  ────────────╮
+router.post(
+  "/",
+  auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
+  ScheduleController.createSchedule,
+);
+//w: (end) ╰──────────── createSchedule ────────────╯
 
 export const ScheduleRoutes = router;
