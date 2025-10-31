@@ -207,13 +207,13 @@ const deletePatient = async (id: string) => {
   });
 
   const result = await prisma.$transaction(async (tx) => {
-    tx.medicalReport.deleteMany({
+    await tx.medicalReport.deleteMany({
       where: {
         patientId: patientInfo.id,
       },
     });
 
-    tx.patientHealthData.delete({
+    await tx.patientHealthData.delete({
       where: {
         patientId: patientInfo.id,
       },
@@ -222,6 +222,11 @@ const deletePatient = async (id: string) => {
     const deletedPatient = await tx.patient.delete({
       where: {
         id: patientInfo.id,
+      },
+    });
+    await tx.user.delete({
+      where: {
+        email: patientInfo.email,
       },
     });
     return deletedPatient;

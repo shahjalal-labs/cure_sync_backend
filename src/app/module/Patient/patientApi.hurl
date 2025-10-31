@@ -15,20 +15,28 @@ DELETE  {{port6009}}/patients/soft/93f32bcb-a1eb-4462-b682-f60317951e93
 
 
 
-PATCH {{port6009}}/patients/93f32bcb-a1eb-4462-b682-f60317951e93
+PATCH {{port6009}}/patients/32b007bc-a209-4801-a4fd-0e0a12eeccbf
 Content-Type: application/json
 
 {
-  "name": "Aminul Islam",
+  "name": "javed karim",
   "contactNumber": "01712345678",
   "address": "House 45, Road 10, Dhanmondi, Dhaka",
   "medicalReport": {
     "reportName": "Blood Test Report",
     "reportLink": "https://example.com/reports/blood-test-2025.pdf"
-  }
+  },
+  "patientHealthData":{
+  "gender": "MALE",
+  "dateOfBirth": "1990-05-15",
+  "bloodGroup": "O_POSITIVE",
+  "hasAllergies": false,
+  "hasDiabetes": false,
+  "height": "175",
+  "weight": "70"
+}
 }
 
-bf3113dc-e70e-4752-aa6e-aa34ad21098d
 
 
 DELETE  {{port6009}}/patient/bf3113dc-e70e-4752-aa6e-aa34ad21098d
