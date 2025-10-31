@@ -94,7 +94,26 @@ const getPatientById = async (id: string): Promise<Patient | null> => {
   const result = await prisma.patient.findUnique({
     where: {
       id,
-      isDeleted: true,
+      isDeleted: false,
+    },
+    include: {
+      patientHealthData: {
+        omit: {
+          id: true,
+          bloodGroup: true,
+          patientId: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
+      medicalReport: {
+        omit: {
+          patientId: true,
+          id: true,
+          updatedAt: true,
+          createdAt: true,
+        },
+      },
     },
   });
   return result;

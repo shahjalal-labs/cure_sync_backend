@@ -8,6 +8,7 @@ import { pick } from "../../../shared/pick";
 import { patientFilterableFields } from "./patient.constant";
 import { Patient } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
+import { ApiError } from "../../errors/ApiError";
 
 //w: (start)╭──────────── getAllPatient  ────────────╮
 const getAllPatient = catchAsync(async (req: Request, res: Response) => {
@@ -28,8 +29,11 @@ const getAllPatient = catchAsync(async (req: Request, res: Response) => {
 //w: (start)╭──────────── getPatientById ────────────╮
 const getPatientById = catchAsync(async (req, res) => {
   const { id } = req.params;
+
   const result = await PatientService.getPatientById(id);
-  console.log(result, "[1;31mresult in patient.controller.ts at line 31[0m");
+
+  if (!result) throw new ApiError(404, "Patient not found.");
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
