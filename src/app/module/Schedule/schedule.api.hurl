@@ -1,9 +1,12 @@
 ### create schedule
 
-GET {{port6009}}/schedules
+GET {{port6009}}/schedule
+Authorization: {{DOCTOR_TOKEN }}
+
+
 
 POST {{port6009}}/schedule
-Authorization: {{ADMIN_TOKEN}}
+Authorization: {{ADMIN_TOKEN }}
 Content-Type: application/json
 
 {

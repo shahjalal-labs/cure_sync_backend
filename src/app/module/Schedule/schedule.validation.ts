@@ -58,6 +58,9 @@ const createSchedule = z.object({
       { message: "startTime must be before endTime", path: ["startTime"] },
     ),
 });
+
+export type TSchedule = z.infer<typeof createSchedule>["body"];
+
 //w: (end) ╰──────────── createSchedule ────────────╯
 
 export const ScheduleValidation = {

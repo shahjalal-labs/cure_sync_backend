@@ -7,8 +7,7 @@ import httpStatus from "http-status";
 
 //w: (start)╭──────────── getSchedulById  ────────────╮
 const getSchedulById = catchAsync(async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const result = await ScheduleService.getScheduleByIdFromDB(id);
+  const result = await ScheduleService.getAllSchedules();
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

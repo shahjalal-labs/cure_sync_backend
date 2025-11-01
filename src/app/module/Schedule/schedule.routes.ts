@@ -12,6 +12,7 @@ router.get(
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR),
   ScheduleController.getSchedulById,
 );
+//w: (end) ╰──────────── getAllSchedules  ────────────╯
 
 router.get(
   "/:id",
