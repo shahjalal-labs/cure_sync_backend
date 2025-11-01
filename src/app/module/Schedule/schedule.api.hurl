@@ -1,4 +1,7 @@
 ### create schedule
+
+GET {{port6009}}/schedules
+
 POST {{port6009}}/schedule
 Authorization: {{ADMIN_TOKEN}}
 Content-Type: application/json

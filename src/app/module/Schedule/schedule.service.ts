@@ -38,6 +38,13 @@ async function createSchedule({ startDate, endDate, startTime, endTime }) {
 
 //w: (end) ╰──────────── createSchedule ────────────╯
 
+//w: (start)╭──────────── getAllSchedules ────────────╮
+const getAllSchedules = async () => {
+  const result = await prisma.schedule.findMany();
+  return result;
+};
+//w: (end) ╰──────────── createSchedule ────────────╯
+
 //w: (start)╭──────────── getScheduleByIdFromDB  ────────────╮
 const getScheduleByIdFromDB = async (id: string) => {
   const result = await prisma.schedule.findUniqueOrThrow({
@@ -72,4 +79,5 @@ export const ScheduleService = {
   createSchedule,
   getScheduleByIdFromDB,
   deleteScheduleFromDB,
+  getAllSchedules,
 };
