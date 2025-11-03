@@ -6,7 +6,7 @@ import { TSchedule } from "./schedule.validation";
 
 //w: (start)╭──────────── createSchedule  ────────────╮
 
-const createSchedule = async (payload: TSchedule): Promise<Schedule[]> => {
+/* const createSchedule = async (payload: TSchedule): Promise<Schedule[]> => {
   const { startDate, endDate, startTime, endTime } = payload;
 
   const interverlTime = 30;
@@ -59,6 +59,41 @@ const createSchedule = async (payload: TSchedule): Promise<Schedule[]> => {
       }
 
       startDateTime.setMinutes(startDateTime.getMinutes() + interverlTime);
+    }
+
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return schedules;
+}; */
+
+const createSchedule = async (payload: TSchedule): Promise<Schedule[]> => {
+  const { startDate, endDate, startTime, endTime } = payload;
+  const intervalTime = 30;
+  const schedules = [];
+
+  const currentDate = new Date(startDate);
+  const lastDate = new Date(endDate);
+
+  while (currentDate <= lastDate) {
+    const baseDate = format(currentDate, "yyyy-MM-dd");
+
+    let start = new Date(`${baseDate}T${startTime}:00`);
+    const end = new Date(`${baseDate}T${endTime}:00`);
+
+    while (start < end) {
+      const scheduleData = {
+        startDateTime: start,
+        endDateTime: addMinutes(start, intervalTime),
+      };
+
+      // will naturally throw Prisma P2002 if duplicate
+      const result = await prisma.schedule.create({
+        data: scheduleData,
+      });
+
+      schedules.push(result);
+      start = addMinutes(start, intervalTime);
     }
 
     currentDate.setDate(currentDate.getDate() + 1);
