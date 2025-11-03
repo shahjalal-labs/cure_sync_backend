@@ -1,12 +1,13 @@
 import { prisma } from "../../../shared/prisma";
 import { IAuthUser } from "../../interfaces/common";
+import { TCreateDoctorSchedule } from "./doctorSchedule.validation";
 
 //
+
+//w: (start)╭──────────── createDoctorSchedule   ────────────╮
 const createDoctorSchedule = async (
   user: IAuthUser,
-  payload: {
-    scheduleIds: string[];
-  },
+  payload: TCreateDoctorSchedule,
 ) => {
   const doctorData = await prisma.doctor.findUniqueOrThrow({
     where: {
@@ -14,6 +15,11 @@ const createDoctorSchedule = async (
     },
   });
 };
+//w: (end)  ╰──────────── createDoctorSchedule   ────────────╯
+
+//w: (start)╭────────────   ────────────╮
+
+//w: (end)  ╰────────────   ────────────╯
 
 export const DoctorScheduleService = {
   createDoctorSchedule,
