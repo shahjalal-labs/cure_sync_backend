@@ -14,6 +14,15 @@ const createDoctorSchedule = async (
       email: user.email,
     },
   });
+
+  const doctorScheduleData = payload.scheduleIds.map((scheduleId) => ({
+    doctorId: doctorData.id,
+    scheduleId,
+  }));
+
+  await prisma.doctorSchedules.createMany({
+    data: doctorScheduleData,
+  });
 };
 //w: (end)  ╰──────────── createDoctorSchedule   ────────────╯
 
