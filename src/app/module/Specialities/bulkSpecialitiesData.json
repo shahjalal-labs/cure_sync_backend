@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Cardiology",
+    "icon": "https://example.com/icons/cardiology.png"
+  },
+  {
+    "title": "Dermatology",
+    "icon": "https://example.com/icons/dermatology.png"
+  },
+  {
+    "title": "Endocrinology",
+    "icon": "https://example.com/icons/endocrinology.png"
+  },
+  {
+    "title": "Gastroenterology",
+    "icon": "https://example.com/icons/gastroenterology.png"
+  },
+  {
+    "title": "General Surgery",
+    "icon": "https://example.com/icons/general_surgery.png"
+  },
+  {
+    "title": "Hematology",
+    "icon": "https://example.com/icons/hematology.png"
+  },
+  {
+    "title": "Internal Medicine",
+    "icon": "https://example.com/icons/internal_medicine.png"
+  },
+  {
+    "title": "Neurology",
+    "icon": "https://example.com/icons/neurology.png"
+  },
+  {
+    "title": "Obstetrics and Gynecology",
+    "icon": "https://example.com/icons/obgyn.png"
+  },
+  {
+    "title": "Oncology",
+    "icon": "https://example.com/icons/oncology.png"
+  }
+]

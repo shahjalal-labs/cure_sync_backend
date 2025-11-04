@@ -42,6 +42,36 @@ const deleteSpecialitiesFromDB = async (id: string): Promise<Specialities> => {
 };
 //w: (end) ╰──────────── deleteSpecialitiesFromDB  ────────────╯
 
+//w: (start)╭──────────── bulkCreateSpecialitiesIntoDB  ────────────╮
+const bulkCreateSpecialitiesIntoDB = async (
+  specialitiesData: any[],
+): Promise<Specialities[]> => {
+  const results: Specialities[] = [];
+
+  for (const specialityData of specialitiesData) {
+    const result = await prisma.specialities.create({
+      data: specialityData,
+    });
+    results.push(result);
+  }
+
+  return results;
+};
+//w: (end) ╰──────────── bulkCreateSpecialitiesIntoDB  ────────────╯
+
+//w: (start)╭──────────── bulkCreateSpecialitiesFromFile  ────────────╮
+const bulkCreateSpecialitiesFromFile = async (
+  file: IFile,
+): Promise<Specialities[]> => {
+  // Read and parse the file content
+  // This is a simplified version - you might want to use a proper file parser
+  const fileContent = await fileUploader.readFileContent(file);
+  const specialitiesData = JSON.parse(fileContent);
+
+  return await bulkCreateSpecialitiesIntoDB(specialitiesData);
+};
+//w: (end) ╰──────────── bulkCreateSpecialitiesFromFile  ────────────╯
+
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
