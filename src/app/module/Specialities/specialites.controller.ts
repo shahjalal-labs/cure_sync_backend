@@ -42,6 +42,37 @@ const deleteSpecialities = catchAsync(async (req: Request, res: Response) => {
 });
 //w: (end) ╰──────────── deleteSpecialities────────────╯
 
+//w: (start)╭──────────── bulkCreateSpecialities  ────────────╮
+const bulkCreateSpecialities = catchAsync(
+  async (req: Request, res: Response) => {
+    const result = await SpecialitiesService.bulkCreateSpecialitiesIntoDB(
+      req.body,
+    );
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Specialities created successfully",
+      data: result,
+    });
+  },
+);
+//w: (end) ╰──────────── bulkCreateSpecialities ────────────╯
+
+//w: (start)╭──────────── bulkCreateSpecialitiesFromFile  ────────────╮
+const bulkCreateSpecialitiesFromFile = catchAsync(
+  async (req: Request, res: Response) => {
+    const file = req.file as IFile;
+    const result =
+      await SpecialitiesService.bulkCreateSpecialitiesFromFile(file);
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Specialities created from file successfully",
+      data: result,
+    });
+  },
+);
+//w: (end) ╰──────────── bulkCreateSpecialitiesFromFile ────────────╯
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
