@@ -1,0 +1,82 @@
+[
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Ahmed Rahman",
+      "email": "ahmed.rahman@curesync.com",
+      "contactNumber": "+8801712345001",
+      "address": "House 12, Road 4, Dhanmondi, Dhaka",
+      "registrationNumber": "BMDC-210001",
+      "experience": 8,
+      "gender": "MALE",
+      "appointmentFee": 700,
+      "qualification": "MBBS, FCPS",
+      "currentWorkingPlace": "Dhaka Medical College",
+      "designation": "Consultant Physician"
+    }
+  },
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Fatima Begum",
+      "email": "fatima.begum@curesync.com",
+      "contactNumber": "+8801712345002",
+      "address": "House 45, Road 7, Gulshan, Dhaka",
+      "registrationNumber": "BMDC-210002",
+      "experience": 12,
+      "gender": "FEMALE",
+      "appointmentFee": 900,
+      "qualification": "MBBS, MD",
+      "currentWorkingPlace": "Square Hospital",
+      "designation": "Senior Consultant"
+    }
+  },
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Karim Khan",
+      "email": "karim.khan@curesync.com",
+      "contactNumber": "+8801712345003",
+      "address": "Road 2, Sector 4, Uttara, Dhaka",
+      "registrationNumber": "BMDC-210003",
+      "experience": 15,
+      "gender": "MALE",
+      "appointmentFee": 1200,
+      "qualification": "MBBS, MS",
+      "currentWorkingPlace": "Apollo Hospital",
+      "designation": "Surgeon"
+    }
+  },
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Nusrat Jahan",
+      "email": "nusrat.jahan@curesync.com",
+      "contactNumber": "+8801712345004",
+      "address": "Flat 5B, Banani, Dhaka",
+      "registrationNumber": "BMDC-210004",
+      "experience": 6,
+      "gender": "FEMALE",
+      "appointmentFee": 600,
+      "qualification": "MBBS, DGO",
+      "currentWorkingPlace": "Ibn Sina Hospital",
+      "designation": "Gynecologist"
+    }
+  },
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Rajib Hasan",
+      "email": "rajib.hasan@curesync.com",
+      "contactNumber": "+8801712345005",
+      "address": "Kakrail, Dhaka",
+      "registrationNumber": "BMDC-210005",
+      "experience": 10,
+      "gender": "MALE",
+      "appointmentFee": 800,
+      "qualification": "MBBS, FCPS (Medicine)",
+      "currentWorkingPlace": "Popular Diagnostic Centre",
+      "designation": "Medicine Specialist"
+    }
+  }
+]

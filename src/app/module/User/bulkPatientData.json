@@ -1,0 +1,74 @@
+[
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Rahim Islam",
+      "email": "rahim.islam@curesync.com",
+      "contactNumber": "+8801712346001",
+      "address": "House 23, Road 8, Mirpur, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Sadia Akter",
+      "email": "sadia.akter@curesync.com",
+      "contactNumber": "+8801712346002",
+      "address": "House 56, Road 12, Mohammadpur, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Kamal Hossain",
+      "email": "kamal.hossain@curesync.com",
+      "contactNumber": "+8801712346003",
+      "address": "Flat 3C, Bashundhara R/A, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Tania Rahman",
+      "email": "tania.rahman@curesync.com",
+      "contactNumber": "+8801712346004",
+      "address": "House 78, Road 9, Dhanmondi, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Arif Chowdhury",
+      "email": "arif.chowdhury@curesync.com",
+      "contactNumber": "+8801712346005",
+      "address": "Road 3, Sector 5, Uttara, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Mitu Saha",
+      "email": "mitu.saha@curesync.com",
+      "contactNumber": "+8801712346006",
+      "address": "House 34, Road 11, Gulshan, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Ratan Kumar",
+      "email": "ratan.kumar@curesync.com",
+      "contactNumber": "+8801712346007",
+      "address": "Kallyanpur, Dhaka"
+    }
+  },
+  {
+    "password": "123456",
+    "patient": {
+      "name": "Farhana Yeasmin",
+      "email": "farhana.yeasmin@curesync.com",
+      "contactNumber": "+8801712346008",
+      "address": "Shyamoli, Dhaka"
+    }
+  }
+]

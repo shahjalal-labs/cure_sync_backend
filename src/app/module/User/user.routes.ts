@@ -93,4 +93,25 @@ router.post(
 );
 //w: (end) ╰──────────── bulkCreateAdmins ────────────╯
 
+//w: (start)╭──────────── bulkCreateDoctors ────────────╮
+router.post(
+  "/bulk-create-doctors",
+  auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = userValidation.bulkCreateDoctorValidationSchema.parse(req.body);
+    return UserController.bulkCreateDoctors(req, res, next);
+  },
+);
+//w: (end) ╰──────────── bulkCreateDoctors ────────────╯
+
+//w: (start)╭──────────── bulkCreatePatients ────────────╮
+router.post(
+  "/bulk-create-patients",
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = userValidation.bulkCreatePatientValidationSchema.parse(req.body);
+    return UserController.bulkCreatePatients(req, res, next);
+  },
+);
+//w: (end) ╰──────────── bulkCreatePatients ────────────╯
+
 export const UserRoutes: Router = router;

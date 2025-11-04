@@ -128,6 +128,30 @@ const bulkCreateAdmins = catchAsync(async (req: Request, res: Response) => {
 });
 //w: (end) ╰──────────── bulkCreateAdmins ────────────╯
 
+//w: (start)╭──────────── bulkCreateDoctors  ────────────╮
+const bulkCreateDoctors = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.bulkCreateDoctorsIntoDB(req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Doctors created successfully",
+    data: result,
+  });
+});
+//w: (end) ╰──────────── bulkCreateDoctors ────────────╯
+
+//w: (start)╭──────────── bulkCreatePatients  ────────────╮
+const bulkCreatePatients = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.bulkCreatePatientsIntoDB(req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Patients created successfully",
+    data: result,
+  });
+});
+//w: (end) ╰──────────── bulkCreatePatients ────────────╯
+
 //w: (start)╭──────────── updateMyProfile  ────────────╮
 
 //w: (end) ╰──────────── updateMyProfile  ────────────╯
@@ -141,4 +165,6 @@ export const UserController = {
   getMyProfile,
   updateMyProfile,
   bulkCreateAdmins,
+  bulkCreateDoctors,
+  bulkCreatePatients,
 };

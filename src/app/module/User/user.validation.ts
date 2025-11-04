@@ -100,6 +100,53 @@ const bulkCreateAdminValidationSchema = z.array(
 );
 //w: (end) ╰──────────── bulkCreateAdminValidationSchema  ────────────╯
 
+//w: (start)╭──────────── bulkCreateDoctorValidationSchema  ────────────╮
+const bulkCreateDoctorValidationSchema = z.array(
+  z.object({
+    password: z.string({ message: "Password is required" }),
+    doctor: z.object({
+      name: z.string({ message: "Doctor name is required" }),
+      email: z.string({ message: "Email is required" }),
+      contactNumber: z.string({ message: "Contact number is required" }),
+      address: z.string().optional(),
+      registrationNumber: z.string({
+        message: "Registration number is required",
+      }),
+      experience: z.number().optional(),
+      gender: z.enum([Gender.MALE, Gender.FEMALE], {
+        message: "Gender is required",
+      }),
+      appointmentFee: z
+        .number({ message: "Appointment fee is required" })
+        .positive("Appointment fee must be positive"),
+      qualification: z.string({ message: "Qualification is required" }),
+      currentWorkingPlace: z.string({
+        message: "Current working place is required",
+      }),
+      designation: z.string({ message: "Designation is required" }),
+    }),
+  }),
+);
+//w: (end) ╰──────────── bulkCreateDoctorValidationSchema  ────────────╯
+
+//w: (start)╭──────────── bulkCreatePatientValidationSchema  ────────────╮
+const bulkCreatePatientValidationSchema = z.array(
+  z.object({
+    password: z.string({
+      message: "Password is required",
+    }),
+    patient: z.object({
+      name: z.string({ message: "Patient name is required" }),
+      email: z.string({ message: "Email is required" }),
+      contactNumber: z.string({
+        message: "Contact number is required",
+      }),
+      address: z.string().optional(),
+    }),
+  }),
+);
+//w: (end) ╰──────────── bulkCreatePatientValidationSchema  ────────────╯
+
 export type TUpdateMyProfile = z.infer<typeof updateMyProfileValidationSchema>;
 
 export const userValidation = {
@@ -109,4 +156,6 @@ export const userValidation = {
   changeProfileStatusValidationSchema,
   updateMyProfileValidationSchema,
   bulkCreateAdminValidationSchema,
+  bulkCreateDoctorValidationSchema,
+  bulkCreatePatientValidationSchema,
 };
