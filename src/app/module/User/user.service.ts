@@ -282,6 +282,37 @@ const updateMyProfile = async (
 
 //w: (end) ╰──────────── updateMyProfile  ────────────╯
 
+//w: (start)╭──────────── bulkCreateAdminsIntoDB  ────────────╮
+const bulkCreateAdminsIntoDB = async (adminsData: any[]): Promise<Admin[]> => {
+  const results: Admin[] = [];
+
+  for (const adminData of adminsData) {
+    const hashedPassword = await bcrypt.hash(adminData.password, 12);
+
+    const userData = {
+      email: adminData.admin.email,
+      password: hashedPassword,
+      role: UserRole.ADMIN,
+    };
+
+    const result = await prisma.$transaction(async (txClient) => {
+      await txClient.user.create({
+        data: userData,
+      });
+
+      const createdAdminData = await txClient.admin.create({
+        data: adminData.admin,
+      });
+      return createdAdminData;
+    });
+
+    results.push(result);
+  }
+
+  return results;
+};
+//w: (end) ╰──────────── bulkCreateAdminsIntoDB  ────────────╯
+
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
@@ -293,4 +324,5 @@ export const UserService = {
   changeProfileStatus,
   getMyProfileFromDB,
   updateMyProfile,
+  bulkCreateAdminsIntoDB,
 };
