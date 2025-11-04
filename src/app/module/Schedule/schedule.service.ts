@@ -85,23 +85,35 @@ const getAllSchedules = async (
     });
   }
 
+  const doctorSchedules = await prisma.doctorSchedules.findMany({
+    where: {
+      doctor: {
+        email: user.email,
+      },
+    },
+  });
 
+  const doctorScheduleIds = doctorSchedules.map((d) => d.scheduleId);
 
-
-
-  const ScheduleWhereInput: Prisma.ScheduleWhereInput = andConditions.length
+  const whereConditions: Prisma.ScheduleWhereInput = andConditions.length
     ? {
         AND: andConditions,
       }
     : {};
   const result = await prisma.schedule.findMany({
-    where: ScheduleWhereInput,
+    where: {
+      ...whereConditions,
+      id: {
+        notIn: doctorScheduleIds,
+      },
+    },
+
     skip,
     take: limit,
   });
 
   const total = await prisma.schedule.count({
-    where: ScheduleWhereInput,
+    where: whereConditions,
   });
   return {
     meta: {
