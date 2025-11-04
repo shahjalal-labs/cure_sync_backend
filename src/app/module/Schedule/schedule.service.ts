@@ -1,11 +1,12 @@
 //
-import { Schedule } from "@prisma/client";
+import { Prisma, Schedule } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
 import { addMinutes, format } from "date-fns";
 import { TSchedule } from "./schedule.validation";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { IAuthUser } from "../../interfaces/common";
-import { paginationHelper, paginationHelper } from "../../../helpers/paginatonHelper";
+import { paginationHelper } from "../../../helpers/paginatonHelper";
+import { IFilterRequest } from "./schedule.interface";
 
 //w: (start)╭──────────── createSchedule  ────────────╮
 const createSchedule = async (payload: TSchedule): Promise<Schedule[]> => {
@@ -47,14 +48,38 @@ const createSchedule = async (payload: TSchedule): Promise<Schedule[]> => {
 
 //w: (start)╭──────────── getAllSchedules ────────────╮
 const getAllSchedules = async (
-  filters,
+  filters: IFilterRequest,
   options: IPaginationOptions,
   user: IAuthUser,
 ) => {
+  const { limit, page, skip } = paginationHelper.calcalutePagination(options);
 
-   const =paginationHelper. ;
-  const result = await prisma.schedule.findMany();
-  return result;
+  const andConditions: Prisma.ScheduleWhereInput[] = [];
+
+  const { startDate, endDate, ...filterData } = filters;
+
+  if (startDate && endDate) {
+  }
+
+  const ScheduleWhereInput: Prisma.ScheduleWhereInput = andConditions.length
+    ? {
+        AND: andConditions,
+      }
+    : {};
+  const result = await prisma.schedule.findMany({
+    where: ScheduleWhereInput,
+    skip,
+    take: limit,
+  });
+
+  const total = await prisma.schedule.count();
+  return {
+    meta: {
+      total: result.length,
+      page,
+      limit,
+    },
+  };
 };
 //w: (end) ╰──────────── getAllSchedules  ────────────╯
 
