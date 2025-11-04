@@ -32,4 +32,18 @@ router.delete(
 );
 //w: (end) ╰──────────── deleteSpecialities ────────────╯
 
+//w: (start)╭──────────── bulkCreateSpecialities ────────────╮
+router.post(
+  "/bulk-create",
+  auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body =
+      SpecialitiesValidation.bulkCreateSpecialitiesValidationSchema.parse(
+        req.body,
+      );
+    return SpecialitiesController.bulkCreateSpecialities(req, res, next);
+  },
+);
+//w: (end) ╰──────────── bulkCreateSpecialities ────────────╯
+
 export const SpecialitiesRoutes = router;
