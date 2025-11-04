@@ -59,7 +59,35 @@ const getAllSchedules = async (
   const { startDate, endDate, ...filterData } = filters;
 
   if (startDate && endDate) {
+    andConditions.push({
+      AND: [
+        {
+          startDateTime: {
+            gte: startDate,
+          },
+        },
+        {
+          endDateTime: {
+            lte: endDate,
+          },
+        },
+      ],
+    });
   }
+
+  if (Object.keys(filterData).length) {
+    andConditions.push({
+      AND: Object.keys(filterData).map((key) => ({
+        [key]: {
+          equals: (filterData as any)[key],
+        },
+      })),
+    });
+  }
+
+
+
+
 
   const ScheduleWhereInput: Prisma.ScheduleWhereInput = andConditions.length
     ? {
@@ -72,13 +100,16 @@ const getAllSchedules = async (
     take: limit,
   });
 
-  const total = await prisma.schedule.count();
+  const total = await prisma.schedule.count({
+    where: ScheduleWhereInput,
+  });
   return {
     meta: {
-      total: result.length,
+      total,
       page,
       limit,
     },
+    data: result,
   };
 };
 //w: (end) ╰──────────── getAllSchedules  ────────────╯
