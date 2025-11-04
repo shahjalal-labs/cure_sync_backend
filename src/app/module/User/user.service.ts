@@ -313,6 +313,72 @@ const bulkCreateAdminsIntoDB = async (adminsData: any[]): Promise<Admin[]> => {
 };
 //w: (end) ╰──────────── bulkCreateAdminsIntoDB  ────────────╯
 
+//w: (start)╭──────────── bulkCreateDoctorsIntoDB  ────────────╮
+const bulkCreateDoctorsIntoDB = async (
+  doctorsData: any[],
+): Promise<Doctor[]> => {
+  const results: Doctor[] = [];
+
+  for (const doctorData of doctorsData) {
+    const hashedPassword = await bcrypt.hash(doctorData.password, 12);
+
+    const userData = {
+      email: doctorData.doctor.email,
+      password: hashedPassword,
+      role: UserRole.DOCTOR,
+    };
+
+    const result = await prisma.$transaction(async (txClient) => {
+      await txClient.user.create({
+        data: userData,
+      });
+
+      const createdDoctor = await txClient.doctor.create({
+        data: doctorData.doctor,
+      });
+      return createdDoctor;
+    });
+
+    results.push(result);
+  }
+
+  return results;
+};
+//w: (end) ╰──────────── bulkCreateDoctorsIntoDB  ────────────╯
+
+//w: (start)╭──────────── bulkCreatePatientsIntoDB  ────────────╮
+const bulkCreatePatientsIntoDB = async (
+  patientsData: any[],
+): Promise<Patient[]> => {
+  const results: Patient[] = [];
+
+  for (const patientData of patientsData) {
+    const hashedPassword = await bcrypt.hash(patientData.password, 12);
+
+    const userData = {
+      email: patientData.patient.email,
+      password: hashedPassword,
+      role: UserRole.PATIENT,
+    };
+
+    const result = await prisma.$transaction(async (txClient) => {
+      await txClient.user.create({
+        data: userData,
+      });
+
+      const createdPatient = await txClient.patient.create({
+        data: patientData.patient,
+      });
+      return createdPatient;
+    });
+
+    results.push(result);
+  }
+
+  return results;
+};
+//w: (end) ╰──────────── bulkCreatePatientsIntoDB  ────────────╯
+
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
@@ -325,4 +391,6 @@ export const UserService = {
   getMyProfileFromDB,
   updateMyProfile,
   bulkCreateAdminsIntoDB,
+  bulkCreateDoctorsIntoDB,
+  bulkCreatePatientsIntoDB,
 };
