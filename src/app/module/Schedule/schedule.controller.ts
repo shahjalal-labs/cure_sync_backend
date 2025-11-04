@@ -4,6 +4,9 @@ import catchAsync from "../../../shared/catchAsync";
 import { ScheduleService } from "./schedule.service";
 import { sendResponse } from "../../../shared/sendResponse";
 import httpStatus from "http-status";
+import { pick } from "../../../shared/pick";
+import { scheduleFilterableFields } from "./schedule.constant";
+import { IAuthUser } from "../../interfaces/common";
 
 //w: (start)╭──────────── getSchedulById  ────────────╮
 const getSchedulById = catchAsync(async (req: Request, res: Response) => {
@@ -42,8 +45,38 @@ const createSchedule = catchAsync(async (req: Request, res: Response) => {
 });
 //w: (end) ╰──────────── createSchedule ────────────╯
 
+//w: (start)╭──────────── getAllSchedules  ────────────╮
+const getAllSchedules = catchAsync(
+  async (
+    req: Request & {
+      user?: IAuthUser;
+    },
+    res,
+  ) => {
+    const filters = pick(req.query, scheduleFilterableFields);
+
+    const options = pick(req.query, ["page", "limit", "sortOrder", "sortBy"]);
+
+    const user = req.user;
+    const result = await ScheduleService.getAllSchedules(
+      filters,
+      options,
+      user as IAuthUser,
+    );
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Successfully fetched schedules.",
+      data: result,
+    });
+  },
+);
+//w: (end) ╰──────────── getAllSchedules  ────────────╯
+
 export const ScheduleController = {
   getSchedulById,
   deleteSchedule,
   createSchedule,
+  getAllSchedules,
 };

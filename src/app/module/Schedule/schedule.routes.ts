@@ -10,7 +10,7 @@ const router = express.Router();
 router.get(
   "/",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR),
-  ScheduleController.getSchedulById,
+  ScheduleController.getAllSchedules,
 );
 //w: (end) ╰──────────── getAllSchedules  ────────────╯
 
