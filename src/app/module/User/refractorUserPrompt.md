@@ -1,5 +1,10 @@
+## 📁 Target Module Tree (User)
+
 ```bash
 /home/sj/web/ph/cure_sync/cure_sync_backend/src/app/module/User
+├── doctorData.json
+├── patientData.json
+├── user2Api.hurl
 ├── userApi.hurl
 ├── user.constant.ts
 ├── user.controller.ts
@@ -13,9 +18,15 @@
 
 ## 📄 Module Files & Contents
 
+### `patientData.json`
+
+```javascripton
+
+```
+
 ### `user.controller.ts`
 
-````ts
+```ts
 //
 import { Request, RequestHandler, Response } from "express";
 import { UserService } from "./user.service";
@@ -112,6 +123,32 @@ const getMyProfile = catchAsync(
   },
 );
 //w: (end) ╰──────────── getMyProfile  ────────────╯
+
+//w: (start)╭──────────── updateMyProfile  ────────────╮
+const updateMyProfile = catchAsync(
+  async (
+    req: Request & {
+      user?: IAuthUser;
+    },
+    res,
+  ) => {
+    const user = req.user;
+    const result = await UserService.updateMyProfile(user as IAuthUser, req);
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Profile updated successfully",
+      data: result,
+    });
+  },
+);
+//w: (end) ╰──────────── updateMyProfile  ────────────╯
+
+//w: (start)╭──────────── updateMyProfile  ────────────╮
+
+//w: (end) ╰──────────── updateMyProfile  ────────────╯
+
 export const UserController = {
   createAdmin,
   getAllUsers,
@@ -119,7 +156,177 @@ export const UserController = {
   createPatient,
   changeProfileStatus,
   getMyProfile,
+  updateMyProfile,
 };
+```
+
+### `doctorData.json`
+
+```javascripton
+[
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Arif Hossain",
+      "email": "arif.hossain@doctor.com",
+      "contactNumber": "+8801712345678",
+      "address": "House 12, Road 4, Dhanmondi, Dhaka",
+      "registrationNumber": "BMDC-210045",
+      "experience": 12,
+      "gender": "MALE",
+      "appointmentFee": 800,
+      "qualification": "MBBS, FCPS (Medicine)",
+      "currentWorkingPlace": "Dhaka Medical College Hospital",
+      "designation": "Consultant Physician"
+    }
+  },
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Nusrat Jahan",
+      "email": "nusrat.jahan92@yahoo.com",
+      "contactNumber": "+8801912345670",
+      "address": "House 34, Sector 7, Uttara, Dhaka",
+      "registrationNumber": "BMDC-200998",
+      "experience": 8,
+      "gender": "FEMALE",
+      "appointmentFee": 600,
+      "qualification": "MBBS, MD (Paediatrics)",
+      "currentWorkingPlace": "United Hospital, Dhaka",
+      "designation": "Pediatrician"
+    }
+  },
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Mahfuzur Rahman",
+      "email": "mahfuz.rahman@outlook.com",
+      "contactNumber": "+8801612345671",
+      "address": "Road 2, Gulshan-1, Dhaka",
+      "registrationNumber": "BMDC-190123",
+      "experience": 18,
+      "gender": "MALE",
+      "appointmentFee": 1500,
+      "qualification": "MBBS, MS (General Surgery)",
+      "currentWorkingPlace": "Square Hospital, Dhaka",
+      "designation": "Senior Consultant Surgeon"
+    }
+  },
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Farhana Begum",
+      "email": "farhana_begum@icloud.com",
+      "contactNumber": "+8801812345672",
+      "address": "Flat 7A, Banani, Dhaka",
+      "registrationNumber": "BMDC-220331",
+      "experience": 6,
+      "gender": "FEMALE",
+      "appointmentFee": 700,
+      "qualification": "MBBS, DGO",
+      "currentWorkingPlace": "Ibn Sina Hospital, Dhaka",
+      "designation": "Obstetrician & Gynecologist"
+    }
+  },
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Kamal Ahmed",
+      "email": "kamal.ahmed83@protonmail.com",
+      "contactNumber": "+8801512345673",
+      "address": "College Road, Chattogram",
+      "registrationNumber": "BMDC-180876",
+      "experience": 20,
+      "gender": "MALE",
+      "appointmentFee": 1000,
+      "qualification": "MBBS, MD (Cardiology)",
+      "currentWorkingPlace": "Chattogram Medical College Hospital",
+      "designation": "Cardiologist"
+    }
+  },
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Laila Sultana",
+      "email": "laila.sultana@mail.com",
+      "contactNumber": "+8801719876543",
+      "address": "Khatunganj, Chattogram",
+      "registrationNumber": "BMDC-160207",
+      "experience": 14,
+      "gender": "FEMALE",
+      "appointmentFee": 900,
+      "qualification": "MBBS, FCPS (Obs & Gynae)",
+      "currentWorkingPlace": "Chattogram General Hospital",
+      "designation": "Senior Consultant"
+    }
+  },
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Selim Khan",
+      "email": "skhan77@hotmail.com",
+      "contactNumber": "+8801911122233",
+      "address": "Kakrail, Dhaka",
+      "registrationNumber": "BMDC-230412",
+      "experience": 4,
+      "gender": "MALE",
+      "appointmentFee": 500,
+      "qualification": "MBBS",
+      "currentWorkingPlace": "Popular Diagnostic Centre, Dhaka",
+      "designation": "General Practitioner"
+    }
+  },
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Tanjila Rahman",
+      "email": "tanjila.rahman@live.com",
+      "contactNumber": "+8801301234567",
+      "address": "Kazir Dewri, Chattogram",
+      "registrationNumber": "BMDC-200765",
+      "experience": 9,
+      "gender": "FEMALE",
+      "appointmentFee": 650,
+      "qualification": "MBBS, MD (Dermatology)",
+      "currentWorkingPlace": "Chevron Clinical Lab, Chattogram",
+      "designation": "Dermatologist"
+    }
+  },
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Ahsan Kabir",
+      "email": "ahsan_kabir.bd@bdmail.net",
+      "contactNumber": "+8801407654321",
+      "address": "Zindabazar, Sylhet",
+      "registrationNumber": "BMDC-170512",
+      "experience": 15,
+      "gender": "MALE",
+      "appointmentFee": 900,
+      "qualification": "MBBS, MS (Orthopedics)",
+      "currentWorkingPlace": "Sylhet MAG Osmani Medical College",
+      "designation": "Orthopedic Surgeon"
+    }
+  },
+  {
+    "password": "123456",
+    "doctor": {
+      "name": "Dr. Rubina Akter",
+      "email": "rubina.akter72@yahoo.com",
+      "contactNumber": "+8801755556677",
+      "address": "Nirala, Khulna",
+      "registrationNumber": "BMDC-210901",
+      "experience": 10,
+      "gender": "FEMALE",
+      "appointmentFee": 750,
+      "qualification": "MBBS, FCPS (ENT)",
+      "currentWorkingPlace": "Khulna Medical College Hospital",
+      "designation": "ENT Specialist"
+    }
+  }
+]
+```
+
 ### `user.routes.ts`
 
 ```ts
@@ -141,6 +348,7 @@ router.get(
 
 router.get("/me", auth(), UserController.getMyProfile);
 
+//w: (start)╭──────────── createAdmin ────────────╮
 router.post(
   "/create-admin",
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
@@ -152,7 +360,9 @@ router.post(
     return UserController.createAdmin(req, res, next);
   },
 );
+//w: (end) ╰──────────── createAdmin ────────────╯
 
+//w: (start)╭──────────── createDoctor ────────────╮
 router.post(
   "/create-doctor",
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
@@ -165,7 +375,9 @@ router.post(
     return UserController.createDoctor(req, res, next);
   },
 );
+//w: (end) ╰──────────── createDoctor ────────────╯
 
+//w: (start)╭──────────── createPatient ────────────╮
 router.post(
   "/create-patient",
   fileUploader.upload.single("file"),
@@ -176,16 +388,34 @@ router.post(
     return UserController.createPatient(req, res, next);
   },
 );
+//w: (end) ╰──────────── createPatient ────────────╯
 
+//w: (start)╭──────────── changeProfileStatus ────────────╮
 router.patch(
   "/:id/status",
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
   validateRequest(userValidation.changeProfileStatusValidationSchema),
   UserController.changeProfileStatus,
 );
+//w: (end) ╰──────────── changeProfileStatus ────────────╯
+
+//w: (start)╭──────────── updateMyProfile  ────────────╮
+router.patch(
+  "/me/update",
+  auth(),
+  fileUploader.upload.single("file"),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = userValidation.updateMyProfileValidationSchema.parse(
+      JSON.parse(req.body.data),
+    );
+
+    return UserController.updateMyProfile(req, res, next);
+  },
+);
+//w: (end) ╰──────────── updateMyProfile  ────────────╯
 
 export const UserRoutes: Router = router;
-````
+```
 
 ### `user.validation.ts`
 
@@ -194,6 +424,7 @@ export const UserRoutes: Router = router;
 import { Gender, UserRole, UserStatus } from "@prisma/client";
 import z from "zod";
 
+//w: (start)╭──────────── createAdminValidationSchema  ────────────╮
 const createAdminValidationSchema = z
   .object({
     password: z.string(),
@@ -204,7 +435,9 @@ const createAdminValidationSchema = z
     }),
   })
   .strict();
+//w: (end) ╰──────────── createAdminValidationSchema  ────────────╯
 
+//w: (start)╭──────────── createDoctorValidationSchema  ────────────╮
 const createDoctorValidationSchema = z
   .object({
     password: z.string({ message: "Password is required" }),
@@ -231,7 +464,9 @@ const createDoctorValidationSchema = z
     }),
   })
   .strict();
+//w: (end) ╰────────────  createDoctorValidationSchema ────────────╯
 
+//w: (start)╭──────────── createPatientValidationSchema  ────────────╮
 const createPatientValidationSchema = z
   .object({
     password: z.string({
@@ -244,11 +479,13 @@ const createPatientValidationSchema = z
         message: "Contact number is required",
       }),
       address: z.string().optional(),
-      gender: z.enum([Gender.MALE, Gender.FEMALE]),
+      // gender: z.enum([Gender.MALE, Gender.FEMALE]),
     }),
   })
   .strict();
+//w: (end) ╰──────────── createPatientValidationSchema  ────────────╯
 
+//w: (start)╭──────────── changeProfileStatusValidationSchema  ────────────╮
 const changeProfileStatusValidationSchema = z.object({
   body: z
     .object({
@@ -260,12 +497,26 @@ const changeProfileStatusValidationSchema = z.object({
     })
     .strict(),
 });
+//w: (end) ╰──────────── changeProfileStatusValidationSchema  ────────────╯
+
+//w: (start)╭──────────── updateMyProfile  ────────────╮
+const updateMyProfileValidationSchema = z
+  .object({
+    name: z.string().min(2).max(50),
+    contactNumber: z.string().min(4).max(15),
+  })
+  .partial()
+  .strict();
+//w: (end) ╰──────────── updateMyProfile  ────────────╯
+
+export type TUpdateMyProfile = z.infer<typeof updateMyProfileValidationSchema>;
 
 export const userValidation = {
   createAdminValidationSchema,
   createDoctorValidationSchema,
   createPatientValidationSchema,
   changeProfileStatusValidationSchema,
+  updateMyProfileValidationSchema,
 };
 ```
 
@@ -426,11 +677,7 @@ import { IPaginationOptions } from "../../interfaces/pagination";
 import { paginationHelper } from "../../../helpers/paginatonHelper";
 import { userSearchableFields } from "./user.constant";
 import { IAuthUser } from "../../interfaces/common";
-
-//w: (start)╭────────────  ────────────╮
-
-//w: (end) ╰────────────  ────────────╯
-//
+import { TUpdateMyProfile } from "./user.validation";
 
 //w: (start)╭──────────── createAdminIntoDB  ────────────╮
 const createAdminIntoDB = async (req: Request): Promise<Admin> => {
@@ -649,6 +896,60 @@ const getMyProfileFromDB = async (user: IAuthUser) => {
   return { ...userInfo, ...profileInfo };
 };
 //w: (end) ╰──────────── getMyProfileFromDB  ────────────╯
+//
+//w: (start)╭──────────── updateMyProfile  ────────────╮
+const updateMyProfile = async (
+  user: IAuthUser,
+  req: Request<
+    unknown,
+    unknown,
+    TUpdateMyProfile & {
+      profilePhoto?: string;
+    }
+  > & {},
+): Promise<Admin | Doctor | Patient | null> => {
+  const existingUser = await prisma.user.findUniqueOrThrow({
+    where: {
+      email: user?.email,
+    },
+  });
+
+  const file = req.file as IFile;
+  if (file) {
+    const uploadToCloudinary = await fileUploader.uploadToCloudinary(file);
+    req.body.profilePhoto = uploadToCloudinary?.secure_url;
+  }
+  let updatedUser: Admin | Doctor | Patient | null = null;
+
+  if (existingUser.role === UserRole.ADMIN) {
+    updatedUser = await prisma.admin.update({
+      where: {
+        email: existingUser.email,
+      },
+      data: req.body,
+    });
+  } else if (existingUser.role === UserRole.DOCTOR) {
+    updatedUser = await prisma.doctor.update({
+      where: {
+        email: existingUser.email,
+      },
+      data: {
+        ...req.body,
+      },
+    });
+  } else if (existingUser.role === UserRole.PATIENT) {
+    updatedUser = await prisma.patient.update({
+      where: {
+        email: existingUser.email,
+      },
+      data: req.body,
+    });
+  }
+  return updatedUser;
+};
+
+//w: (end) ╰──────────── updateMyProfile  ────────────╯
+
 //w: (start)╭────────────  ────────────╮
 
 //w: (end) ╰────────────  ────────────╯
@@ -659,6 +960,7 @@ export const UserService = {
   getAllUsersFromDB,
   changeProfileStatus,
   getMyProfileFromDB,
+  updateMyProfile,
 };
 ```
 
@@ -675,6 +977,18 @@ Authorization: Bearer {{ token }}
 
 {
   "status": "ADMIN"
+}
+
+
+PATCH {{ port6009 }}/user/me/update
+
+Authorization: {{ token }}
+
+Content-Type: application/form-data
+
+{
+  "name": "test",
+  "contactNumber": "123456789"
 }
 ```
 
