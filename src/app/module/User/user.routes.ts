@@ -82,4 +82,15 @@ router.patch(
 );
 //w: (end) ╰──────────── updateMyProfile  ────────────╯
 
+//w: (start)╭──────────── bulkCreateAdmins ────────────╮
+router.post(
+  "/bulk-create-admins",
+  auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = userValidation.bulkCreateAdminValidationSchema.parse(req.body);
+    return UserController.bulkCreateAdmins(req, res, next);
+  },
+);
+//w: (end) ╰──────────── bulkCreateAdmins ────────────╯
+
 export const UserRoutes: Router = router;

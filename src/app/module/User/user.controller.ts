@@ -116,6 +116,18 @@ const updateMyProfile = catchAsync(
 );
 //w: (end) ╰──────────── updateMyProfile  ────────────╯
 
+//w: (start)╭──────────── bulkCreateAdmins  ────────────╮
+const bulkCreateAdmins = catchAsync(async (req: Request, res: Response) => {
+  const result = await UserService.bulkCreateAdminsIntoDB(req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Admins created successfully",
+    data: result,
+  });
+});
+//w: (end) ╰──────────── bulkCreateAdmins ────────────╯
+
 //w: (start)╭──────────── updateMyProfile  ────────────╮
 
 //w: (end) ╰──────────── updateMyProfile  ────────────╯
@@ -128,4 +140,5 @@ export const UserController = {
   changeProfileStatus,
   getMyProfile,
   updateMyProfile,
+  bulkCreateAdmins,
 };

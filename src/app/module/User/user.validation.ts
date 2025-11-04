@@ -87,6 +87,19 @@ const updateMyProfileValidationSchema = z
   .strict();
 //w: (end) ╰──────────── updateMyProfile  ────────────╯
 
+//w: (start)╭──────────── bulkCreateAdminValidationSchema  ────────────╮
+const bulkCreateAdminValidationSchema = z.array(
+  z.object({
+    password: z.string(),
+    admin: z.object({
+      name: z.string(),
+      email: z.string(),
+      contactNumber: z.string(),
+    }),
+  }),
+);
+//w: (end) ╰──────────── bulkCreateAdminValidationSchema  ────────────╯
+
 export type TUpdateMyProfile = z.infer<typeof updateMyProfileValidationSchema>;
 
 export const userValidation = {
@@ -95,4 +108,5 @@ export const userValidation = {
   createPatientValidationSchema,
   changeProfileStatusValidationSchema,
   updateMyProfileValidationSchema,
+  bulkCreateAdminValidationSchema,
 };
