@@ -15,27 +15,33 @@ DELETE  {{port6009}}/patients/soft/93f32bcb-a1eb-4462-b682-f60317951e93
 
 
 
-PATCH {{port6009}}/patients/32b007bc-a209-4801-a4fd-0e0a12eeccbf
+PATCH {{port6009}}/patients/11eb7e51-14ca-4478-b1a6-17637fca5218
 Content-Type: application/json
 
+
+
 {
-  "name": "javed karim",
-  "contactNumber": "01712345678",
-  "address": "House 45, Road 10, Dhanmondi, Dhaka",
-  "medicalReport": {
-    "reportName": "Blood Test Report",
-    "reportLink": "https://example.com/reports/blood-test-2025.pdf"
+  "name": "Farhana Yeasmin",
+  "contactNumber": "+8801712346008",
+  "address": "Shyamoli, Dhaka",
+  "patientHealthData": {
+    "gender": "FEMALE",
+    "dateOfBirth": "1995-07-18",
+    "bloodGroup": "AB_POSITIVE",
+    "hasAllergies": true,
+    "hasDiabetes": false,
+    "height": "158",
+    "weight": "54"
   },
-  "patientHealthData":{
-  "gender": "MALE",
-  "dateOfBirth": "1990-05-15",
-  "bloodGroup": "O_POSITIVE",
-  "hasAllergies": false,
-  "hasDiabetes": false,
-  "height": "175",
-  "weight": "70"
+  "medicalReport": {
+    "reportName": "Routine Health Assessment",
+    "reportLink": "https://curesync.com/reports/farhana-yeasmin-assessment.pdf"
+  }
 }
-}
+
+
+
+
 
 
 

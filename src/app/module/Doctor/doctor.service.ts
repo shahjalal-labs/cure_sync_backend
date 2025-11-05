@@ -1,3 +1,4 @@
+//
 import { Doctor, Prisma, UserStatus } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
 import { IDoctorFilterRequest, IDoctorUpdate } from "./doctor.interface";
