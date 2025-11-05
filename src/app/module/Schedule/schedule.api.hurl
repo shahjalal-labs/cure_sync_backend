@@ -1,10 +1,10 @@
-### create schedule
 
-GET {{port6009}}/schedule
+GET {{port6010}}/schedule?startDate=2025-11-04&endDate=2025-11-05
 Authorization: {{DOCTOR_TOKEN }}
 
 
 
+### create schedule
 POST {{port6009}}/schedule
 Authorization: {{ADMIN_TOKEN }}
 Content-Type: application/json

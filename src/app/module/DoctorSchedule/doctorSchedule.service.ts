@@ -26,10 +26,16 @@ const createDoctorSchedule = async (
 };
 //w: (end)  ╰──────────── createDoctorSchedule   ────────────╯
 
-//w: (start)╭────────────   ────────────╮
-
-//w: (end)  ╰────────────   ────────────╯
+//w: (start)╭──────────── getMySchedules  ────────────╮
+const getMySchedules = async (user: IAuthUser) => {
+  const result = await prisma.schedule.findMany({
+    where: {},
+  });
+  return result;
+};
+//w: (end)  ╰──────────── getMySchedules  ────────────╯
 
 export const DoctorScheduleService = {
   createDoctorSchedule,
+  getMySchedules,
 };
