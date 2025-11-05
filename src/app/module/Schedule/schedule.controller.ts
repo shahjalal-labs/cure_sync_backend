@@ -53,8 +53,7 @@ const getAllSchedules = catchAsync(
     },
     res,
   ) => {
-    const filters = pick(req.query, scheduleFilterableFields);
-
+    const filters = pick(req.query, ["startDate", "endDate"]);
     const options = pick(req.query, ["page", "limit", "sortOrder", "sortBy"]);
 
     const user = req.user;

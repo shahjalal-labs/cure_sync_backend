@@ -56,7 +56,8 @@ const getAllSchedules = async (
 
   const andConditions: Prisma.ScheduleWhereInput[] = [];
 
-  const { startDate, endDate, ...filterData } = filters;
+  // starte and enddate for filtering  use iso datetime format
+  const { startDate, endDate, ...filterData } = filters; //p:...filterData has no usage here(perhaps).
 
   if (startDate && endDate) {
     andConditions.push({
@@ -74,7 +75,7 @@ const getAllSchedules = async (
       ],
     });
   }
-
+  //p:...filterData has no usage here(perhaps).
   if (Object.keys(filterData).length) {
     andConditions.push({
       AND: Object.keys(filterData).map((key) => ({
@@ -103,6 +104,8 @@ const getAllSchedules = async (
   const result = await prisma.schedule.findMany({
     where: {
       ...whereConditions,
+
+      //p: remove the schedules that are already booked for the doctor who is seeing all schedules. as a doctor should not see schedules which are already selected
       id: {
         notIn: doctorScheduleIds,
       },
