@@ -6,6 +6,7 @@ import z from "zod";
 //w: (end)  ╰────────────   ────────────╯
 
 //w: (start)╭──────────── createDoctorSchedule ────────────╮
+
 const createDoctorScheduleSchema = z.object({
   body: z.object({
     scheduleIds: z.array(z.string()),

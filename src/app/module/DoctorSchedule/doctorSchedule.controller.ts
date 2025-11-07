@@ -31,7 +31,8 @@ const createDoctorSchedule = catchAsync(
 );
 //w: (end)  ╰──────────── createDoctorSchedule   ────────────╯
 
-const createDoctorSchedule = catchAsync(
+//w: (start)╭──────────── getMySchedules   ────────────╮
+const getMySchedules = catchAsync(
   async (
     req: Request & {
       user?: IAuthUser;
@@ -53,10 +54,12 @@ const createDoctorSchedule = catchAsync(
     });
   },
 );
+//w: (end)  ╰──────────── getMySchedules   ────────────╯
 
 //w: (start)╭────────────   ────────────╮
 
 //w: (end)  ╰────────────   ────────────╯
 export const DoctorScheduleController = {
   createDoctorSchedule,
+  getMySchedules,
 };

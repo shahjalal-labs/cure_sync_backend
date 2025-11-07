@@ -1,5 +1,8 @@
+import { Prisma } from "@prisma/client";
+import { paginationHelper } from "../../../helpers/paginatonHelper";
 import { prisma } from "../../../shared/prisma";
 import { IAuthUser } from "../../interfaces/common";
+import { IPaginationOptions } from "../../interfaces/pagination";
 import { TCreateDoctorSchedule } from "./doctorSchedule.validation";
 
 //
@@ -27,7 +30,20 @@ const createDoctorSchedule = async (
 //w: (end)  ╰──────────── createDoctorSchedule   ────────────╯
 
 //w: (start)╭──────────── getMySchedules  ────────────╮
-const getMySchedules = async (user: IAuthUser) => {
+const getMySchedules = async (
+  filters: any,
+  options: IPaginationOptions,
+  user: IAuthUser,
+) => {
+  const { limit, page, skip } = paginationHelper.calcalutePagination(options);
+
+  const { startDate, endDate, ...filterData } = filters;
+
+  const andConditions: Prisma.DoctorSchedulesWhereInput[] = [];
+
+  if (startDate && endDate) {
+  }
+
   const result = await prisma.doctorSchedules.findMany({
     where: {
       doctor: {
