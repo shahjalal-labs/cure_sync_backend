@@ -23,4 +23,8 @@ Content-Type: application/json
 
 
 
-GET {{port6009}}/doctor-schedule?startDate=2022-01-01&endDate=2022-12-31
+GET {{port6009}}/doctor-schedule
+
+
+GET {{port6009}}/doctor-schedule/my-schedules?startDate=2025-11-05T04:00:00.000Z&endDate=2025-11-05T05:00:00.000Z
+Authorization: {{DOCTOR_TOKEN }}

@@ -42,6 +42,16 @@ const getMySchedules = async (
 
   const andConditions: Prisma.DoctorSchedulesWhereInput[] = [];
 
+  andConditions.push({
+    AND: [
+      {
+        doctor: {
+          email: user.email,
+        },
+      },
+    ],
+  });
+
   if (startDate && endDate) {
     andConditions.push({
       AND: [
@@ -95,6 +105,21 @@ const getMySchedules = async (
 
   const result = await prisma.doctorSchedules.findMany({
     where: whereConditions,
+    include: {
+      schedule: {
+        select: {
+          startDateTime: true,
+          endDateTime: true,
+        },
+      },
+      doctor: {
+        select: {
+          name: true,
+          _count: true,
+          email: true,
+        },
+      },
+    },
     skip,
     take: limit,
     orderBy:
