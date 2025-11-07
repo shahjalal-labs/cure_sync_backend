@@ -21,3 +21,6 @@ Content-Type: application/json
   ]
 }
 
+
+
+GET {{port6009}}/doctor-schedule?startDate=2022-01-01&endDate=2022-12-31

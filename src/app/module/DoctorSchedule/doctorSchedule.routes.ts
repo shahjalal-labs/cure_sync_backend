@@ -14,4 +14,12 @@ router.post(
 );
 //w: (end)  ╰──────────── createDoctorSchedule   ────────────╯
 
+//w: (start)╭──────────── getMySchedules     ────────────╮
+router.get(
+  "/my-schedules",
+  auth(UserRole.DOCTOR),
+  DoctorScheduleController.getMySchedules,
+);
+//w: (end)  ╰──────────── getMySchedules     ────────────╯
+
 export const DoctorScheduleRoutes = router;

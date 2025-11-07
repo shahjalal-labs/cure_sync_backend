@@ -5,6 +5,8 @@ import { IAuthUser } from "../../interfaces/common";
 import { DoctorScheduleService } from "./doctorSchedule.service";
 import { sendResponse } from "../../../shared/sendResponse";
 import httpStatus from "http-status";
+import { pick } from "../../../shared/pick";
+import { doctorScheduleFilterableFields } from "./doctorSchedule.constant";
 
 //w: (start)╭──────────── createDoctorSchedule   ────────────╮
 const createDoctorSchedule = catchAsync(
@@ -41,15 +43,20 @@ const getMySchedules = catchAsync(
   ) => {
     const user = req.user;
 
-    const result = await DoctorScheduleService.createDoctorSchedule(
+    const filters = pick(req.query, doctorScheduleFilterableFields);
+
+    const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
+
+    const result = await DoctorScheduleService.getMySchedules(
+      filters,
+      options,
       user as IAuthUser,
-      req.body,
     );
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "Doctor Schedule created successfully!",
+      message: "My Schedules fetched successfully!",
       data: result,
     });
   },
