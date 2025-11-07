@@ -31,6 +31,29 @@ const createDoctorSchedule = catchAsync(
 );
 //w: (end)  ╰──────────── createDoctorSchedule   ────────────╯
 
+const createDoctorSchedule = catchAsync(
+  async (
+    req: Request & {
+      user?: IAuthUser;
+    },
+    res: Response,
+  ) => {
+    const user = req.user;
+
+    const result = await DoctorScheduleService.createDoctorSchedule(
+      user as IAuthUser,
+      req.body,
+    );
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Doctor Schedule created successfully!",
+      data: result,
+    });
+  },
+);
+
 //w: (start)╭────────────   ────────────╮
 
 //w: (end)  ╰────────────   ────────────╯

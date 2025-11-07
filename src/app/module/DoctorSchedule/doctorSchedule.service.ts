@@ -28,8 +28,12 @@ const createDoctorSchedule = async (
 
 //w: (start)╭──────────── getMySchedules  ────────────╮
 const getMySchedules = async (user: IAuthUser) => {
-  const result = await prisma.doctorsche.findMany({
-    where: {},
+  const result = await prisma.doctorSchedules.findMany({
+    where: {
+      doctor: {
+        email: user.email,
+      },
+    },
   });
   return result;
 };

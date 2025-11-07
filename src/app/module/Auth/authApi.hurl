@@ -30,7 +30,7 @@ Content-Type: application/json
 }
 
 POST {{port6009}}/auth/reset-password
-Authorization: {{token}}
+juthorization: {{token}}
 
 Content-Type: application/json
 {
