@@ -77,14 +77,45 @@ const getMySchedules = async (
     }
   }
 
-  const result = await prisma.doctorSchedules.findMany({
-    where: {
-      doctor: {
-        email: user.email,
-      },
-    },
+  andConditions.push({
+    AND: Object.keys(filterData).map((key) => {
+      return {
+        [key]: {
+          equals: (filterData as any)[key],
+        },
+      };
+    }),
   });
-  return result;
+
+  const whereConditions: Prisma.DoctorSchedulesWhereInput = andConditions.length
+    ? {
+        AND: andConditions,
+      }
+    : {};
+
+  const result = await prisma.doctorSchedules.findMany({
+    where: whereConditions,
+    skip,
+    take: limit,
+    orderBy:
+      options.sortBy && options.sortOrder
+        ? {
+            [options.sortBy]: options.sortOrder,
+          }
+        : {},
+  });
+
+  const total = await prisma.doctorSchedules.count({
+    where: whereConditions,
+  });
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
 };
 //w: (end)  ╰──────────── getMySchedules  ────────────╯
 
