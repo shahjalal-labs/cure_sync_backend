@@ -4,6 +4,7 @@ import { prisma } from "../../../shared/prisma";
 import { IAuthUser } from "../../interfaces/common";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { TCreateDoctorSchedule } from "./doctorSchedule.validation";
+import { object } from "zod";
 
 //
 
@@ -42,6 +43,38 @@ const getMySchedules = async (
   const andConditions: Prisma.DoctorSchedulesWhereInput[] = [];
 
   if (startDate && endDate) {
+    andConditions.push({
+      AND: [
+        {
+          schedule: {
+            startDateTime: {
+              gte: startDate,
+            },
+          },
+        },
+        {
+          schedule: {
+            endDateTime: {
+              lte: endDate,
+            },
+          },
+        },
+      ],
+    });
+  }
+
+  if (Object.keys(filterData).length) {
+    if (
+      typeof filterData.isBooked === "string" &&
+      filterData.isBooked === "true"
+    ) {
+      filterData.isBooked = true;
+    } else if (
+      typeof filterData.isBooked === "string" &&
+      filterData.isBooked === "false"
+    ) {
+      filterData.isBooked = false;
+    }
   }
 
   const result = await prisma.doctorSchedules.findMany({
