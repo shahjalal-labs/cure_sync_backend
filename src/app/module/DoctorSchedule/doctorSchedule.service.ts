@@ -7,6 +7,7 @@ import { IPaginationOptions } from "../../interfaces/pagination";
 import { TCreateDoctorSchedule } from "./doctorSchedule.validation";
 import { ApiError } from "../../errors/ApiError";
 import httpStatus from "http-status";
+import { IDoctorScheduleFilterRequest } from "./doctorSchedule.interface";
 
 //
 
@@ -179,10 +180,21 @@ const deleteDoctorSchedule = async (user: IAuthUser, id: string) => {
 //w: (end)  ╰──────────── deleteDoctorSchedule ────────────╯
 
 //w: (start)╭──────────── getAllSchedules ────────────╮
-const getAllSchedules = async (filters: any, options: IPaginationOptions) => {
+const getAllSchedules = async (
+  filters: IDoctorScheduleFilterRequest,
+  options: IPaginationOptions,
+) => {
   const { page, limit, skip } = paginationHelper.calcalutePagination(options);
 
-  const {} = filters;
+  const { searchTerm, ...filterData } = filters;
+
+  const andConditions: Prisma.DoctorSchedulesWhereInput = [];
+
+  if (searchTerm) {
+    andConditions.push({
+      doctor: {},
+    });
+  }
 };
 //w: (end)  ╰──────────── getAllSchedules ────────────╯
 
