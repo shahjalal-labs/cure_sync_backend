@@ -4,7 +4,8 @@ import { prisma } from "../../../shared/prisma";
 import { IAuthUser } from "../../interfaces/common";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { TCreateDoctorSchedule } from "./doctorSchedule.validation";
-import { object } from "zod";
+import { ApiError } from "../../errors/ApiError";
+import httpStatus from "http-status";
 
 //
 
@@ -145,7 +146,34 @@ const getMySchedules = async (
 //w: (end)  ╰──────────── getMySchedules  ────────────╯
 
 //w: (start)╭──────────── deleteDoctorSchedule ────────────╮
-const deleteDoctorSchedule = async (user: IAuthUser, id: string) => {};
+const deleteDoctorSchedule = async (user: IAuthUser, id: string) => {
+  const doctorInfo = await prisma.doctor.findUniqueOrThrow({
+    where: {
+      email: user.email,
+    },
+  });
+
+  const isBooked = await prisma.doctorSchedules.findFirst({
+    where: {
+      isBooked: true,
+      doctorId: doctorInfo.id,
+      scheduleId: id,
+    },
+  });
+
+  if (isBooked)
+    throw new ApiError(httpStatus.BAD_REQUEST, "Schedule is already booked!");
+
+  const result = await prisma.doctorSchedules.delete({
+    where: {
+      doctorId_scheduleId: {
+        doctorId: doctorInfo.id,
+        scheduleId: id,
+      },
+    },
+  });
+  return result;
+};
 
 //w: (end)  ╰──────────── deleteDoctorSchedule ────────────╯
 
