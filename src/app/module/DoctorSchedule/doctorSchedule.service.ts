@@ -188,13 +188,44 @@ const getAllSchedules = async (
 
   const { searchTerm, ...filterData } = filters;
 
-  const andConditions: Prisma.DoctorSchedulesWhereInput = [];
+  const andConditions: Prisma.DoctorSchedulesWhereInput[] = [];
 
   if (searchTerm) {
     andConditions.push({
-      doctor: {},
+      doctor: {
+        name: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+        email: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      },
     });
   }
+
+  if (Object.keys(filterData).length) {
+    if (
+      typeof filterData.isBooked === "string" &&
+      filterData.isBooked === "true"
+    ) {
+      filterData.isBooked = true;
+    } else if (
+      typeof filterData.isBooked === "string" &&
+      filterData.isBooked === "false"
+    ) {
+      filterData.isBooked = false;
+    }
+  }
+
+  andConditions.push({
+    AND: Object.keys(filterData).map((key) => {
+      ({
+        [key]: (filterData as any)[key],
+      });
+    }),
+  });
 };
 //w: (end)  ╰──────────── getAllSchedules ────────────╯
 
