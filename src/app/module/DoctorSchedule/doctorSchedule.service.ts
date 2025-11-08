@@ -144,7 +144,12 @@ const getMySchedules = async (
 };
 //w: (end)  ╰──────────── getMySchedules  ────────────╯
 
+//w: (start)╭──────────── deleteDoctorSchedule ────────────╮
+const deleteDoctorSchedule = async (user: IAuthUser, id: string) => {};
+//w: (end)  ╰──────────── deleteDoctorSchedule ────────────╯
+
 export const DoctorScheduleService = {
   createDoctorSchedule,
   getMySchedules,
+  deleteDoctorSchedule,
 };

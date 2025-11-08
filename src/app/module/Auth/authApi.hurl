@@ -4,7 +4,7 @@
 POST {{port6009}}/auth
 Content-Type: application/json
 {
-  "email": "arif.hossain@doctor.com",
+  "email": "laila.sultana@mail.com",
   "password": "123456"
 }
 
