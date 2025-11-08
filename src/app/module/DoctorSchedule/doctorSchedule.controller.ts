@@ -64,9 +64,22 @@ const getMySchedules = catchAsync(
 //w: (end)  ╰──────────── getMySchedules   ────────────╯
 
 //w: (start)╭──────────── deleteDoctorSchedule ────────────╮
-const deleteDoctorSchedule = catchAsync(async (req: Request, res: Response) => {
-  const user = req.user;
-});
+const deleteDoctorSchedule = catchAsync(
+  async (req: Request & { user?: IAuthUser }, res: Response) => {
+    const user = req.user;
+
+    const result = await DoctorScheduleService.deleteDoctorSchedule(
+      user as IAuthUser,
+      req.params.id,
+    );
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Doctor Schedule deleted successfully!",
+      data: result,
+    });
+  },
+);
 //w: (end)  ╰──────────── deleteDoctorSchedule ────────────╯
 
 //w: (start)╭────────────   ────────────╮

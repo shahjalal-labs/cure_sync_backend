@@ -23,9 +23,19 @@ Content-Type: application/json
 
 GET {{port6009}}/doctor-schedule
 
+GET {{port6009}}/doctor-schedule/my-schedules
+Authorization: {{DOCTOR_TOKEN}}
+
+
+
+
 
 GET {{port6009}}/doctor-schedule/my-schedules?startDate=2025-11-05T04:00:00.000Z&endDate=2025-11-05T05:00:00.000Z
-
 Authorization: {{DOCTOR_TOKEN}}
 
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhaWxhLnN1bHRhbmFAbWFpbC5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzYyNTM2MzE5LCJleHAiOjE3NjUxMjgzMTl9.pTq5dGY20IB2dmQR3A6WFePyTLW4vHfmUVIZNfWqMtM
+
+
+# delete doctor schedule
+DELETE {{port6009}}/doctor-schedule/2e603bd2-7c35-4bb9-9930-bb0aca536b71
+Authorization: {{DOCTOR_TOKEN }}

@@ -22,4 +22,12 @@ router.get(
 );
 //w: (end)  ╰──────────── getMySchedules     ────────────╯
 
+//w: (start)╭──────────── deleteDoctorSchedule ────────────╮
+router.delete(
+  "/:id",
+  auth(UserRole.DOCTOR),
+  DoctorScheduleController.deleteDoctorSchedule,
+);
+//w: (end)  ╰──────────── deleteDoctorSchedule ────────────╯
+
 export const DoctorScheduleRoutes = router;
