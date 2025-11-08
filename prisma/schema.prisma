@@ -26,6 +26,7 @@ model User {
 
 //w: (end)  ╰────────────  User  ────────────╯
 
+//w: (start)╭──────────── Admin   ────────────╮
 model Admin {
   id            String   @id @default(uuid())
   name          String
@@ -41,6 +42,9 @@ model Admin {
   @@map("admins")
 }
 
+//w: (end)  ╰──────────── Admin   ────────────╯
+
+//w: (start)╭──────────── Doctor   ────────────╮
 model Doctor {
   id                  String   @id @default(uuid())
   name                String
@@ -66,6 +70,9 @@ model Doctor {
   @@map("doctors")
 }
 
+//w: (end)  ╰──────────── Doctor   ────────────╯
+
+//w: (start)╭──────────── Patient   ────────────╮
 model Patient {
   id                String             @id @default(uuid())
   email             String             @unique
@@ -83,6 +90,9 @@ model Patient {
   @@map("patients")
 }
 
+//w: (end)  ╰──────────── Patient   ────────────╯
+
+//w: (start)╭──────────── Specialities   ────────────╮
 model Specialities {
   id                 String               @id @default(uuid())
   title              String
@@ -92,6 +102,9 @@ model Specialities {
   @@map("specialities")
 }
 
+//w: (end)  ╰──────────── Specialities   ────────────╯
+
+//w: (start)╭────────────  DoctorSpecialities  ────────────╮
 model DoctorSpecialities {
   specialitiesId String
   specialities   Specialities @relation(fields: [specialitiesId], references: [id])
@@ -102,6 +115,9 @@ model DoctorSpecialities {
   @@map("doctor_specialties")
 }
 
+//w: (end)  ╰──────────── DoctorSpecialities   ────────────╯
+
+//w: (start)╭────────────  PatientHealthData  ────────────╮
 model PatientHealthData {
   id                  String        @id @default(uuid())
   patientId           String        @unique
@@ -128,6 +144,9 @@ model PatientHealthData {
   @@map("patient_health_datas")
 }
 
+//w: (end)  ╰────────────  PatientHealthData  ────────────╯
+
+//w: (start)╭──────────── MedicalReport   ────────────╮
 model MedicalReport {
   id         String   @id @default(uuid())
   patientId  String
@@ -140,6 +159,9 @@ model MedicalReport {
   @@map("medical_reports")
 }
 
+//w: (end)  ╰────────────  MedicalReport  ────────────╯
+
+//w: (start)╭────────────  Schedule  ────────────╮
 model Schedule {
   id              String            @id @default(uuid())
   startDateTime   DateTime
@@ -152,6 +174,9 @@ model Schedule {
   @@map("schedules")
 }
 
+//w: (end)  ╰────────────  Schedule  ────────────╯
+
+//w: (start)╭────────────  DoctorSchedules  ────────────╮
 model DoctorSchedules {
   doctorId      String
   doctor        Doctor   @relation(fields: [doctorId], references: [id])
@@ -163,6 +188,8 @@ model DoctorSchedules {
   @@id([doctorId, scheduleId])
   @@map("doctor_schedules")
 }
+
+//w: (end)  ╰────────────  DoctorSchedules  ────────────╯
 
 enum UserRole {
   SUPER_ADMIN
@@ -182,6 +209,7 @@ enum Gender {
   FEMALE
 }
 
+//w: (start)╭────────────  BloodGroup  ────────────╮
 enum BloodGroup {
   A_POSITIVE
   B_POSITIVE
@@ -192,6 +220,8 @@ enum BloodGroup {
   O_NEGATIVE
   AB_NEGATIVE
 }
+
+//w: (end)  ╰────────────  BloodGroup  ────────────╯
 
 enum MaritalStatus {
   MARRIED
