@@ -37,5 +37,5 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxhaWxhLnN1bHRh
 
 
 # delete doctor schedule
-DELETE {{port6009}}/doctor-schedule/2e603bd2-7c35-4bb9-9930-bb0aca536b71
+DELETE {{port6009}}/doctor-schedule/0774e718-09e0-4e99-a5f1-1c4c2f819b6f
 Authorization: {{DOCTOR_TOKEN }}

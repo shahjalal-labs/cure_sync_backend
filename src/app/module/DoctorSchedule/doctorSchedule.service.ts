@@ -1,3 +1,4 @@
+//
 import { Prisma } from "@prisma/client";
 import { paginationHelper } from "../../../helpers/paginatonHelper";
 import { prisma } from "../../../shared/prisma";
@@ -177,8 +178,17 @@ const deleteDoctorSchedule = async (user: IAuthUser, id: string) => {
 
 //w: (end)  ╰──────────── deleteDoctorSchedule ────────────╯
 
+//w: (start)╭──────────── getAllSchedules ────────────╮
+const getAllSchedules = async (filters: any, options: IPaginationOptions) => {
+  const { page, limit, skip } = paginationHelper.calcalutePagination(options);
+
+  const {} = filters;
+};
+//w: (end)  ╰──────────── getAllSchedules ────────────╯
+
 export const DoctorScheduleService = {
   createDoctorSchedule,
   getMySchedules,
   deleteDoctorSchedule,
+  getAllSchedules,
 };

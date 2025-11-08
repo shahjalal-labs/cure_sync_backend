@@ -82,6 +82,10 @@ const deleteDoctorSchedule = catchAsync(
 );
 //w: (end)  ╰──────────── deleteDoctorSchedule ────────────╯
 
+//w: (start)╭──────────── getAllSchedules ────────────╮
+const getAllSchedules = catchAsync(async (req, res) => {});
+//w: (end)  ╰──────────── getAllSchedules ────────────╯
+
 //w: (start)╭────────────   ────────────╮
 
 //w: (end)  ╰────────────   ────────────╯
@@ -89,4 +93,5 @@ export const DoctorScheduleController = {
   createDoctorSchedule,
   getMySchedules,
   deleteDoctorSchedule,
+  getAllSchedules,
 };
