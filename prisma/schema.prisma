@@ -182,11 +182,12 @@ model Schedule {
 //w: (start)╭────────────  DoctorSchedules  ────────────╮
 model DoctorSchedules {
   doctorId      String
-  doctor        Doctor   @relation(fields: [doctorId], references: [id])
+  doctor        Doctor        @relation(fields: [doctorId], references: [id])
   scheduleId    String
-  schedule      Schedule @relation(fields: [scheduleId], references: [id])
-  isBooked      Boolean  @default(false)
+  schedule      Schedule      @relation(fields: [scheduleId], references: [id])
+  isBooked      Boolean       @default(false)
   appointmentId String?
+  Appointment   Appointment[]
 
   @@id([doctorId, scheduleId])
   @@map("doctor_schedules")
@@ -196,15 +197,22 @@ model DoctorSchedules {
 
 //w: (start)╭──────────── Appointment   ────────────╮
 model Appointment {
-  id             String   @id @default(uuid())
-  patientId      String
-  patent         Patient  @relation(fields: [patientId], references: [id])
-  doctorId       String
-  doctor         Doctor   @relation(fields: [doctorId], references: [id])
-  scheduleId     String   @unique
-  schedule       Schedule @relation(fields: [scheduleId], references: [id])
-  videoCallingId String
-  status App
+  id              String            @id @default(uuid())
+  patientId       String
+  patent          Patient           @relation(fields: [patientId], references: [id])
+  doctorId        String
+  doctor          Doctor            @relation(fields: [doctorId], references: [id])
+  scheduleId      String            @unique
+  schedule        Schedule          @relation(fields: [scheduleId], references: [id])
+  videoCallingId  String
+  status          AppointmentStatus @default(SCHEDULED)
+  paymentStatus   PaymentStatus     @default(UNPAID)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  doctorSchedules DoctorSchedules?  @relation(fields: [doctorSchedulesDoctorId, doctorSchedulesScheduleId], references: [doctorId, scheduleId])
+
+  doctorSchedulesDoctorId   String?
+  doctorSchedulesScheduleId String?
 }
 
 //w: (end)  ╰──────────── Appointment   ────────────╯
@@ -246,14 +254,20 @@ enum MaritalStatus {
   UNMARRIED
 }
 
-
-
 //w: (start)╭──────────── AppointmentStatus  ────────────╮
-enum AppointmentStatus{
-SCHEDULED
-INPROGRESS
-COMPLETED 
-CANCELED
+enum AppointmentStatus {
+  SCHEDULED
+  INPROGRESS
+  COMPLETED
+  CANCELED
 }
+
 //w: (end)  ╰──────────── AppointmentStatus  ────────────╯
 
+//w: (start)╭────────────  PaymentStatus  ────────────╮
+enum PaymentStatus {
+  PAID
+  UNPAID
+}
+
+//w: (end)  ╰────────────  PaymentStatus  ────────────╯
