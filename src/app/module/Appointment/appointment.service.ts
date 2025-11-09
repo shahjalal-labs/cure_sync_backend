@@ -31,6 +31,27 @@ const createAppointment = async (user: IAuthUser, payload: any) => {
     const appointmentData = await tx.appointment.create({
       data: {
         patientId: patientData.id,
+        doctorId: doctorData.id,
+        scheduleId: payload.scheduleId,
+        videoCallingId,
+      },
+      include: {
+        patent: true,
+        doctor: true,
+        schedule: true,
+      },
+    });
+
+    await tx.doctorSchedules.update({
+      where: {
+        doctorId_scheduleId: {
+          doctorId: doctorData.id,
+          scheduleId: payload.scheduleId,
+        },
+      },
+      data: {
+        isBooked: true,
+        appointmentId: appointmentData.id,
       },
     });
   });
