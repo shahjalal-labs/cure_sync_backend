@@ -43,6 +43,13 @@ const getMyAppointment = catchAsync(
       filters,
       options,
     );
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "All appointment fetched successfully",
+      data: result,
+    });
   },
 );
 //w: (end)  ╰──────────── getMyAppointment ────────────╯

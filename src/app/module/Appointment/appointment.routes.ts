@@ -17,4 +17,13 @@ router.post(
 );
 //w: (end)  ╰──────────── createAppointment ────────────╯
 
+//
+//w: (start)╭────────────  getMyAppointment ────────────╮
+router.get(
+  "/",
+  auth(UserRole.PATIENT, UserRole.DOCTOR),
+  AppointmentController.getMyAppointment,
+);
+//w: (end)  ╰────────────  getMyAppointment ────────────╯
+
 export const AppointmentRoutes = router;

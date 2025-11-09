@@ -95,7 +95,10 @@ const getMyAppointment = async (
   user: IAuthUser,
   filters: any,
   options: IPaginationOptions,
-) => {};
+) => {
+  console.log(`working`, user, filters, options);
+};
+
 //w: (end)  ╰──────────── getMyAppointment ────────────╯
 
 export const AppointmentService = {
