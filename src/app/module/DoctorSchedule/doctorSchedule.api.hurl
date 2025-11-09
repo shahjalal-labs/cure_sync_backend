@@ -6,16 +6,13 @@ Content-Type: application/json
 
 {
   "scheduleIds": [
-    "0774e718-09e0-4e99-a5f1-1c4c2f819b6f",
-    "0ab47b6a-fdd6-4e9a-8c3b-86dc79e6a1c3",
-    "0b21caf3-35c2-49bd-8891-ab096e3a4547",
-    "0beee3d9-f716-4567-8791-aa20c767dfbe",
-    "0d4e28fa-06d3-4564-a0d8-ccba09093213",
-    "0e4978cc-92bb-4b83-a39f-a1925e3be6bb",
-    "189ffe85-4410-484f-9c07-dc40ef1186d6",
-    "1afa6d64-a702-4db9-ac44-214de0bbbd6a",
-    "1eaa98f6-0e20-43d7-bdd6-9423e3d76e41",
-    "40d767a0-602d-4521-b247-b2c445f59682"
+      "f5293923-9c06-4921-a1b6-24dc377d3b66",
+      "82dce632-68fb-4ae9-bddf-f8f19c63f9ac",
+      "5253dc42-8a49-4194-a3d6-53a5a2aac604",
+      "065de160-b017-4fcf-9759-a3c98ea608c8",
+      "e5495530-8d5e-45ad-b0b3-ac165f70fe5a",
+      "fe5203ea-55cb-4d74-a745-084bef924105",
+      "fb4f3e1d-acf9-46ce-87b7-99df3cde2783"
   ]
 }
 
