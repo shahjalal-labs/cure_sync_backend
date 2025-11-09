@@ -54,6 +54,20 @@ const createAppointment = async (user: IAuthUser, payload: any) => {
         appointmentId: appointmentData.id,
       },
     });
+
+    const today = new Date();
+    const transactionId =
+      "Cure-Sync-" +
+      today.getFullYear() +
+      "-" +
+      today.getMonth() +
+      "-" +
+      today.getDay() +
+      "-" +
+      "-" +
+      today.getHours() +
+      "-" +
+      today.getSeconds();
   });
 };
 
