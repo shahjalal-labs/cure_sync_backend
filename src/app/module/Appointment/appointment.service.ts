@@ -126,9 +126,34 @@ const getMyAppointment = async (
     andConditions.push(...filterConditions);
   }
 
-  const whereConditions: Prisma.AppointmentWhereInput = {};
+  const whereConditions: Prisma.AppointmentWhereInput = andConditions.length
+    ? {
+        AND: andConditions,
+      }
+    : {};
 
-  console.log(`working`, user, filters, options);
+  const result = await prisma.appointment.findMany({
+    where: whereConditions,
+    skip,
+    take: limit,
+    orderBy:
+      options.sortBy && options.sortOrder
+        ? {
+            [options.sortBy]: options.sortOrder,
+          }
+        : {
+            createdAt: "desc",
+          },
+    include: user.role ===UserRole.PATIENT ? {
+  
+    }
+    /* include: {
+      schedule: true,
+      [user?.role === UserRole.PATIENT ? "patent" : "doctor"]: true,
+    } */
+  });
+
+  return result;
 };
 
 //w: (end)  ╰──────────── getMyAppointment ────────────╯
