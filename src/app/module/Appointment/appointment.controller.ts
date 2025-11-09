@@ -34,7 +34,7 @@ const createAppointment = catchAsync(
 //w: (start)╭──────────── getMyAppointment ────────────╮
 const getMyAppointment = catchAsync(
   async (req: Request & { user?: IAuthUser }, res: Response) => {
-    const filters = pick(req.query, []);
+    const filters = pick(req.query, ["paymentStatus", "status"]);
     const options = pick(req.query, ["page", "limit", "sortOrder", "sortBy"]);
 
     const { user } = req;

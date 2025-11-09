@@ -144,9 +144,20 @@ const getMyAppointment = async (
         : {
             createdAt: "desc",
           },
-    include: user.role ===UserRole.PATIENT ? {
-  
-    }
+    include:
+      user.role === UserRole.PATIENT
+        ? {
+            doctor: true,
+            schedule: true,
+          }
+        : {
+            patent: {
+              include: {
+                patientHealthData: true,
+                medicalReport: true,
+              },
+            },
+          },
     /* include: {
       schedule: true,
       [user?.role === UserRole.PATIENT ? "patent" : "doctor"]: true,

@@ -15,4 +15,9 @@ Content-Type: application/json
 }
 
 
+GET  {{port6009}}/appointment?status=SCHEDULED&paymentStatus=UNPAID
+Authorization: {{PATIENT_TOKEN}}
+
+
 GET  {{port6009}}/appointment
+Authorization: {{DOCTOR_TOKEN}}
