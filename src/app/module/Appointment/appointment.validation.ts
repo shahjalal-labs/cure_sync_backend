@@ -3,12 +3,17 @@
 import z from "zod";
 
 //w: (start)╭──────────── createAppointmen ────────────╮
-const createAppointmenSchema = {
-  body: z.object({
-    doctorId: z.string().uuid(),
-    scheduleId: z.string().uuid(),
-  }),
-};
+const createAppointmenSchema = z.object({
+  body: z
+    .object({
+      doctorId: z.uuidv4(),
+      scheduleId: z.uuidv4(),
+    })
+    .strict(),
+});
+
+type TCreateAppointment = z.infer<typeof createAppointmenSchema>["body"];
+
 //w: (end)  ╰──────────── createAppointmen ────────────╯
 
 export const AppointmentValidation = {

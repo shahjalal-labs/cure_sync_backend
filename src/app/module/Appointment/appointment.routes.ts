@@ -3,6 +3,8 @@ import express from "express";
 import { auth } from "../../middlewares/auth";
 import { UserRole } from "@prisma/client";
 import { AppointmentController } from "./appointment.controller";
+import { validateRequest } from "../../middlewares/validateRequest";
+import { AppointmentValidation } from "./appointment.validation";
 
 const router = express.Router();
 
@@ -10,6 +12,7 @@ const router = express.Router();
 router.post(
   "/",
   auth(UserRole.PATIENT),
+  validateRequest(AppointmentValidation.createAppointmenSchema),
   AppointmentController.createAppointment,
 );
 //w: (end)  ╰──────────── createAppointment ────────────╯
