@@ -4,6 +4,7 @@ import catchAsync from "../../../shared/catchAsync";
 import { IAuthUser } from "../../interfaces/common";
 import { AppointmentService } from "./appointment.service";
 import { sendResponse } from "../../../shared/sendResponse";
+import httpStatus from "http-status";
 
 //w: (start)╭──────────── createAppointment ────────────╮
 const createAppointment = catchAsync(
@@ -15,9 +16,15 @@ const createAppointment = catchAsync(
   ) => {
     const { user, body } = req;
 
-    const result = await AppointmentService.createAppointment(user, body);
+    const result = await AppointmentService.createAppointment(
+      user as IAuthUser,
+      body,
+    );
     sendResponse(res, {
-      statusCode: httpS,
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Appointment created successfully",
+      data: result,
     });
   },
 );
