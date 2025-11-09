@@ -221,12 +221,13 @@ const getAllSchedules = async (
 
   andConditions.push({
     AND: Object.keys(filterData).map((key) => {
-      ({
+      return {
         [key]: (filterData as any)[key],
-      });
+      };
     }),
   });
 };
+
 //w: (end)  ╰──────────── getAllSchedules ────────────╯
 
 export const DoctorScheduleService = {

@@ -66,6 +66,7 @@ model Doctor {
   user               User                 @relation(fields: [email], references: [email])
   doctorSpecialities DoctorSpecialities[]
   doctorSchedules    DoctorSchedules[]
+  Appointment        Appointment[]
 
   @@map("doctors")
 }
@@ -86,6 +87,7 @@ model Patient {
   user              User               @relation(fields: [email], references: [email])
   patientHealthData PatientHealthData?
   medicalReport     MedicalReport[]
+  Appointment       Appointment[]
 
   @@map("patients")
 }
@@ -190,6 +192,17 @@ model DoctorSchedules {
 }
 
 //w: (end)  ╰────────────  DoctorSchedules  ────────────╯
+
+//w: (start)╭──────────── Appointment   ────────────╮
+model Appointment {
+  id        String  @id @default(uuid())
+  patientId String
+  patent    Patient @relation(fields: [patientId], references: [id])
+  doctorId  String
+  doctor    Doctor  @relation(fields: [doctorId], references: [id])
+}
+
+//w: (end)  ╰──────────── Appointment   ────────────╯
 
 enum UserRole {
   SUPER_ADMIN
