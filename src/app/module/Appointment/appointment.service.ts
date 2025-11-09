@@ -3,6 +3,7 @@ import { prisma } from "../../../shared/prisma";
 import { IAuthUser } from "../../interfaces/common";
 import { v4 as uuidv4 } from "uuid";
 import { TCreateAppointment } from "./appointment.validation";
+import { IPaginationOptions } from "../../interfaces/pagination";
 
 //w: (start)╭──────────── createAppointment ────────────╮
 const createAppointment = async (
@@ -57,6 +58,7 @@ const createAppointment = async (
         patent: true,
         doctor: true,
         schedule: true,
+        payment: true,
       },
     });
 
@@ -88,6 +90,15 @@ const createAppointment = async (
 
 //w: (end)  ╰──────────── createAppointment ────────────╯
 
+//w: (start)╭──────────── getMyAppointment ────────────╮
+const getMyAppointment = async (
+  user: IAuthUser,
+  filters: any,
+  options: IPaginationOptions,
+) => {};
+//w: (end)  ╰──────────── getMyAppointment ────────────╯
+
 export const AppointmentService = {
   createAppointment,
+  getMyAppointment,
 };

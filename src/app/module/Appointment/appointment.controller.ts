@@ -5,6 +5,7 @@ import { IAuthUser } from "../../interfaces/common";
 import { AppointmentService } from "./appointment.service";
 import { sendResponse } from "../../../shared/sendResponse";
 import httpStatus from "http-status";
+import { pick } from "../../../shared/pick";
 
 //w: (start)╭──────────── createAppointment ────────────╮
 const createAppointment = catchAsync(
@@ -30,6 +31,23 @@ const createAppointment = catchAsync(
 );
 //w: (end)  ╰──────────── createAppointment ────────────╯
 
+//w: (start)╭──────────── getMyAppointment ────────────╮
+const getMyAppointment = catchAsync(
+  async (req: Request & { user?: IAuthUser }, res: Response) => {
+    const filters = pick(req.query, []);
+    const options = pick(req.query, ["page", "limit", "sortOrder", "sortBy"]);
+
+    const { user } = req;
+    const result = await AppointmentService.getMyAppointment(
+      user as IAuthUser,
+      filters,
+      options,
+    );
+  },
+);
+//w: (end)  ╰──────────── getMyAppointment ────────────╯
+
 export const AppointmentController = {
   createAppointment,
+  getMyAppointment,
 };
