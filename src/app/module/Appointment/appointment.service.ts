@@ -2,9 +2,13 @@
 import { prisma } from "../../../shared/prisma";
 import { IAuthUser } from "../../interfaces/common";
 import { v4 as uuidv4 } from "uuid";
+import { TCreateAppointment } from "./appointment.validation";
 
 //w: (start)╭──────────── createAppointment ────────────╮
-const createAppointment = async (user: IAuthUser, payload: any) => {
+const createAppointment = async (
+  user: IAuthUser,
+  payload: TCreateAppointment,
+) => {
   const patientData = await prisma.patient.findUniqueOrThrow({
     where: {
       email: user?.email,

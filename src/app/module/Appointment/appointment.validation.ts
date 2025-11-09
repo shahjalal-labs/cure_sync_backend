@@ -12,7 +12,7 @@ const createAppointmenSchema = z.object({
     .strict(),
 });
 
-type TCreateAppointment = z.infer<typeof createAppointmenSchema>["body"];
+export type TCreateAppointment = z.infer<typeof createAppointmenSchema>["body"];
 
 //w: (end)  ╰──────────── createAppointmen ────────────╯
 
