@@ -4,6 +4,8 @@ import { IAuthUser } from "../../interfaces/common";
 import { v4 as uuidv4 } from "uuid";
 import { TCreateAppointment } from "./appointment.validation";
 import { IPaginationOptions } from "../../interfaces/pagination";
+import { paginationHelper } from "../../../helpers/paginatonHelper";
+import { Prisma, UserRole } from "@prisma/client";
 
 //w: (start)╭──────────── createAppointment ────────────╮
 const createAppointment = async (
@@ -96,6 +98,36 @@ const getMyAppointment = async (
   filters: any,
   options: IPaginationOptions,
 ) => {
+  const { limit, page, skip } = paginationHelper.calcalutePagination(options);
+  const { ...filterData } = filters;
+
+  const andConditions: Prisma.AppointmentWhereInput[] = [];
+
+  if (user?.role === UserRole.PATIENT) {
+    andConditions.push({
+      patent: {
+        email: user?.email,
+      },
+    });
+  } else if (UserRole.DOCTOR) {
+    andConditions.push({
+      doctor: {
+        email: user?.email,
+      },
+    });
+  }
+
+  if (Object.keys(filterData).length) {
+    const filterConditions = Object.keys(filterData).map((key) => ({
+      [key]: {
+        equals: filterData[key],
+      },
+    }));
+    andConditions.push(...filterConditions);
+  }
+
+  const whereConditions: Prisma.AppointmentWhereInput = {};
+
   console.log(`working`, user, filters, options);
 };
 
