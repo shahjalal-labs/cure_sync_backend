@@ -67,6 +67,7 @@ model Doctor {
   doctorSpecialities DoctorSpecialities[]
   doctorSchedules    DoctorSchedules[]
   appointment        Appointment[]
+  prescription       Prescription[]
 
   @@map("doctors")
 }
@@ -211,6 +212,7 @@ model Appointment {
   updatedAt       DateTime          @updatedAt
   doctorSchedules DoctorSchedules?
   payment         Payment?
+  prescription    Prescription?
 
   @@map("appointments")
 }
@@ -233,6 +235,17 @@ model Payment {
 }
 
 //w: (end)  ╰────────────  Payment  ────────────╯
+
+//w: (start)╭────────────  Prescription  ────────────╮
+model Prescription {
+  id            String      @id @default(uuid())
+  appointmentId String      @unique
+  appointment   Appointment @relation(fields: [appointmentId], references: [id])
+  doctorId      String
+  doctor        Doctor      @relation(fields: [doctorId], references: [id])
+}
+
+//w: (end)  ╰────────────  Prescription  ────────────╯
 
 enum UserRole {
   SUPER_ADMIN
