@@ -1,9 +1,9 @@
 //
-export interface IPaymentData {
-  amount: number | string;
+export type IPaymentData = {
+  amount: number;
   transactionId: string;
   name: string;
   email: string;
-  phoneNumber: string;
-  address: string;
-}
+  address: string | null;
+  phoneNumber: string | null;
+};

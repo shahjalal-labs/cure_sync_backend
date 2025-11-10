@@ -22,11 +22,13 @@ const initPayment = async (appointmentId: string) => {
     transactionId: paymentData.transactionId,
     name: paymentData.appointment.patent.name,
     email: paymentData.appointment.patent.email,
+    address: paymentData.appointment.patent.address,
     phoneNumber: paymentData.appointment.patent.contactNumber,
   };
-
   const result = await SSLService.initPayment(initPaymentData);
-  return result;
+  return {
+    paymentUrl: result.GatewayPageURL,
+  };
 };
 //w: (end)  ╰──────────── initPayment ────────────╯
 

@@ -23,8 +23,8 @@ const initPayment = async (paymentData: IPaymentData) => {
       product_profile: "general",
       cus_name: paymentData.name,
       cus_email: paymentData.email,
-      cus_add1: paymentData.a,
-      cus_add2: "Dhaka",
+      cus_add1: paymentData.address,
+      cus_add2: "N/A",
       cus_city: "Dhaka",
       cus_state: "Dhaka",
       cus_postcode: "1000",
@@ -48,10 +48,8 @@ const initPayment = async (paymentData: IPaymentData) => {
         "Content-Type": "application/x-www-form-urlencoded",
       },
     });
-    console.log(
-      response.data,
-      "[1;31mresponse in payment.service.ts at line 44[0m",
-    );
+    
+    return response.data;
   } catch (error: any) {
     throw new ApiError(
       httpStatus.BAD_REQUEST,
