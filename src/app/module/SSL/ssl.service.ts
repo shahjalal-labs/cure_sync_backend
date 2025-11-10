@@ -1,7 +1,9 @@
 import axios from "axios";
 import config from "../../../config";
+import { IPaymentData } from "./ssl.interface";
 
-const initPayment = async (paymentData: any) => {
+//w: (start)╭──────────── initPayment ────────────╮
+const initPayment = async (paymentData: IPaymentData) => {
   const data = {
     store_id: config.ssl.storeId,
     store_passwd: config.ssl.storePass,
@@ -17,8 +19,8 @@ const initPayment = async (paymentData: any) => {
     product_name: "Appointment",
     product_category: "Healh Care",
     product_profile: "general",
-    cus_name: paymentData.appointment.patent.name,
-    cus_email: paymentData.appointment.patent.email,
+    cus_name: paymentData.name,
+    cus_email: paymentData.email,
     cus_add1: "Dhaka",
     cus_add2: "Dhaka",
     cus_city: "Dhaka",
@@ -48,4 +50,9 @@ const initPayment = async (paymentData: any) => {
     response.data,
     "[1;31mresponse in payment.service.ts at line 44[0m",
   );
+};
+//w: (end)  ╰──────────── initPayment ────────────╯
+
+export const SSLService = {
+  initPayment,
 };

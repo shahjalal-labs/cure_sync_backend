@@ -1,8 +1,6 @@
 //
-
-import axios from "axios";
-import config from "../../../config";
 import { prisma } from "../../../shared/prisma";
+import { SSLService } from "../SSL/ssl.service";
 
 //w: (start)╭──────────── initPayment ────────────╮
 const initPayment = async (appointmentId: string) => {
@@ -18,6 +16,17 @@ const initPayment = async (appointmentId: string) => {
       },
     },
   });
+
+  const initPaymentData = {
+    amount: paymentData.amount,
+    transactionId: paymentData.transactionId,
+    name: paymentData.appointment.patent.name,
+    email: paymentData.appointment.patent.email,
+    phoneNumber: paymentData.appointment.patent.contactNumber,
+  };
+
+  const result = await SSLService.initPayment(initPaymentData);
+  return result;
 };
 //w: (end)  ╰──────────── initPayment ────────────╯
 
