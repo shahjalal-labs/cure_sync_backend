@@ -5,4 +5,5 @@ export interface IPaymentData {
   name: string;
   email: string;
   phoneNumber: string;
+  address: string;
 }
