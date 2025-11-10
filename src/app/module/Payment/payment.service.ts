@@ -5,7 +5,6 @@ import SSLCommerzPayment from "sslcommerz-lts";
 
 //w: (start)╭──────────── initPayment ────────────╮
 const initPayment = async (appointmentId: string) => {
-  console.log(appointmentId);
   const data = {
     store_id: config.ssl.storeId,
     store_passwd: config.ssl.storePass,
@@ -39,14 +38,6 @@ const initPayment = async (appointmentId: string) => {
     ship_postcode: 1000,
     ship_country: "Bangladesh",
   };
-
-  const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live);
-  sslcz.init(data).then((apiResponse) => {
-    // Redirect the user to payment gateway
-    let GatewayPageURL = apiResponse.GatewayPageURL;
-    res.redirect(GatewayPageURL);
-    console.log("Redirecting to: ", GatewayPageURL);
-  });
 };
 //w: (end)  ╰──────────── initPayment ────────────╯
 
