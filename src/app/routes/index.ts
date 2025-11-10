@@ -55,7 +55,7 @@ const moduleRoutes: IModuleRoutes[] = [
     route: AppointmentRoutes,
   },
   {
-    path: "/payment",
+    path: "/payments",
     route: PaymentRoutes,
   },
 ];
