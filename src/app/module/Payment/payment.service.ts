@@ -6,7 +6,7 @@ import { SSLService } from "../SSL/ssl.service";
 const initPayment = async (appointmentId: string) => {
   const paymentData = await prisma.payment.findUniqueOrThrow({
     where: {
-      id: appointmentId,
+      appointmentId,
     },
     include: {
       appointment: {
@@ -32,6 +32,13 @@ const initPayment = async (appointmentId: string) => {
 };
 //w: (end)  ╰──────────── initPayment ────────────╯
 
+//w: (start)╭──────────── validatePayment ────────────╮
+const validatePayment = async () => {
+  console.log(`working`);
+};
+//w: (end)  ╰──────────── validatePayment ────────────╯
+
 export const PaymentService = {
   initPayment,
+  validatePayment,
 };
