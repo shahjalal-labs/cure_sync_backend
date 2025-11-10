@@ -1,1 +1,1 @@
-POST {{port6009}}/payments/init
+POST {{port6009}}/payments/init/

@@ -6,7 +6,7 @@ import httpStatus from "http-status";
 
 //w: (start)╭──────────── initPayment ────────────╮
 const initPayment = catchAsync(async (req, res) => {
-  const result = await PaymentService.initPayment(req.body);
+  const result = await PaymentService.initPayment(req.params.id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
