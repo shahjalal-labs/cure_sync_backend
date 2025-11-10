@@ -70,3 +70,6 @@ Write a complete Neovim Lua script implementing this navigation behavior, includ
 Make the code readable, maintainable, and well-commented.
 
 ````
+
+javedkarim.codes
+email: javedkarim.codes@gmail.com

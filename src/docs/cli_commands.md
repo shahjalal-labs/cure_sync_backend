@@ -5,3 +5,4 @@ bun add multer
 bun add npm i @types/multer
 bun add cloudinary
 bun add uuid
+bun add sslcommerz-lts
