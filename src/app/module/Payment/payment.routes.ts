@@ -18,6 +18,6 @@ router.post(
 router.get("/ipn", PaymentController.validatePayment);
 //w: (end)  ╰──────────── validatePayment ────────────╯
 
-router.get("/all", PaymentController.getAllPayment);
+// router.get("/all", PaymentController.getAllPayment);
 
 export const PaymentRoutes = router;

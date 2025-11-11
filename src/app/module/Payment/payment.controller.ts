@@ -1,48 +1,32 @@
 //
+import { Request, Response } from "express";
 import catchAsync from "../../../shared/catchAsync";
-import { sendResponse } from "../../../shared/sendResponse";
-import { SSLService } from "../SSL/ssl.service";
 import { PaymentService } from "./payment.service";
 import httpStatus from "http-status";
+import { sendResponse } from "../../../shared/sendResponse";
 
-//w: (start)╭──────────── initPayment ────────────╮
-const initPayment = catchAsync(async (req, res) => {
-  const result = await PaymentService.initPayment(req.params.id);
+const initPayment = catchAsync(async (req: Request, res: Response) => {
+  const { appointmentId } = req.params;
+  const result = await PaymentService.initPayment(appointmentId);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Payment initialized successfully",
+    message: "Payment initiate successfully",
     data: result,
   });
 });
-//w: (end)  ╰──────────── initPayment ────────────╯
 
-//w: (start)╭──────────── validatePayment ────────────╮
-const validatePayment = catchAsync(async (req, res) => {
-  const result = await SSLService.validatePayment(req.query);
+const validatePayment = catchAsync(async (req: Request, res: Response) => {
+  const result = await PaymentService.validatePayment(req.query);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Payment validation successful",
+    message: "Payment validate successfully",
     data: result,
   });
 });
-//w: (end)  ╰──────────── validatePayment ────────────╯
-
-//w: (start)╭──────────── getAllPayment ────────────╮
-const getAllPayment = catchAsync(async (req, res) => {
-  const result = await PaymentService.getAllPayment();
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: "Payment getAllPayment successful",
-    data: result,
-  });
-});
-//w: (end)  ╰──────────── getAllPayment ────────────╯
 
 export const PaymentController = {
   initPayment,
   validatePayment,
-  getAllPayment,
 };
