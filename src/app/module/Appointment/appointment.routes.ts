@@ -26,12 +26,13 @@ router.get(
 );
 //w: (end)  ╰────────────  getMyAppointment ────────────╯
 
-//w: (start)╭──────────── router ────────────╮
+//w: (start)╭──────────── changeAppointmentStatus ────────────╮
 router.patch(
   "/status/:id",
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN, UserRole.DOCTOR),
+  validateRequest(AppointmentValidation.changeAppointmentStatusSchema),
   AppointmentController.changeAppointmentStatus,
 );
-//w: (end)  ╰──────────── router ────────────╯
+//w: (end)  ╰──────────── changeAppointmentStatus ────────────╯
 
 export const AppointmentRoutes = router;

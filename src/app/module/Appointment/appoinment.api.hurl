@@ -15,6 +15,15 @@ Content-Type: application/json
 
 
 
+PATCH  {{port6009}}/appointment/status/8770261a-71e8-45e2-9c3f-b453d947b79e
+Authorization: {{DOCTOR_TOKEN }}
+
+Content-Type: application/json
+{
+  "status": "INPROGRESS"
+}
+
+
 GET  {{port6009}}/appointment?status=SCHEDULED&paymentStatus=UNPAID
 Authorization: {{PATIENT_TOKEN}}
 
