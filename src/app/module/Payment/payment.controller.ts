@@ -1,6 +1,7 @@
 //
 import catchAsync from "../../../shared/catchAsync";
 import { sendResponse } from "../../../shared/sendResponse";
+import { SSLService } from "../SSL/ssl.service";
 import { PaymentService } from "./payment.service";
 import httpStatus from "http-status";
 
@@ -18,7 +19,7 @@ const initPayment = catchAsync(async (req, res) => {
 
 //w: (start)╭──────────── validatePayment ────────────╮
 const validatePayment = catchAsync(async (req, res) => {
-  const result = await PaymentService.validatePayment();
+  const result = await SSLService.validatePayment(req.query);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

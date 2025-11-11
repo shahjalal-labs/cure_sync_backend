@@ -34,13 +34,19 @@ const initPayment = async (appointmentId: string) => {
 
 //w: (start)╭──────────── validatePayment ────────────╮
 const validatePayment = async (payload: any) => {
-  if (!payload || !payload.status || !(payload.status === "VALID")) {
+  //this commenting as we  have not live production api, and ssl can't interact with local api
+  /*   if (!payload || !payload.status || !(payload.status === "VALID")) {
     return {
       message: "Invalid Payment!",
     };
   }
 
-  const response = await SSLService;
+  const response = await SSLService.validatePayment(payload);
+  if (response?.status !== "VALID") {
+    return {
+      message: "Payment failed!",
+    };
+  } */
 
   console.log(`working`);
 };
