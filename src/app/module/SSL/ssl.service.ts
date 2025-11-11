@@ -48,7 +48,7 @@ const initPayment = async (paymentData: IPaymentData) => {
         "Content-Type": "application/x-www-form-urlencoded",
       },
     });
-    
+
     return response.data;
   } catch (error: any) {
     throw new ApiError(
@@ -59,6 +59,22 @@ const initPayment = async (paymentData: IPaymentData) => {
 };
 //w: (end)  ╰──────────── initPayment ────────────╯
 
+//w: (start)╭──────────── validatePayment ────────────╮
+const validatePayment = async (payload: any) => {
+  try {
+    const response = await axios({
+      method: "GET",
+    });
+  } catch (error: any) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      error?.message || "Payment validation failed!",
+    );
+  }
+};
+//w: (end)  ╰──────────── validatePayment ────────────╯
+
 export const SSLService = {
   initPayment,
+  validatePayment,
 };

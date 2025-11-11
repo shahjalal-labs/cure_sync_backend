@@ -33,12 +33,19 @@ const initPayment = async (appointmentId: string) => {
 //w: (end)  ╰──────────── initPayment ────────────╯
 
 //w: (start)╭──────────── validatePayment ────────────╮
-const validatePayment = async () => {
+const validatePayment = async (payload: any) => {
+  if (!payload || !payload.status || !(payload.status === "VALID")) {
+    return {
+      message: "Invalid Payment!",
+    };
+  }
+
+  const response = await SSLService;
+
   console.log(`working`);
 };
 //w: (end)  ╰──────────── validatePayment ────────────╯
 
 export const PaymentService = {
   initPayment,
-  validatePayment,
 };
