@@ -5,7 +5,9 @@ import { v4 as uuidv4 } from "uuid";
 import { TCreateAppointment } from "./appointment.validation";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { paginationHelper } from "../../../helpers/paginatonHelper";
-import { Prisma, UserRole } from "@prisma/client";
+import { AppointmentStatus, Prisma, UserRole } from "@prisma/client";
+import { ApiError } from "../../errors/ApiError";
+import httpStatus from "http-status";
 
 //w: (start)╭──────────── createAppointment ────────────╮
 const createAppointment = async (
@@ -42,7 +44,6 @@ const createAppointment = async (
     today.getMonth() +
     "-" +
     today.getDay() +
-    "-" +
     "-" +
     today.getHours() +
     "-" +
@@ -169,7 +170,34 @@ const getMyAppointment = async (
 
 //w: (end)  ╰──────────── getMyAppointment ────────────╯
 
+//w: (start)╭──────────── changeAppointmentStatus ────────────╮
+const changeAppointmentStatus = async (
+  appointmentId: string,
+  status: AppointmentStatus,
+  user: IAuthUser,
+) => {
+  const appointmentData = await prisma.appointment.findUniqueOrThrow({
+    where: {
+      id: appointmentId,
+    },
+    include: {
+      doctor: true,
+    },
+  });
+
+  if (user?.role === UserRole.DOCTOR) {
+    if (!(user.email !== appointmentData.doctor.email)) {
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        "This is not your appointment!",
+      );
+    }
+  }
+};
+//w: (end)  ╰──────────── changeAppointmentStatus ────────────╯
+
 export const AppointmentService = {
   createAppointment,
   getMyAppointment,
+  changeAppointmentStatus,
 };
