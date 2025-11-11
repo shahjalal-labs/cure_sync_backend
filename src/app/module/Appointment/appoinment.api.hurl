@@ -15,7 +15,7 @@ Content-Type: application/json
 
 
 
-PATCH  {{port6009}}/appointment/status/8770261a-71e8-45e2-9c3f-b453d947b79e
+PATCH  {{port6009}}/appointment/status/0332b66c-239d-47a6-b8a3-d27eb91b9bad
 Authorization: {{DOCTOR_TOKEN }}
 
 Content-Type: application/json

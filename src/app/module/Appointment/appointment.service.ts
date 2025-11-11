@@ -5,7 +5,12 @@ import { v4 as uuidv4 } from "uuid";
 import { TCreateAppointment } from "./appointment.validation";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { paginationHelper } from "../../../helpers/paginatonHelper";
-import { AppointmentStatus, Prisma, UserRole } from "@prisma/client";
+import {
+  AppointmentStatus,
+  PaymentStatus,
+  Prisma,
+  UserRole,
+} from "@prisma/client";
 import { ApiError } from "../../errors/ApiError";
 import httpStatus from "http-status";
 
@@ -207,8 +212,28 @@ const changeAppointmentStatus = async (
 };
 //w: (end)  ╰──────────── changeAppointmentStatus ────────────╯
 
+//w: (start)╭──────────── cancelUnpaidAppointments ────────────╮
+export const cancelUnpaidAppointments = async () => {
+  const thirtyMinAgo = new Date(Date.now() - 30 * 60 * 1000);
+  console.log(
+    thirtyMinAgo,
+    "[1;31mthirtyMinAgo in appointment.service.ts at line 213[0m",
+  );
+
+  const unPaidAppointments = await prisma.appointment.findMany({
+    where: {
+      createdAt: {
+        lte: thirtyMinAgo,
+      },
+      paymentStatus: PaymentStatus.UNPAID,
+    },
+  });
+};
+//w: (end)  ╰──────────── cancelUnpaidAppointments ────────────╯
+
 export const AppointmentService = {
   createAppointment,
   getMyAppointment,
   changeAppointmentStatus,
+  cancelUnpaidAppointments,
 };
