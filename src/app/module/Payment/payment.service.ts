@@ -77,7 +77,15 @@ const validatePayment = async (payload: any) => {
 };
 //w: (end)  ╰──────────── validatePayment ────────────╯
 
+//w: (start)╭──────────── getAllPayment ────────────╮
+const getAllPayment = async () => {
+  const paymentData = await prisma.payment.findMany();
+  return paymentData;
+};
+//w: (end)  ╰──────────── getAllPayment ────────────╯
+
 export const PaymentService = {
   initPayment,
   validatePayment,
+  getAllPayment,
 };

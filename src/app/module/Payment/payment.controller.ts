@@ -29,7 +29,20 @@ const validatePayment = catchAsync(async (req, res) => {
 });
 //w: (end)  ╰──────────── validatePayment ────────────╯
 
+//w: (start)╭──────────── getAllPayment ────────────╮
+const getAllPayment = catchAsync(async (req, res) => {
+  const result = await PaymentService.getAllPayment();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Payment getAllPayment successful",
+    data: result,
+  });
+});
+//w: (end)  ╰──────────── getAllPayment ────────────╯
+
 export const PaymentController = {
   initPayment,
   validatePayment,
+  getAllPayment,
 };
