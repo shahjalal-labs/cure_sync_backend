@@ -186,13 +186,24 @@ const changeAppointmentStatus = async (
   });
 
   if (user?.role === UserRole.DOCTOR) {
-    if (!(user.email !== appointmentData.doctor.email)) {
+    if (!(user.email === appointmentData.doctor.email)) {
       throw new ApiError(
         httpStatus.BAD_REQUEST,
         "This is not your appointment!",
       );
     }
   }
+
+  const result = await prisma.appointment.update({
+    where: {
+      id: appointmentId,
+    },
+    data: {
+      status,
+    },
+  });
+
+  return result;
 };
 //w: (end)  ╰──────────── changeAppointmentStatus ────────────╯
 

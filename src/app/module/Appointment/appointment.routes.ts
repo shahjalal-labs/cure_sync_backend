@@ -26,4 +26,12 @@ router.get(
 );
 //w: (end)  ╰────────────  getMyAppointment ────────────╯
 
+//w: (start)╭──────────── router ────────────╮
+router.patch(
+  "/status/:id",
+  auth(UserRole.ADMIN, UserRole.SUPER_ADMIN, UserRole.DOCTOR),
+  AppointmentController.changeAppointmentStatus,
+);
+//w: (end)  ╰──────────── router ────────────╯
+
 export const AppointmentRoutes = router;
