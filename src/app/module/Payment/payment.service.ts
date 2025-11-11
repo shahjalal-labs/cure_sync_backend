@@ -1,4 +1,5 @@
 //
+import { PaymentStatus } from "@prisma/client";
 import { prisma } from "../../../shared/prisma";
 import { SSLService } from "../SSL/ssl.service";
 
@@ -48,10 +49,35 @@ const validatePayment = async (payload: any) => {
     };
   } */
 
-  console.log(`working`);
+  const response = payload; // this line will be commented when production api
+  await prisma.$transaction(async (tx) => {
+    const updatedPaymentData = await tx.payment.update({
+      where: {
+        transactionId: response.tran_id,
+      },
+      data: {
+        status: PaymentStatus.PAID,
+        paymentGateWayData: response,
+      },
+    });
+
+    await tx.appointment.update({
+      where: {
+        id: updatedPaymentData.appointmentId,
+      },
+      data: {
+        paymentStatus: PaymentStatus.PAID,
+      },
+    });
+  });
+
+  return {
+    message: "Payment success!",
+  };
 };
 //w: (end)  ╰──────────── validatePayment ────────────╯
 
 export const PaymentService = {
   initPayment,
+  validatePayment,
 };
