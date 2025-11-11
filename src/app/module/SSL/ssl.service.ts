@@ -1,10 +1,10 @@
+//
 import axios from "axios";
 import config from "../../../config";
+import httpStatus from "http-status";
 import { IPaymentData } from "./ssl.interface";
 import { ApiError } from "../../errors/ApiError";
-import httpStatus from "http-status";
 
-//w: (start)╭──────────── initPayment ────────────╮
 const initPayment = async (paymentData: IPaymentData) => {
   try {
     const data = {
@@ -14,12 +14,12 @@ const initPayment = async (paymentData: IPaymentData) => {
       currency: "BDT",
       tran_id: paymentData.transactionId, // use unique tran_id for each api call
       success_url: config.ssl.successUrl,
-      fail_url: config.ssl.successUrl,
+      fail_url: config.ssl.failUrl,
       cancel_url: config.ssl.cancelUrl,
       ipn_url: "http://localhost:3030/ipn",
       shipping_method: "N/A",
       product_name: "Appointment",
-      product_category: "Healh Care",
+      product_category: "Service",
       product_profile: "general",
       cus_name: paymentData.name,
       cus_email: paymentData.email,
@@ -37,29 +37,22 @@ const initPayment = async (paymentData: IPaymentData) => {
       ship_city: "N/A",
       ship_state: "N/A",
       ship_postcode: 1000,
-      ship_country: "Bangladesh",
+      ship_country: "N/A",
     };
 
     const response = await axios({
       method: "post",
       url: config.ssl.sslPaymentApi,
-      data,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
+      data: data,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
     });
 
     return response.data;
-  } catch (error: any) {
-    throw new ApiError(
-      httpStatus.BAD_REQUEST,
-      error?.message || "Payment initialization failed!",
-    );
+  } catch (err) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "Payment erro occured!");
   }
 };
-//w: (end)  ╰──────────── initPayment ────────────╯
 
-//w: (start)╭──────────── validatePayment ────────────╮
 const validatePayment = async (payload: any) => {
   try {
     const response = await axios({
@@ -72,7 +65,6 @@ const validatePayment = async (payload: any) => {
     throw new ApiError(httpStatus.BAD_REQUEST, "Payment validation failed!");
   }
 };
-//w: (end)  ╰──────────── validatePayment ────────────╯
 
 export const SSLService = {
   initPayment,
