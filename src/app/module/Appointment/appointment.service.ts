@@ -214,12 +214,7 @@ const changeAppointmentStatus = async (
 
 //w: (start)╭──────────── cancelUnpaidAppointments ────────────╮
 export const cancelUnpaidAppointments = async () => {
-  const thirtyMinAgo = new Date(Date.now() - 30 * 60 * 1000);
-  console.log(
-    thirtyMinAgo,
-    "[1;31mthirtyMinAgo in appointment.service.ts at line 213[0m",
-  );
-
+  const thirtyMinAgo = new Date(Date.now() - 1 * 60 * 1000);
   const unPaidAppointments = await prisma.appointment.findMany({
     where: {
       createdAt: {
@@ -228,6 +223,12 @@ export const cancelUnpaidAppointments = async () => {
       paymentStatus: PaymentStatus.UNPAID,
     },
   });
+  console.log(
+    unPaidAppointments,
+    "[1;31munPaidAppointments in appointment.service.ts at line 224[0m",
+  );
+
+  const appointmentIdsToCancel = unPaidAppointments.map((app) => app.id);
 };
 //w: (end)  ╰──────────── cancelUnpaidAppointments ────────────╯
 
