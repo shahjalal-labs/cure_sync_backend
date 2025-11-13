@@ -1,13 +1,14 @@
 //
-import { Prescription } from "@prisma/client";
 import { IAuthUser } from "../../interfaces/common";
 import { prisma } from "../../../shared/prisma";
 import { ApiError } from "../../errors/ApiError";
 import httpStatus from "http-status";
+import { TCreatePrescriptionSchema } from "./prescription.validation";
 
+//w: (start)╭──────────── createPrescripton ────────────╮
 const createPrescripton = async (
   user: IAuthUser,
-  payload: Partial<Prescription>,
+  payload: TCreatePrescriptionSchema,
 ) => {
   const appointmentData = await prisma.appointment.findUniqueOrThrow({
     where: {
@@ -26,9 +27,22 @@ const createPrescripton = async (
     data: {
       appointmentId: appointmentData.id,
       doctorId: appointmentData.doctorId,
+      patientId: appointmentData.patientId,
+      followUpDate: payload.followUpDate,
+      instructions: payload.instructions,
+    },
+    include: {
+      patient: {
+        omit: {
+          updatedAt: true,
+          createdAt: true,
+        },
+      },
     },
   });
+  return result;
 };
+//w: (end)  ╰──────────── createPrescripton ────────────╯
 
 export const PrescriptionService = {
   createPrescripton,
