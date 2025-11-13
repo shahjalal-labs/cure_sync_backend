@@ -49,7 +49,8 @@ const createPrescripton = async (
 };
 //w: (end)  ╰──────────── createPrescripton ────────────╯
 
-const getAllPrescriptionsForAdoctor = async (
+//w: (start)╭──────────── getAllPrescriptionsForAdoctor ────────────╮
+const getAllPrescriptions = async (
   filters: any,
   options: IPaginationOptions,
 ) => {
@@ -61,12 +62,57 @@ const getAllPrescriptionsForAdoctor = async (
   const andConditions: Prisma.PrescriptionWhereInput[] = [];
 
   if (patientEmail) {
+    andConditions.push({
+      patient: {
+        email: patientEmail,
+      },
+    });
   }
   if (doctorEmail) {
+    andConditions.push({
+      doctor: {
+        email: doctorEmail,
+      },
+    });
   }
+
+  const whereConditions: Prisma.PrescriptionWhereInput = andConditions.length
+    ? {
+        AND: andConditions,
+      }
+    : {};
+
+  const result = await prescription.findMany({
+    where: whereConditions,
+    skip,
+    take: limit,
+    orderBy:
+      sortBy && sortOrder
+        ? {
+            [sortBy]: sortOrder,
+          }
+        : {
+            createdAt: "asc",
+          },
+  });
+
+  const total = await prescription.count({
+    where: whereConditions,
+  });
+  return {
+    meta: {
+      total,
+      page,
+      limit,
+    },
+    data: {
+      data: result,
+    },
+  };
 };
+//w: (end)  ╰──────────── getAllPrescriptionsForAdoctor ────────────╯
 
 export const PrescriptionService = {
   createPrescripton,
-  getAllPrescriptionsForAdoctor,
+  getAllPrescriptions,
 };
