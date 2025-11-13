@@ -9,11 +9,11 @@ Authorization: {{PATIENT_TOKEN}}
 
 Content-Type: application/json
 {
- "doctorId": "8770261a-71e8-45e2-9c3f-b453d947b79e",
- "scheduleId": "82dce632-68fb-4ae9-bddf-f8f19c63f9ac"
+  "doctorId": "8770261a-71e8-45e2-9c3f-b453d947b79e",
+  "scheduleId": "e5495530-8d5e-45ad-b0b3-ac165f70fe5a"
 }
         "doctorId": "8770261a-71e8-45e2-9c3f-b453d947b79e",
-        "scheduleId": "e5495530-8d5e-45ad-b0b3-ac165f70fe5a",
+        "scheduleId": "e5495530-8d5e-45ad-b0b3-ac165f70fe5a"
 
 
 
