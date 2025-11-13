@@ -4,6 +4,11 @@ import { prisma } from "../../../shared/prisma";
 import { ApiError } from "../../errors/ApiError";
 import httpStatus from "http-status";
 import { TCreatePrescriptionSchema } from "./prescription.validation";
+import { IPaginationOptions } from "../../interfaces/pagination";
+import { paginationHelper } from "../../../helpers/paginatonHelper";
+import { Prisma } from "@prisma/client";
+
+const { prescription } = prisma;
 
 //w: (start)╭──────────── createPrescripton ────────────╮
 const createPrescripton = async (
@@ -23,7 +28,7 @@ const createPrescripton = async (
     throw new ApiError(httpStatus.BAD_REQUEST, "This is not your appointment!");
   }
 
-  const result = await prisma.prescription.create({
+  const result = await prescription.create({
     data: {
       appointmentId: appointmentData.id,
       doctorId: appointmentData.doctorId,
@@ -44,6 +49,24 @@ const createPrescripton = async (
 };
 //w: (end)  ╰──────────── createPrescripton ────────────╯
 
+const getAllPrescriptionsForAdoctor = async (
+  filters: any,
+  options: IPaginationOptions,
+) => {
+  const { limit, page, skip, sortBy, sortOrder } =
+    paginationHelper.calcalutePagination(options);
+
+  const { patientEmail, doctorEmail } = filters;
+
+  const andConditions: Prisma.PrescriptionWhereInput[] = [];
+
+  if (patientEmail) {
+  }
+  if (doctorEmail) {
+  }
+};
+
 export const PrescriptionService = {
   createPrescripton,
+  getAllPrescriptionsForAdoctor,
 };
